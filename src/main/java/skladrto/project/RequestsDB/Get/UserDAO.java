@@ -36,19 +36,19 @@ public class UserDAO {
         return listUser.getUsersData();
     }
 
-    public Boolean CheckUsers(String name, String password) { // проверка пользователя
-
-        try {
-            Statement st = DatabaseConnection.getDatabaseConnection().createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM authentication ");
-            while (rs.next()) {
-                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
-                    return true;
-                }
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+//    public Boolean CheckUsers(String name, String password) { // проверка пользователя
+//
+//        try {
+//
+//            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT * FROM authentication ");
+//            while (rs.next()) {
+//                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
+//                    return true;
+//                }
+//            }
+//        } catch (SQLException | IOException e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
 }

@@ -44,7 +44,7 @@ public class authorizationController {
     void initialize() {
         SingIn_ButSingIn.setOnAction(actionEvent -> { // нажатие кнопки войти
 
-//            if (userDAO.CheckUsers(SingIn_login.getText(), SingIn_password.getText())) { // проверка пользователя в бд
+            if (userDAO.CheckUsers(SingIn_login.getText(), SingIn_password.getText())) { // проверка пользователя в бд
                 SingIn_ButSingIn.getScene().getWindow().hide();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("User.fxml"));
@@ -59,7 +59,7 @@ public class authorizationController {
                 stage.setScene(new Scene(root, 600, 400));
                 stage.show();
 
-//            } else SMS.setText("Пользователь не найден!");
+            } else SMS.setText("Пользователь не найден!");
         });
     }
 }

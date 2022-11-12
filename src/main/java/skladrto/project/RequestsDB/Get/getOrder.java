@@ -8,11 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class getOrder {
-    private static DatabaseConnection databaseConnection;
+
     public static void GetOrder() {
 
         try {
-            ResultSet rs = databaseConnection.getStatement().executeQuery("select * from orders");
+            ResultSet rs = DatabaseConnection.getStatement().executeQuery("select * from orders");
 
             while (rs.next()) { // передаем в лист заказов
                 ListOrder.create(rs.getString("Name"), rs.getString("articul"), rs.getString("opis"),

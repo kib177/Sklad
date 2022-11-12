@@ -8,12 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class addOrder {
-    private static DatabaseConnection databaseConnection;
 
     public static void add(String name, String articul, String opis, String oboryd, String status, String kol, String zakazchik) throws SQLException {
 
         try {
-            PreparedStatement preparedStatement = databaseConnection.getDatabaseConnection().prepareStatement("INSERT INTO orders (Name, articul, opis, oboryd, status, kol, zakazchik) Values (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = DatabaseConnection.getDatabaseConnection().prepareStatement("INSERT INTO orders (Name, articul, opis, oboryd, status, kol, zakazchik) Values (?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, articul);
             preparedStatement.setString(3, opis);

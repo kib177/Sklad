@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrdersDAO {
-    private DatabaseConnection databaseConnection;
+
     public void showListOfOrders() {
 
         try {
-            ResultSet resultSet = databaseConnection.getStatement().executeQuery("SELECT orders.id, product.name, orders.product_article, " +
+            ResultSet resultSet = DatabaseConnection.getStatement().executeQuery("SELECT orders.id, product.name, orders.product_article, " +
                     " product.equipment, orders.status_order_id, orders.amount,orders.user_id, orders.subdivision_id " +
                     " FROM sklad.orders,sklad.product,sklad.users,sklad.subdivision,sklad.order_status " +
                     " where orders.id = orders.id " +
