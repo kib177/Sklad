@@ -45,7 +45,7 @@ public class userController {
 
     @FXML
     void initialize() {
-        Go_to_order.setOnAction(actionEvent -> { // если нажата кнопка перейти к заказам, открывается новое окно с заказами
+        Go_to_order.setOnAction(actionEvent -> {
             Go_to_order.getScene().getWindow().centerOnScreen();
 
             FXMLLoader loader = new FXMLLoader();
@@ -58,7 +58,7 @@ public class userController {
             }
             Parent root = loader.getRoot();
             Stage stage = new Stage();
-            stage.setScene(new Scene(root, 1200, 750));
+            stage.setScene(new Scene(root, 1400, 700));
             stage.show();
         });
 
