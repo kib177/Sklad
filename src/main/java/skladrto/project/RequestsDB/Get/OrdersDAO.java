@@ -28,11 +28,14 @@ public class OrdersDAO {
                 String article = resultSet.getString("article");
                 String equipment = resultSet.getString("equipment");
                 String status1 = resultSet.getString("status");
+
+
                 int amount = resultSet.getInt("amount");
                 String firstName = resultSet.getString("first_name");
                 String subdivision = resultSet.getString("subdivision");
                 System.out.printf("%-5s%-20s%-20s%-20ss%-20ss%-20s%-20s%-20s\n", id, name, article, equipment, status1,
                         amount, firstName, subdivision);
+                System.out.println("Проверка");
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
