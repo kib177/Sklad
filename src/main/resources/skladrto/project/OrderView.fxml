@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.orderViewController">
+   <children>
+      <TableView fx:id="List_order" layoutY="14.0" prefHeight="400.0" prefWidth="1200.0">
+        <columns>
+          <TableColumn fx:id="Column_name" prefWidth="131.99999696016312" text="Наименование" />
+          <TableColumn fx:id="column_articul" minWidth="5.600006103515625" prefWidth="151.99998474121094" text="Артикул" />
+            <TableColumn fx:id="column_opis" minWidth="0.0" prefWidth="302.4000244140625" text="Описание" />
+            <TableColumn fx:id="column_oboryd" prefWidth="136.00006103515625" text="Оборудование" />
+            <TableColumn fx:id="column_status" prefWidth="164.0" text="Статус заказа" />
+            <TableColumn fx:id="column_kol" prefWidth="87.9998779296875" text="Количество" />
+            <TableColumn fx:id="column_zakaz" prefWidth="224.80023193359375" text="Заказчик" />
+        </columns>
+      </TableView>
+      <Button fx:id="Watch_order" alignment="CENTER" layoutX="1000.0" layoutY="546.0" mnemonicParsing="false" text="Показать активные заказы" />
+      <Button fx:id="new_order" alignment="CENTER" layoutX="379.0" layoutY="622.0" mnemonicParsing="false" style="-fx-border-radius: 5;" text="Новый заказ" />
+      <TextField fx:id="search_name" alignment="CENTER" layoutX="744.0" layoutY="464.0" prefHeight="27.0" prefWidth="201.0" promptText="Поиск по названию" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextField fx:id="search_articul" alignment="CENTER" layoutX="961.0" layoutY="464.0" prefHeight="27.0" prefWidth="202.0" promptText="Поиск по артиклу" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+   </children>
+</AnchorPane>

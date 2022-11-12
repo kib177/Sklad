@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.orderNewController">
+   <children>
+      <Button fx:id="button_zakaz" layoutX="368.0" layoutY="326.0" mnemonicParsing="false" style="-fx-border-radius: 5;" text="Заказать" />
+      <TextField fx:id="order_name" alignment="CENTER" layoutX="63.0" layoutY="85.0" prefHeight="30.0" prefWidth="200.0" promptText="Название" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextField fx:id="order_articul" layoutX="63.0" layoutY="127.0" prefHeight="30.0" prefWidth="200.0" promptText="Артикул" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextField fx:id="order_status" layoutX="63.0" layoutY="169.0" prefHeight="30.0" prefWidth="200.0" promptText="Статус" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextField fx:id="order_number" layoutX="538.0" layoutY="169.0" prefHeight="30.0" prefWidth="200.0" promptText="Количество" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextField fx:id="order_zakazchik" layoutX="538.0" layoutY="85.0" prefHeight="30.0" prefWidth="200.0" promptText="Заказчик" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextField fx:id="order_mashin" layoutX="538.0" layoutY="127.0" prefHeight="30.0" prefWidth="200.0" promptText="Оборудование" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <TextArea fx:id="order_proper" layoutX="307.0" layoutY="82.0" prefHeight="90.0" prefWidth="200.0" promptText="Описание" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
+      <Label alignment="CENTER" layoutX="310.0" layoutY="14.0" prefHeight="26.0" prefWidth="178.0" text="Новый заказ">
+         <font>
+            <Font name="Times New Roman" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
