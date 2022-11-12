@@ -1,4 +1,4 @@
-package skladrto.project.connectDB;
+package skladrto.project.DAO.connectDB;
 
 import java.io.IOException;
 import java.sql.*;

@@ -1,9 +1,8 @@
 package skladrto.project.RequestsDB.Add;
 
-import skladrto.project.connectDB.DatabaseConnection;
+import skladrto.project.DAO.connectDB.DatabaseConnection;
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 

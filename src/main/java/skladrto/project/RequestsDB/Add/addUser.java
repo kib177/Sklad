@@ -1,11 +1,5 @@
 package skladrto.project.RequestsDB.Add;
 
-import skladrto.project.connectDB.DatabaseConnection;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class addUser {
 
 //    public static void add(String firstName, String secondName, String login, String email, String password, String status, String department) {

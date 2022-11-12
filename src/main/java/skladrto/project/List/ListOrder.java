@@ -1,22 +1,22 @@
 package skladrto.project.List;
 
-import skladrto.project.Model.Tovar;
+import skladrto.project.Model.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ListOrder {
-    private static ObservableList<Tovar> usersData = FXCollections.observableArrayList(); // тип листа хуй знает какой, но таблица понимает толлько его агрегирует Tovar
+    private ObservableList<Order> orderData = FXCollections.observableArrayList();
 
-    public static void create(String name, String articul, String opis, String oboryd, String status, String kol, String zakazchik) {
-        usersData.add(new Tovar(name, articul, opis, oboryd, status, kol, zakazchik)); // так как тип String не подходит намшему листу наши параметры передаем и создаем обьект котоырй закидываем в лист,
-        // монжон улучшить но стоит ли?
-
-    }
-    public static ObservableList<Tovar> getUsersData() {
-        return usersData;
+    public void create(int id, String product_article, int amount, String order_description, String user,
+                       String subdivision, String status, String date) {
+        orderData.add(new Order(id, product_article, amount, order_description, user, subdivision, status, date));
     }
 
-    public static void setUsersData(ObservableList<Tovar> usersData) {
-        ListOrder.usersData = usersData;
+    public ObservableList<Order> getOrderData() {
+        return orderData;
+    }
+
+    public void setOrderData(ObservableList<Order> orderData) {
+        this.orderData = orderData;
     }
 }
