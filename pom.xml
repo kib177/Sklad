@@ -23,17 +23,17 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>19</version>
+            <version>17</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>19</version>
+            <version>17</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>19</version>
+            <version>17</version>
         </dependency>
         <dependency>
             <groupId>org.controlsfx</groupId>
@@ -85,7 +85,12 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-      </dependencies>
+        <dependency>
+            <groupId>Brigi</groupId>
+            <artifactId>SkladRTO</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
