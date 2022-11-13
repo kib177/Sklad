@@ -14,7 +14,15 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-
+//        проверка методов
+//        OrdersDAO ordersDAO = new OrdersDAO();
+//        ordersDAO.showListOfOrders();
+//        System.out.println();
+//        ordersDAO.searchName("пила");
+//        System.out.println();
+//        ordersDAO.searchArticle("222");
+//        System.out.println();
+//        ordersDAO.searchSubdivision(2);
         launch();
     }
 

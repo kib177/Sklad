@@ -85,11 +85,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>Brigi</groupId>
-            <artifactId>SkladRTO</artifactId>
-            <version>1.0</version>
-        </dependency>
+
     </dependencies>
     <build>
         <plugins>

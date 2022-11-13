@@ -6,12 +6,10 @@ import skladrto.project.Model.Order;
 public interface OrderFunction {
     public ObservableList<Order> showListOfOrders();
 
-    public void createNewOrder();
+    public ObservableList<Order> searchName(String productName);
 
-    public void searchName();
+    public ObservableList<Order> searchArticle(String articleProduct);
 
-    public void searchArticle();
-
-    public void searchSubdivision();
+    public ObservableList<Order> searchSubdivision(int subdivision);
 
 }

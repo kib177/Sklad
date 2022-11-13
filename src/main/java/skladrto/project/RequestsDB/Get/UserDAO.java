@@ -39,11 +39,6 @@ public class UserDAO implements UserFunction {
     }
 
     @Override
-    public void addUser() {
-
-    }
-
-    @Override
     public void deleteUser() {
 
     }
