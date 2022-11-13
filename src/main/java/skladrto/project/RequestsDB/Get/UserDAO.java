@@ -11,12 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class UserDAO {
+public class UserDAO implements UserFunction {
 
-    public ObservableList<User> showListOfUsers() {
+    @Override
+    public ObservableList<User> showListOfUsers()  {
         ListUser listUser = new ListUser();
         WeakReference<ListUser> weakReference = new WeakReference<>(listUser);
-
         try {
             ResultSet resultSet = DatabaseConnection.getStatement().executeQuery("SELECT users.id_users, users.first_name, users.last_name," +
                     " authentication.login, authentication.password,authentication.email,subdivision.subdivision," +
@@ -36,6 +36,16 @@ public class UserDAO {
             e.printStackTrace();
         }
         return listUser.getUsersData();
+    }
+
+    @Override
+    public void addUser() {
+
+    }
+
+    @Override
+    public void deleteUser() {
+
     }
 
 //    public Boolean CheckUsers(String name, String password) { // проверка пользователя
