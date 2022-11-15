@@ -35,12 +35,13 @@ public class orderNewController {
 
     @FXML
     void initialize() {
-        button_zakaz.setOnAction(actionEvent -> { // при нажатии на кнопку добавить заказ передает параметры введенные пользователем в класс addOrder где добавляется в базу данных
+        button_zakaz.setOnAction(actionEvent -> {
             try {
-                addOrder.add(order_name.getText(), order_articul.getText(), order_proper.getText(), order_mashin.getText(), order_status.getText(), order_number.getText(), order_zakazchik.getText());
+                addOrder.add(order_name.getText(), order_articul.getText(), order_proper.getText(), order_mashin.getText(),
+                        order_status.getText(), order_number.getText(), order_zakazchik.getText());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         });
-    } // здесь нужно реализовать проверку на ввод данных чтобы заказ не был пустым и проверку на наличие заказа в бд.
+    }
 }

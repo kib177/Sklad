@@ -1,6 +1,7 @@
 package skladrto.project.RequestsDB.Get;
 
 import javafx.collections.ObservableList;
+import skladrto.project.DAO.modelDAO.OrderFunction;
 import skladrto.project.List.ListOrder;
 import skladrto.project.DAO.connectDB.DatabaseConnection;
 import skladrto.project.Model.Order;
@@ -11,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrdersDAO implements OrderFunction {
+public class getOrdersDAO implements OrderFunction {
 
     @Override
     public ObservableList<Order> showListOfOrders() {
@@ -96,7 +97,7 @@ public class OrdersDAO implements OrderFunction {
     }
 
     @Override
-    public ObservableList<Order> searchSubdivision(int subdivisionSearch) {
+    public ObservableList<Order> searchSubdivision(String subdivisionSearch) {
         // поиск по подразделению
         // принимает на вход введенное ID подразделения
         // если продукт с таким ID подразделения есть в заказах показывает все заказы - если такого нет ничего не показывает!!!
@@ -114,7 +115,7 @@ public class OrdersDAO implements OrderFunction {
                     " LEFT JOIN order_status ON (orders.status_order_id=order_status.id)" +
                     " LEFT JOIN subdivision ON (users.subdivision_id= subdivision.id )" +
                     " WHERE subdivision.id = ?;");
-            preparedStatement.setInt(1, subdivisionSearch);
+            preparedStatement.setInt(1, metod(subdivisionSearch));
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 nePridumalNazvanieDlyaMethoda(listOrder, resultSet);
@@ -126,26 +127,40 @@ public class OrdersDAO implements OrderFunction {
     }
 
     private void nePridumalNazvanieDlyaMethoda(ListOrder listOrder, ResultSet resultSet) throws SQLException {
-        // вынес получение данных из БД в отдельный метод чтобы не дублировать код, он одинаковый для всех операций
-        int id = resultSet.getInt("id");
-        String article = resultSet.getString("product_article");
-        String name = resultSet.getString("name");
-        int amount = resultSet.getInt("amount");
-        String description = resultSet.getString("order_description");
-        String lastName = resultSet.getString("last_name");
-        String equipment = resultSet.getString("equipment");
-        String status1 = resultSet.getString("status");
-        String subdivision = resultSet.getString("subdivision");
-        String orderDate = resultSet.getString("order_date");
-        System.out.printf("%-5s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n", id, article, name, amount,
-                description, lastName, equipment, status1, subdivision, orderDate);
+        // оставил тебе для проверок или коректировок
+//        int id = resultSet.getInt("id");
+//        String article = resultSet.getString("product_article");
+//        String name = resultSet.getString("name");
+//        int amount = resultSet.getInt("amount");
+//        String description = resultSet.getString("order_description");
+//        String lastName = resultSet.getString("last_name");
+//        String equipment = resultSet.getString("equipment");
+//        String status1 = resultSet.getString("status");
+//        String subdivision = resultSet.getString("subdivision");
+//        String orderDate = resultSet.getString("order_date");
+//        System.out.printf("%-5s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s\n", id, article, name, amount,
+//                description, lastName, equipment, status1, subdivision, orderDate);
 
-// надо переписать я пока закоментил!!!
+        listOrder.create(resultSet.getInt("id"), resultSet.getString("product_article"),
+                resultSet.getString("name"), resultSet.getInt("amount"),
+                resultSet.getString("order_description"), resultSet.getString("last_name"),
+                resultSet.getString("equipment"), resultSet.getString("status"),
+                resultSet.getString("subdivision"), resultSet.getString("order_date"));
+    }
 
-//        String lastName1 = resultSet.getString("last_name");
-//        listOrder.create(resultSet.getInt("id"), resultSet.getString("product_article"),
-//                resultSet.getInt("amount"), resultSet.getString("order_description"),
-//                resultSet.getString("Заказчик какой-то"), resultSet.getString("subdivision"),
-//                resultSet.getString("status"), resultSet.getString("date"));
+    public int metod(String str) {
+        // потом доделать через дженерик для поиска необходимой таблице
+        int num = 0;
+        try {
+            ResultSet resultSet = DatabaseConnection.getStatement().executeQuery("select * from subdivision where " +
+                    "subdivision.subdivision = '" + str + "'");
+            while (resultSet.next()) {
+                num = resultSet.getInt("subdivision.id");
+            }
+        } catch (SQLException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return num;
     }
 }

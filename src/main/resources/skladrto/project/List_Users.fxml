@@ -4,20 +4,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.listUsersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.listUsersController">
    <children>
-      <TableView fx:id="Table_Users" prefHeight="500.0" prefWidth="1200.0">
+      <TableView fx:id="Table_Users" layoutY="46.0" prefHeight="450.0" prefWidth="1200.0" AnchorPane.bottomAnchor="99.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
         <columns>
-          <TableColumn fx:id="column_id" prefWidth="56.79998856782913" text="ID" />
-          <TableColumn fx:id="column_login" prefWidth="125.60000228881836" text="Логин" />
-            <TableColumn fx:id="colunm_password" prefWidth="131.2000274658203" text="Пароль" />
-            <TableColumn fx:id="column_first" prefWidth="164.0" text="Имя" />
-            <TableColumn fx:id="column_second" prefWidth="191.20001220703125" text="Фамилия" />
-            <TableColumn fx:id="column_status" prefWidth="135.199951171875" text="Доступ" />
-            <TableColumn fx:id="column_email" prefWidth="202.4000244140625" text="Почта" />
-            <TableColumn fx:id="column_department" prefWidth="194.39996337890625" text="Отдел" />
+          <TableColumn fx:id="column_id" maxWidth="40.0" prefWidth="40.0" text="ID" />
+          <TableColumn fx:id="column_login" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Логин" />
+            <TableColumn fx:id="colunm_password" maxWidth="150.0" minWidth="130.0" prefWidth="130.0" text="Пароль" />
+            <TableColumn fx:id="column_first" maxWidth="165.0" minWidth="165.0" prefWidth="165.0" text="Имя" />
+            <TableColumn fx:id="column_second" maxWidth="165.0" minWidth="165.0" prefWidth="165.0" text="Фамилия" />
+            <TableColumn fx:id="column_status" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Доступ" />
+            <TableColumn fx:id="column_email" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Почта" />
+            <TableColumn fx:id="column_department" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="Отдел" />
         </columns>
       </TableView>
    </children>

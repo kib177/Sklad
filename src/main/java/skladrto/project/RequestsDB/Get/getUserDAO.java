@@ -1,6 +1,7 @@
 package skladrto.project.RequestsDB.Get;
 
 import javafx.collections.ObservableList;
+import skladrto.project.DAO.modelDAO.UserFunction;
 import skladrto.project.List.ListUser;
 import skladrto.project.DAO.connectDB.DatabaseConnection;
 import skladrto.project.Model.User;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class UserDAO implements UserFunction {
+public class getUserDAO implements UserFunction {
 
     @Override
     public ObservableList<User> showListOfUsers()  {
@@ -43,19 +44,20 @@ public class UserDAO implements UserFunction {
 
     }
 
-//    public Boolean CheckUsers(String name, String password) { // проверка пользователя
-//
-//        try {
-//
-//            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT * FROM authentication ");
-//            while (rs.next()) {
-//                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
-//                    return true;
-//                }
-//            }
-//        } catch (SQLException | IOException e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+    public String CheckUsers(String name, String password) {
+
+        try {
+
+            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT * FROM authentication JOIN status_user ON authentication.status_user_id=status_user.id");
+            while (rs.next()) {
+                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
+
+                    return rs.getString("status");
+                }
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 }

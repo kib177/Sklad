@@ -5,8 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import skladrto.project.RequestsDB.Get.OrdersDAO;
-import skladrto.project.RequestsDB.Get.UserDAO;
 
 import java.io.IOException;
 

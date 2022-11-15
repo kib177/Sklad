@@ -50,20 +50,7 @@ public class registrationController {
     @FXML
     void initialize() {
         SingUp_back.setOnAction(actionEvent -> {
-            SingUp_back.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("User.fxml"));
-
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root, 600, 400));
-            stage.show();
+            buttonBack();
         });
 
 //        SingUp_ButttonGone.setOnAction(actionEvent -> {
@@ -75,5 +62,22 @@ public class registrationController {
 //            }
 //
 //        });
+    }
+
+    public void buttonBack(){
+        SingUp_back.getScene().getWindow().hide();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AdminWindow.fxml"));
+
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root, 600, 400));
+        stage.show();
     }
 }

@@ -1,6 +1,6 @@
 package skladrto.project;
 
-import skladrto.project.RequestsDB.Get.UserDAO;
+import skladrto.project.RequestsDB.Get.getUserDAO;
 import skladrto.project.Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 public class listUsersController {
 
-    private UserDAO userDAO;
+    private getUserDAO userDAO;
 
     @FXML
     private ResourceBundle resources;
@@ -50,8 +50,13 @@ public class listUsersController {
 
     @FXML
     void initialize() {
-        userDAO = new UserDAO();
-        WeakReference<UserDAO> weakReference = new WeakReference<>(userDAO);
+        userDAO = new getUserDAO(); // подгрузка в таблицу данных
+        WeakReference<getUserDAO> weakReference = new WeakReference<>(userDAO);
+        showUsers();
+        Table_Users.setItems(userDAO.showListOfUsers());
+    }
+
+    public void showUsers(){
         column_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         column_login.setCellValueFactory(new PropertyValueFactory<>("login"));
         colunm_password.setCellValueFactory(new PropertyValueFactory<>("password"));
@@ -60,6 +65,5 @@ public class listUsersController {
         column_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         column_email.setCellValueFactory(new PropertyValueFactory<>("email"));
         column_department.setCellValueFactory(new PropertyValueFactory<>("department"));
-        Table_Users.setItems(userDAO.showListOfUsers());
     }
 }
