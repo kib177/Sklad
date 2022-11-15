@@ -15,18 +15,17 @@ import java.sql.SQLException;
 public class getUserDAO implements UserFunction {
 
     @Override
-    public ObservableList<User> showListOfUsers()  {
+    public ObservableList<User> showListOfUsers() {
         ListUser listUser = new ListUser();
         WeakReference<ListUser> weakReference = new WeakReference<>(listUser);
         try {
-            ResultSet resultSet = DatabaseConnection.getStatement().executeQuery("SELECT users.id_users, users.first_name, users.last_name," +
-                    " authentication.login, authentication.password,authentication.email,subdivision.subdivision," +
+            ResultSet resultSet = DatabaseConnection.getStatement().executeQuery("SELECT users.id_users, users.first_name," +
+                    " users.last_name,authentication.login, authentication.password,authentication.email,subdivision.subdivision," +
                     " status_user.status " +
-                    " FROM sklad.users,sklad.subdivision,sklad.status_user,sklad.authentication" +
-                    " WHERE users.authentication_id = authentication.id and" +
-                    " users.subdivision_id = subdivision.id and " +
-                    " authentication.status_user_id = status_user.id" +
-                    ";");
+                    " FROM users " +
+                    " LEFT JOIN subdivision ON (users.subdivision_id =subdivision.id)" +
+                    " LEFT JOIN authentication ON (users.authentication_id=authentication.id) " +
+                    " LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);");
             while (resultSet.next()) {
                 listUser.create(resultSet.getInt("id_users"), resultSet.getString("login"),
                         resultSet.getString("password"), resultSet.getString("first_name"),
