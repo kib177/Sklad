@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.orderNewController">
+<AnchorPane prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.Controllers.orderNewController">
    <children>
       <Button fx:id="button_zakaz" layoutX="368.0" layoutY="326.0" mnemonicParsing="false" style="-fx-border-radius: 5;" text="Заказать" />
       <TextField fx:id="order_name" alignment="CENTER" layoutX="63.0" layoutY="85.0" prefHeight="30.0" prefWidth="200.0" promptText="Название" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />

@@ -30,7 +30,7 @@ public class getUserDAO implements UserFunction {
                 listUser.create(resultSet.getInt("id_users"), resultSet.getString("login"),
                         resultSet.getString("password"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getString("status"),
-                        resultSet.getString("email"), resultSet.getString("subdivision"));
+                        resultSet.getString("email"));
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -44,13 +44,13 @@ public class getUserDAO implements UserFunction {
     }
 
     public String CheckUsers(String name, String password) {
-
         try {
-
-            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT * FROM authentication JOIN status_user ON authentication.status_user_id=status_user.id");
+            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT authentication.login, " +
+                    "authentication.password, status_user.status" +
+                    " FROM authentication" +
+                    " LEFT JOIN status_user ON (authentication.status_user_id=status_user.id)");
             while (rs.next()) {
                 if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
-
                     return rs.getString("status");
                 }
             }

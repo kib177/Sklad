@@ -1,11 +1,7 @@
-package skladrto.project;
+package skladrto.project.Controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import skladrto.project.RequestsDB.Add.addUser;
-import skladrto.project.Registration.CheckData;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -49,9 +45,7 @@ public class registrationController {
 
     @FXML
     void initialize() {
-        SingUp_back.setOnAction(actionEvent -> {
-            buttonBack();
-        });
+        SingUp_back.setOnAction(actionEvent -> buttonBack());
 
 //        SingUp_ButttonGone.setOnAction(actionEvent -> {
 //            CheckData checkData = new CheckData(); // тут должна быть проверка на введены ли все данные, она то работает но не так как хотелось
@@ -67,17 +61,8 @@ public class registrationController {
     public void buttonBack(){
         SingUp_back.getScene().getWindow().hide();
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("AdminWindow.fxml"));
+        CreateScene createScene = new CreateScene();
+        createScene.createScene("AdminWindow.fxml", "Юзер-лох", 600, 400);
 
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Parent root = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
     }
 }

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Brigi</groupId>
+    <groupId>Sklad</groupId>
     <artifactId>SkladRTO</artifactId>
     <version>1.0</version>
     <name>SkladRTO</name>
@@ -94,8 +94,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
+                    <source>9</source>
+                    <target>9</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -106,7 +106,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>brigi.skladrto/Main</mainClass>
+                            <mainClass>skladrto.project/Main</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>

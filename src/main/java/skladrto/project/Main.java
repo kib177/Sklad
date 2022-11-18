@@ -26,7 +26,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Authorization.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Controllers/Authorization.fxml"));
         stage.setTitle("Склад РТО");
         stage.setScene(new Scene(root, 600, 400));
         stage.show();

@@ -1,6 +1,4 @@
-/* класс для работы окна новый заказ
- */
-package skladrto.project;
+package skladrto.project.Controllers;
 
 import skladrto.project.RequestsDB.Add.addOrder;
 import javafx.fxml.FXML;

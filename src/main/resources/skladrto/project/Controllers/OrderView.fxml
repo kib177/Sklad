@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ededed; -fx-background-image: #ededed;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladrto.project.Controllers.orderViewController">
+   <children>
+      <TableView fx:id="List_order" layoutY="38.0" prefHeight="252.0" prefWidth="800.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="Column_Id" maxWidth="100.0" minWidth="40.0" prefWidth="70.39999085664749" text="ID заказа" visible="false" />
+            <TableColumn fx:id="Column_number_order" prefWidth="108.79995727539062" text="Номер заказа" />
+            <TableColumn fx:id="Сolumn_description" maxWidth="438.39996337890625" minWidth="274.4000244140625" prefWidth="428.79998779296875" text="Описание" />
+            <TableColumn fx:id="Column_user" prefWidth="136.800048828125" text="Заказчик" />
+            <TableColumn fx:id="Column_date" maxWidth="213.60003662109375" minWidth="90.0" prefWidth="120.00006103515625" text="Дата заказа" />
+        </columns>
+      </TableView>
+      <Button fx:id="Watch_order" alignment="CENTER" layoutX="679.0" layoutY="326.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Обновить список" AnchorPane.rightAnchor="5.0" />
+      <Button fx:id="new_order" alignment="CENTER" layoutX="679.0" layoutY="362.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Новый заказ" AnchorPane.rightAnchor="5.0" />
+      <TextField fx:id="search_name" alignment="CENTER" layoutX="229.0" layoutY="558.0" onAction="#SearchOrderDescription" prefHeight="25.0" prefWidth="200.0" promptText="Поиск по описанию" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: silver;" AnchorPane.leftAnchor="229.0" />
+      <TextField fx:id="search_articul" alignment="CENTER" layoutX="14.0" layoutY="558.0" maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" onAction="#SearchOrderNumber" prefHeight="25.0" prefWidth="200.0" promptText="Поиск по номеру" style="-fx-background-color: #ffffff; -fx-border-color: silver; -fx-border-radius: 5;" AnchorPane.leftAnchor="15.0" />
+      <MenuBar prefHeight="25.0" prefWidth="800.0" style="-fx-border-color: silver; -fx-background-radius: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu fx:id="menu_file" mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="MenuItem_exit" mnemonicParsing="false" text="Выйти" />
+            </items>
+          </Menu>
+          <Menu fx:id="menu_edit" mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu fx:id="menu_help" mnemonicParsing="false" text="Помощь">
+            <items>
+              <MenuItem mnemonicParsing="false" text="ПОшел нахуй" />
+            </items>
+          </Menu>
+            <Menu fx:id="menu_fuction" mnemonicParsing="false" text="Функционал">
+              <items>
+                  <CheckMenuItem fx:id="MenuItem_id" mnemonicParsing="false" text="Показать id" />
+                  <CheckMenuItem fx:id="MenuItem_product" mnemonicParsing="false" text="Позиции заказа" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TableView fx:id="Table_Items" layoutY="314.0" prefHeight="215.0" prefWidth="512.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" visible="false">
+         <columns>
+            <TableColumn fx:id="ColumnProduct_id" prefWidth="59.20001220703125" text="ID" visible="false" />
+            <TableColumn fx:id="ColumnProduct_name" prefWidth="219.20001220703125" text="Наименование" />
+            <TableColumn fx:id="ColumnProduct_amount" prefWidth="97.60003662109375" text="Количество" />
+            <TableColumn fx:id="ColumnProduct_status" prefWidth="191.20001220703125" text="Статус" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

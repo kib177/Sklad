@@ -3,13 +3,21 @@ package skladrto.project.DAO.modelDAO;
 import javafx.collections.ObservableList;
 import skladrto.project.Model.Order;
 
-public interface OrderFunction {
-    public ObservableList<Order> showListOfOrders();
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-    public ObservableList<Order> searchName(String productName);
+public interface OrderFunction<T,K> {
+    public ObservableList<T> showListOfOrders();
 
-    public ObservableList<Order> searchArticle(String articleProduct);
+    public default ObservableList<T> searchName(String orderDescription) {
+        return null;
+    }
 
-    public ObservableList<Order> searchSubdivision(String subdivision);
+    public default ObservableList<T> searchNumber(String numberOrder) {
+        return null;
+    }
 
+    public void delete (int id);
+
+    void FillingInList(K listOrder, ResultSet rs) throws SQLException;
 }

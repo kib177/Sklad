@@ -8,9 +8,9 @@ public class ListUser {
     private ObservableList<User> usersData = FXCollections.observableArrayList();
 
     public void create(int id, String login, String password, String firstName, String secondName, String status,
-                       String email, String department){
-        usersData.add(new User(id,login,password,firstName,secondName,status,email,department));
-        // тоже самое читай в ListOrder
+                       String email){
+        usersData.add(new User(id,login,password,firstName,secondName,status,email));
+
     }
 
     public ObservableList<User> getUsersData() {

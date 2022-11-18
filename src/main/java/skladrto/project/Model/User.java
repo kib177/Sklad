@@ -16,9 +16,8 @@ public class User {
     private SimpleStringProperty secondName;
     private SimpleStringProperty status;
     private SimpleStringProperty email;
-    private SimpleStringProperty department;
 
-    public User(int id, String login, String password, String firstName, String secondName,String status, String email, String department) { // тоже смое читай в классе Tovar
+    public User(int id, String login, String password, String firstName, String secondName,String status, String email) { // тоже смое читай в классе Tovar
         this.id = new SimpleIntegerProperty(id);
         this.login = new SimpleStringProperty(login);
         this.password = new SimpleStringProperty(password);
@@ -26,7 +25,6 @@ public class User {
         this.firstName = new SimpleStringProperty(firstName);
         this.secondName = new SimpleStringProperty(secondName);
         this.email = new SimpleStringProperty(email);
-        this.department = new SimpleStringProperty(department);
     }
 
     public String getStatus() {
@@ -39,18 +37,6 @@ public class User {
 
     public void setStatus(String status) {
         this.status.set(status);
-    }
-
-    public String getDepartment() {
-        return department.get();
-    }
-
-    public SimpleStringProperty departmentProperty() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department.set(department);
     }
 
     public int getId() {
@@ -130,12 +116,12 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(firstName, user.firstName) && Objects.equals(secondName, user.secondName) && Objects.equals(status, user.status) && Objects.equals(email, user.email) && Objects.equals(department, user.department);
+        return Objects.equals(id, user.id) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && Objects.equals(firstName, user.firstName) && Objects.equals(secondName, user.secondName) && Objects.equals(status, user.status) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password, firstName, secondName, status, email, department);
+        return Objects.hash(id, login, password, firstName, secondName, status, email);
     }
 
     @Override
@@ -148,7 +134,6 @@ public class User {
                 ", secondName=" + secondName +
                 ", status=" + status +
                 ", email=" + email +
-                ", department=" + department +
                 '}';
     }
 }

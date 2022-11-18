@@ -1,4 +1,4 @@
-package skladrto.project;
+package skladrto.project.Controllers;
 
 import skladrto.project.RequestsDB.Get.getUserDAO;
 import skladrto.project.Model.User;
@@ -8,18 +8,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.lang.ref.WeakReference;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class listUsersController {
-
-    private getUserDAO userDAO;
-
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TableColumn<?, ?> column_department;
@@ -50,7 +40,7 @@ public class listUsersController {
 
     @FXML
     void initialize() {
-        userDAO = new getUserDAO(); // подгрузка в таблицу данных
+        getUserDAO userDAO = new getUserDAO(); // подгрузка в таблицу данных
         WeakReference<getUserDAO> weakReference = new WeakReference<>(userDAO);
         showUsers();
         Table_Users.setItems(userDAO.showListOfUsers());
