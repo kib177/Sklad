@@ -2,23 +2,23 @@ package skladrto.project.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import skladrto.project.Model.Product;
+import skladrto.project.Model.FX.ProductFX;
 
 import java.util.Objects;
 
 public class ListProductOrder {
-    private ObservableList<Product> ProductData = FXCollections.observableArrayList();
+    private ObservableList<ProductFX> productFXData = FXCollections.observableArrayList();
 
     public void create(int id, String name, int amount, String status) {
-        ProductData.add(new Product(id, name, amount, status));
+        productFXData.add(new ProductFX(id, name, amount, status));
     }
 
-    public ObservableList<Product> getProductData() {
-        return ProductData;
+    public ObservableList<ProductFX> getProductData() {
+        return productFXData;
     }
 
-    public void setProductData(ObservableList<Product> productData) {
-        ProductData = productData;
+    public void setProductData(ObservableList<ProductFX> productFXData) {
+        this.productFXData = productFXData;
     }
 
     @Override
@@ -26,18 +26,18 @@ public class ListProductOrder {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ListProductOrder that = (ListProductOrder) o;
-        return Objects.equals(ProductData, that.ProductData);
+        return Objects.equals(productFXData, that.productFXData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ProductData);
+        return Objects.hash(productFXData);
     }
 
     @Override
     public String toString() {
         return "ListProductOrder{" +
-                "ProductData=" + ProductData +
+                "ProductData=" + productFXData +
                 '}';
     }
 }

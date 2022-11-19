@@ -1,7 +1,7 @@
 package skladrto.project.Controllers;
 
 import skladrto.project.RequestsDB.Get.getUserDAO;
-import skladrto.project.Model.User;
+import skladrto.project.Model.FX.UserFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -36,7 +36,7 @@ public class listUsersController {
     private TableColumn<?, ?> colunm_password;
 
     @FXML
-    private TableView<User> Table_Users;
+    private TableView<UserFX> Table_Users;
 
     @FXML
     void initialize() {

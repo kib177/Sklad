@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import skladrto.project.DAO.connectDB.DatabaseConnection;
 import skladrto.project.DAO.modelDAO.FillingInListsDAO;
 import skladrto.project.List.ListProductOrder;
-import skladrto.project.Model.Product;
+import skladrto.project.Model.FX.ProductFX;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class getProduct implements FillingInListsDAO<ListProductOrder> {
 
-    public ObservableList<Product> showListOfProducts(Integer id) {
+    public ObservableList<ProductFX> showListOfProducts(Integer id) {
         ListProductOrder listProduct = new ListProductOrder();
         WeakReference<ListProductOrder> weakReference = new WeakReference<>(listProduct);
         try {

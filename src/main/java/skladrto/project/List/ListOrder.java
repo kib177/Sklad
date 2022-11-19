@@ -1,24 +1,24 @@
 package skladrto.project.List;
 
-import skladrto.project.Model.Order;
+import skladrto.project.Model.FX.OrderFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Objects;
 
 public class ListOrder {
-    private ObservableList<Order> orderData = FXCollections.observableArrayList();
+    private ObservableList<OrderFX> orderFXData = FXCollections.observableArrayList();
 
     public void create(int id, int number_order, String order_description, String user, String order_date) {
-        orderData.add(new Order(id,number_order, order_description, user, order_date));
+        orderFXData.add(new OrderFX(id,number_order, order_description, user, order_date));
     }
 
-    public ObservableList<Order> getOrderData() {
-        return orderData;
+    public ObservableList<OrderFX> getOrderData() {
+        return orderFXData;
     }
 
-    public void setOrderData(ObservableList<Order> orderData) {
-        this.orderData = orderData;
+    public void setOrderData(ObservableList<OrderFX> orderFXData) {
+        this.orderFXData = orderFXData;
     }
 
     @Override
@@ -26,18 +26,18 @@ public class ListOrder {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ListOrder listOrder = (ListOrder) o;
-        return Objects.equals(orderData, listOrder.orderData);
+        return Objects.equals(orderFXData, listOrder.orderFXData);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderData);
+        return Objects.hash(orderFXData);
     }
 
     @Override
     public String toString() {
         return "ListOrder{" +
-                "orderData=" + orderData +
+                "orderData=" + orderFXData +
                 '}';
     }
 }

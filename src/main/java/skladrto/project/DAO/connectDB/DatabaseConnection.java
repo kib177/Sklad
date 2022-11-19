@@ -9,8 +9,8 @@ public class DatabaseConnection {
         return DriverManager.getConnection("jdbc:mysql://localhost:3306/sklad", "root", "admin");
     }
 
-    public static Statement getStatement() throws SQLException, IOException  {
-           return getDatabaseConnection().createStatement();
+    public static Statement getStatement() throws SQLException, IOException {
+        return getDatabaseConnection().createStatement();
     }
 
     public static void close(Connection connection) {

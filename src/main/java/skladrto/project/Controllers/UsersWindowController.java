@@ -4,9 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-
-import java.io.IOException;
-
 public class UsersWindowController {
     @FXML
     private Button Go_to_order;

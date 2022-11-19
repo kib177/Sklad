@@ -5,8 +5,8 @@ import java.lang.ref.WeakReference;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
-import skladrto.project.Model.Order;
-import skladrto.project.Model.Product;
+import skladrto.project.Model.FX.OrderFX;
+import skladrto.project.Model.FX.ProductFX;
 import skladrto.project.RequestsDB.Get.getOrdersDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,9 +31,9 @@ public class orderViewController {
     @FXML
     private TableColumn<?, ?> Column_user;
     @FXML
-    private TableView<Order> List_order;
+    private TableView<OrderFX> List_order;
     @FXML
-    private TableView<Product> Table_Items;
+    private TableView<ProductFX> Table_Items;
     @FXML
     private Button Watch_order;
     @FXML
@@ -87,15 +87,15 @@ public class orderViewController {
         Column_date.setCellValueFactory(new PropertyValueFactory<>("order_date"));
         List_order.setItems(ordersDAO.showListOfOrders());
 
-        TableView.TableViewSelectionModel<Order> selectionModel = List_order.getSelectionModel();
+        TableView.TableViewSelectionModel<OrderFX> selectionModel = List_order.getSelectionModel();
 
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<Order>() {
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<OrderFX>() {
 
             @Override
-            public void changed(ObservableValue<? extends Order> observableValue, Order order, Order newOrder) {
-                if (newOrder != null) {
+            public void changed(ObservableValue<? extends OrderFX> observableValue, OrderFX orderFX, OrderFX newOrderFX) {
+                if (newOrderFX != null) {
                     if (watchProduct()) {
-                        viewProduct(newOrder.getId());
+                        viewProduct(newOrderFX.getId());
                     }
                 }
             }

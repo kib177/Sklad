@@ -13,10 +13,13 @@ module brigi.skladrto {
 
     opens skladrto.project to javafx.fxml;
     exports skladrto.project;
-    exports skladrto.project.Model;
-    opens skladrto.project.Model to javafx.fxml;
+    exports skladrto.project.Model.FX;
+    opens skladrto.project.Model.FX to javafx.fxml;
     exports skladrto.project.List;
     opens skladrto.project.List to javafx.fxml;
     exports skladrto.project.Controllers;
     opens skladrto.project.Controllers to javafx.fxml;
+    exports skladrto.project.Model;
+    opens skladrto.project.Model to javafx.fxml;
+
 }

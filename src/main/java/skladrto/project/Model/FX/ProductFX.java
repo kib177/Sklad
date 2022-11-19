@@ -1,17 +1,17 @@
-package skladrto.project.Model;
+package skladrto.project.Model.FX;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.util.Objects;
 
-public class Product {
+public class ProductFX {
     private SimpleIntegerProperty id;
     private SimpleStringProperty name;
     private SimpleIntegerProperty amount;
     private SimpleStringProperty status;
 
-    public Product(int id, String name, int amount, String status) {
+    public ProductFX(int id, String name, int amount, String status) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.amount = new SimpleIntegerProperty(amount);
@@ -70,8 +70,8 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(amount, product.amount) && Objects.equals(status, product.status);
+        ProductFX productFX = (ProductFX) o;
+        return Objects.equals(id, productFX.id) && Objects.equals(name, productFX.name) && Objects.equals(amount, productFX.amount) && Objects.equals(status, productFX.status);
     }
 
     @Override

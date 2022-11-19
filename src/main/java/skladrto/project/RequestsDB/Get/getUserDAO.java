@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import skladrto.project.DAO.modelDAO.UserFunction;
 import skladrto.project.List.ListUser;
 import skladrto.project.DAO.connectDB.DatabaseConnection;
-import skladrto.project.Model.User;
+import skladrto.project.Model.FX.UserFX;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class getUserDAO implements UserFunction {
 
     @Override
-    public ObservableList<User> showListOfUsers() {
+    public ObservableList<UserFX> showListOfUsers() {
         ListUser listUser = new ListUser();
         WeakReference<ListUser> weakReference = new WeakReference<>(listUser);
         try {

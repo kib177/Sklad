@@ -1,109 +1,58 @@
-/* обьекте с параметрами соответствующие данным заказа из бд
-стандартный набор get set и др методов
- */
 package skladrto.project.Model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
-import java.util.Objects;
-
 public class Order {
-    private SimpleIntegerProperty id;
-    private SimpleIntegerProperty number_order;
-    private SimpleStringProperty order_description;
-    private SimpleStringProperty user;
-    private SimpleStringProperty order_date;
+    private int id;
+    private String orderDescription;
+    private User user;
+    //потом заменить на Date
+    private String orderDate;
+    private int numberOrder;
 
-    public Order(int id, int number_order, String order_description, String user, String order_date) {
-        this.id = new SimpleIntegerProperty(id);
-        this.number_order = new SimpleIntegerProperty(number_order);
-        this.order_description = new SimpleStringProperty(order_description);
-        this.user = new SimpleStringProperty(user);
-        this.order_date = new SimpleStringProperty(order_date);
-    }
-
-    public int getNumber_order() {
-        return number_order.get();
-    }
-
-    public SimpleIntegerProperty number_orderProperty() {
-        return number_order;
-    }
-
-    public void setNumber_order(int number_order) {
-        this.number_order.set(number_order);
+    public Order(int id, String orderDescription, User user, String orderDate, int numberOrder) {
+        this.id = id;
+        this.orderDescription = orderDescription;
+        this.user = user;
+        this.orderDate = orderDate;
+        this.numberOrder = numberOrder;
     }
 
     public int getId() {
-        return id.get();
-    }
-
-    public SimpleIntegerProperty idProperty() {
         return id;
     }
 
     public void setId(int id) {
-        this.id.set(id);
+        this.id = id;
     }
 
-    public String getOrder_description() {
-        return order_description.get();
+    public String getOrderDescription() {
+        return orderDescription;
     }
 
-    public SimpleStringProperty order_descriptionProperty() {
-        return order_description;
+    public void setOrderDescription(String orderDescription) {
+        this.orderDescription = orderDescription;
     }
 
-    public void setOrder_description(String order_description) {
-        this.order_description.set(order_description);
-    }
-
-    public String getOrder_date() {
-        return order_date.get();
-    }
-
-    public SimpleStringProperty order_dateProperty() {
-        return order_date;
-    }
-
-    public void setOrder_date(String order_date) {
-        this.order_date.set(order_date);
-    }
-
-    public String getUser() {
-        return user.get();
-    }
-
-    public SimpleStringProperty userProperty() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(String user) {
-        this.user.set(user);
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(number_order, order.number_order) && Objects.equals(order_description, order.order_description) && Objects.equals(user, order.user) && Objects.equals(order_date, order.order_date);
+    public String getOrderDate() {
+        return orderDate;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, number_order, order_description, user, order_date);
+    public void setOrderDate(String orderDate) {
+        this.orderDate = orderDate;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", number_order=" + number_order +
-                ", order_description=" + order_description +
-                ", user=" + user +
-                ", order_date=" + order_date +
-                '}';
+    public int getNumberOrder() {
+        return numberOrder;
+    }
+
+    public void setNumberOrder(int numberOrder) {
+        this.numberOrder = numberOrder;
     }
 }

@@ -1,23 +1,23 @@
 package skladrto.project.List;
 
-import skladrto.project.Model.User;
+import skladrto.project.Model.FX.UserFX;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ListUser {
-    private ObservableList<User> usersData = FXCollections.observableArrayList();
+    private ObservableList<UserFX> usersData = FXCollections.observableArrayList();
 
     public void create(int id, String login, String password, String firstName, String secondName, String status,
                        String email){
-        usersData.add(new User(id,login,password,firstName,secondName,status,email));
+        usersData.add(new UserFX(id,login,password,firstName,secondName,status,email));
 
     }
 
-    public ObservableList<User> getUsersData() {
+    public ObservableList<UserFX> getUsersData() {
         return usersData;
     }
 
-    public void setUsersData(ObservableList<User> usersData) {
+    public void setUsersData(ObservableList<UserFX> usersData) {
         this.usersData = usersData;
     }
 
