@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import skladrto.project.Model.Order;
+import skladrto.project.Model.User;
+import skladrto.project.RequestsDB.Get.GetOrdersDAO;
 
 import java.io.IOException;
 
@@ -12,16 +15,12 @@ public class Main extends Application {
 
     public static void main(String[] args) {
 
-//        проверка методов
-//        OrdersDAO ordersDAO = new OrdersDAO();
-//        ordersDAO.showListOfOrders();
-//        System.out.println();
-//        ordersDAO.searchName("пила");
-//        System.out.println();
-//        ordersDAO.searchArticle("222");
-//        System.out.println();
-//        ordersDAO.searchSubdivision(2);
-        launch();
+        User user = new User(1, "Кирилл", "Бриги", 1);
+        Order order = new Order(14, "проверка метода", 1,"2020",2322);
+        GetOrdersDAO getOrdersDAO = new GetOrdersDAO();
+        getOrdersDAO.add(order);
+
+       // launch();
     }
 
     @Override

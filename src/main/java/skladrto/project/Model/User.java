@@ -4,13 +4,13 @@ public class User {
     private int id;
     private String ferstName;
     private String lastName;
-    private Authentication authentication;
+    private int authenticationId;
 
-    public User(int id, String ferstName, String lastName, Authentication authentication) {
+    public User(int id, String ferstName, String lastName, int authenticationId) {
         this.id = id;
         this.ferstName = ferstName;
         this.lastName = lastName;
-        this.authentication = authentication;
+        this.authenticationId = authenticationId;
     }
 
     public int getId() {
@@ -37,11 +37,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Authentication getAuthentication() {
-        return authentication;
+    public int getAuthenticationId() {
+        return authenticationId;
     }
 
-    public void setAuthentication(Authentication authentication) {
-        this.authentication = authentication;
+    public void setAuthenticationId(int authenticationId) {
+        this.authenticationId = authenticationId;
     }
 }

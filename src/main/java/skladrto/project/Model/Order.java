@@ -3,15 +3,15 @@ package skladrto.project.Model;
 public class Order {
     private int id;
     private String orderDescription;
-    private User user;
+    private int userId;
     //потом заменить на Date
     private String orderDate;
     private int numberOrder;
 
-    public Order(int id, String orderDescription, User user, String orderDate, int numberOrder) {
+    public Order(int id, String orderDescription, int userId, String orderDate, int numberOrder) {
         this.id = id;
         this.orderDescription = orderDescription;
-        this.user = user;
+        this.userId = userId;
         this.orderDate = orderDate;
         this.numberOrder = numberOrder;
     }
@@ -32,12 +32,12 @@ public class Order {
         this.orderDescription = orderDescription;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getOrderDate() {

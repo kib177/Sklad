@@ -7,7 +7,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
 import skladrto.project.Model.FX.OrderFX;
 import skladrto.project.Model.FX.ProductFX;
-import skladrto.project.RequestsDB.Get.getOrdersDAO;
+import skladrto.project.RequestsDB.Get.GetOrdersDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
 import skladrto.project.RequestsDB.Get.getProduct;
@@ -77,8 +77,8 @@ public class orderViewController {
     }
 
     public void getOrders() {
-        getOrdersDAO ordersDAO = new getOrdersDAO();
-        WeakReference<getOrdersDAO> weakReference = new WeakReference<>(ordersDAO);
+        GetOrdersDAO ordersDAO = new GetOrdersDAO();
+        WeakReference<GetOrdersDAO> weakReference = new WeakReference<>(ordersDAO);
 
         Column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         Column_number_order.setCellValueFactory(new PropertyValueFactory<>("number_order"));
@@ -118,15 +118,15 @@ public class orderViewController {
     }
 
     public void SearchOrderDescription() {
-        getOrdersDAO ordersDAO = new getOrdersDAO();
-        WeakReference<getOrdersDAO> weakReference = new WeakReference<>(ordersDAO);
+        GetOrdersDAO ordersDAO = new GetOrdersDAO();
+        WeakReference<GetOrdersDAO> weakReference = new WeakReference<>(ordersDAO);
         getOrders();
         List_order.setItems(ordersDAO.searchName(search_name.getText()));
     }
 
     public void SearchOrderNumber() {
-        getOrdersDAO ordersDAO = new getOrdersDAO();
-        WeakReference<getOrdersDAO> weakReference = new WeakReference<>(ordersDAO);
+        GetOrdersDAO ordersDAO = new GetOrdersDAO();
+        WeakReference<GetOrdersDAO> weakReference = new WeakReference<>(ordersDAO);
 
         getOrders();
         List_order.setItems(ordersDAO.searchNumber(search_articul.getText()));
