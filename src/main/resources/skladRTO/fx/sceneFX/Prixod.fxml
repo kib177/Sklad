@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="533.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.PrixodController">
+   <children>
+      <ChoiceBox fx:id="status" layoutX="349.0" layoutY="81.0" prefWidth="150.0" />
+      <TextArea fx:id="description" layoutX="14.0" layoutY="81.0" prefHeight="112.0" prefWidth="296.0" promptText="Описание" />
+      <TextField fx:id="data" layoutX="349.0" layoutY="167.0" promptText="дата поставки" />
+      <TextField fx:id="articul" layoutX="350.0" layoutY="124.0" promptText="артикул" />
+      <Button layoutX="467.0" layoutY="208.0" mnemonicParsing="false" text="Button" />
+      <Label fx:id="label_product" layoutX="40.0" layoutY="26.0" text="Label" />
+   </children>
+</AnchorPane>

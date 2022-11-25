@@ -1,7 +1,6 @@
-module brigi.skladrto {
+module skladrto {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.web;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -11,15 +10,18 @@ module brigi.skladrto {
     requires java.sql;
     requires java.naming;
 
-    opens skladrto.project to javafx.fxml;
-    exports skladrto.project;
-    exports skladrto.project.Model.FX;
-    opens skladrto.project.Model.FX to javafx.fxml;
-    exports skladrto.project.List;
-    opens skladrto.project.List to javafx.fxml;
-    exports skladrto.project.Controllers;
-    opens skladrto.project.Controllers to javafx.fxml;
-    exports skladrto.project.Model;
-    opens skladrto.project.Model to javafx.fxml;
+    opens skladRTO to javafx.fxml;
+    exports skladRTO;
+    exports skladRTO.api.models.FX;
+    opens skladRTO.api.models.FX to javafx.fxml;
+    exports skladRTO.api.models.lists;
+    opens skladRTO.api.models.lists to javafx.fxml;
+    exports skladRTO.fx.Controllers;
+    opens skladRTO.fx.Controllers to javafx.fxml;
+    exports skladRTO.api.models;
+    opens skladRTO.api.models to javafx.fxml;
+    exports skladRTO.fx.sceneFX;
+    opens skladRTO.fx.sceneFX to javafx.fxml;
+
 
 }

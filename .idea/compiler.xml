@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SkladRTO" target="9" />
+      <module name="SkladRTO" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
