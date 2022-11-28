@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import skladRTO.api.models.Authorization;
 import skladRTO.api.models.FX.OrderFX;
 import skladRTO.api.models.FX.ProductFX;
 import skladRTO.dao.requestsDB.Get.GetOrdersDAO;
@@ -74,8 +75,15 @@ public class OrderViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Menu_Users.disableProperty().setValue(false);
         Watch_order(new ActionEvent());
+
+        if(Authorization.getStatusUser().getStatus().equals("Пользователь")){
+            Menu_Users.disableProperty().setValue(true);
+            MenuItem_confirmOrder.disableProperty().setValue(true);
+            MenuItem_deleteOrder.disableProperty().setValue(true);
+        } else if (Authorization.getStatusUser().getStatus().equals("Модератор")){
+            Menu_Users.disableProperty().setValue(true);
+        }
     }
 
     @FXML
@@ -112,7 +120,7 @@ public class OrderViewController implements Initializable {
     @FXML
     public void MenuItem_addOrder(ActionEvent actionEvent) {
         CreateScene createScene = new CreateScene();
-        createScene.createScene("New_order.fxml", "Новый заказ", 800, 400);
+        createScene.createScene("New_order.fxml", 800, 400);
 
     }
 
@@ -156,7 +164,7 @@ public class OrderViewController implements Initializable {
             public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
                 if (newProduct != null) {
                     CreateScene createScene = new CreateScene();
-                    createScene.createScene("Prixod.fxml", "Подтверждение заказа", 533, 247);
+                    createScene.createScene("Prixod.fxml", 533, 247);
                     ((PrixodController) createScene.getLoader().getController()).toStringProduct(newProduct);
                     }
                 }
@@ -166,6 +174,6 @@ public class OrderViewController implements Initializable {
     @FXML
     public void MenuItem_users(ActionEvent actionEvent) {
         CreateScene createScene = new CreateScene();
-        createScene.createScene("List_Users.fxml", "Список пользователей", 950, 370);
+        createScene.createScene("List_Users.fxml", 950, 370);
     }
 }

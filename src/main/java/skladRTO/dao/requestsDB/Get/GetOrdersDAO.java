@@ -1,6 +1,7 @@
 package skladRTO.dao.requestsDB.Get;
 
 import javafx.collections.ObservableList;
+import skladRTO.api.models.Authorization;
 import skladRTO.dao.modelDAO.OrderFunction;
 import skladRTO.api.models.lists.ListOrder;
 import skladRTO.dao.connectDB.DatabaseConnection;
@@ -109,7 +110,7 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, ListOrder> {
                 System.out.println(order);
                 preparedStatement.setString(1, order.getOrderDescription());
                 // надо вернуть ид юзера, можно вернуть текущий ид аутентифицированного пользователя
-                preparedStatement.setInt(2, order.getUserId());
+                preparedStatement.setInt(2, Authorization.getUser().getId());
                 preparedStatement.setString(3, order.getOrderDate());
                 preparedStatement.setInt(4, order.getNumberOrder());
                 preparedStatement.executeUpdate();

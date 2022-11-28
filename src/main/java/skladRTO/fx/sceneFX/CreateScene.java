@@ -11,12 +11,12 @@ import java.util.Objects;
 public class CreateScene {
     private Stage stage;
 private FXMLLoader loader;
-    public void createScene(String nameFXML, String title, int width, int heigth) {
+    public void createScene(String nameFXML, int width, int heigth) {
         loader = new FXMLLoader(getClass().getResource(nameFXML));
         try {
             Parent root = loader.load();
             stage = new Stage();
-            stage.setTitle(title);
+            stage.setTitle("Делком 40");
             stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("1198294.png"))));
             stage.setResizable(false);
             stage.setScene(new Scene(root, width, heigth));

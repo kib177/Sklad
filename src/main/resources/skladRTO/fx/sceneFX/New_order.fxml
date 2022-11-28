@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="505.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.OrderNewController">
    <children>
-      <Button fx:id="button_gone" layoutX="215.0" layoutY="297.0" mnemonicParsing="false" style="-fx-border-radius: 5;" text="Продолжить" />
+      <Button fx:id="button_gone" layoutX="215.0" layoutY="297.0" mnemonicParsing="false" onAction="#button_gone" style="-fx-border-radius: 5;" text="Продолжить" />
       <TextField fx:id="order_number" layoutX="288.0" layoutY="169.0" prefHeight="30.0" prefWidth="200.0" promptText="Номер заказа" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
       <TextField fx:id="order_zakazchik" layoutX="288.0" layoutY="82.0" prefHeight="30.0" prefWidth="200.0" promptText="Заказчик" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />
       <TextField fx:id="order_date" layoutX="288.0" layoutY="124.0" prefHeight="30.0" prefWidth="200.0" promptText="Дата заказа" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;" />

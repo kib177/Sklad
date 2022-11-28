@@ -17,10 +17,10 @@
       <TableView fx:id="List_order" layoutY="37.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="252.0" minWidth="800.0" prefHeight="252.0" prefWidth="800.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="311.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="37.0">
         <columns>
           <TableColumn fx:id="Column_Id" maxWidth="100.0" minWidth="40.0" prefWidth="70.39999085664749" text="ID заказа" />
-            <TableColumn fx:id="Column_number_order" prefWidth="108.79995727539062" text="Номер заказа" />
-            <TableColumn fx:id="Сolumn_description" maxWidth="360.79998779296875" minWidth="274.4000244140625" prefWidth="360.79998779296875" text="Описание" />
-            <TableColumn fx:id="Column_user" maxWidth="1.7976931348623157E308" prefWidth="128.79998779296875" text="Заказчик" />
-            <TableColumn fx:id="Column_date" maxWidth="127.2" minWidth="90.0" prefWidth="127.2000732421875" text="Дата заказа" />
+            <TableColumn fx:id="Column_number_order" prefWidth="92.79998779296875" text="Номер заказа" />
+            <TableColumn fx:id="Сolumn_description" maxWidth="360.79998779296875" minWidth="274.4000244140625" prefWidth="351.99998474121094" text="Описание" />
+            <TableColumn fx:id="Column_user" maxWidth="1.7976931348623157E308" prefWidth="171.99993896484375" text="Заказчик" />
+            <TableColumn fx:id="Column_date" maxWidth="127.2" minWidth="90.0" prefWidth="109.60009765625" text="Дата заказа" />
         </columns>
       </TableView>
       <Button fx:id="Watch_order" alignment="CENTER" layoutX="643.0" layoutY="430.0" maxHeight="25.0" maxWidth="120.0" mnemonicParsing="false" onAction="#Watch_order" prefHeight="25.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Обновить" AnchorPane.bottomAnchor="194.39999999999998" AnchorPane.leftAnchor="643.0" />
@@ -46,12 +46,12 @@
             <Menu fx:id="Menu_Orders" mnemonicParsing="false" text="Заказы">
               <items>
                   <MenuItem fx:id="MenuItem_addOrder" mnemonicParsing="false" onAction="#MenuItem_addOrder" text="Создать заказ" />
-                <MenuItem fx:id="MenuItem_updateOrder" disable="true" mnemonicParsing="false" text="Изменить заказ" />
-                  <MenuItem fx:id="MenuItem_confirmOrder" disable="true" mnemonicParsing="false" text="Подтвердить заказ" />
-                  <MenuItem fx:id="MenuItem_deleteOrder" disable="true" mnemonicParsing="false" text="Удалить заказ" />
+                <MenuItem fx:id="MenuItem_updateOrder" mnemonicParsing="false" text="Изменить заказ" />
+                  <MenuItem fx:id="MenuItem_confirmOrder" mnemonicParsing="false" text="Подтвердить заказ" />
+                  <MenuItem fx:id="MenuItem_deleteOrder" mnemonicParsing="false" text="Удалить заказ" />
               </items>
             </Menu>
-            <Menu fx:id="Menu_Users" disable="true" mnemonicParsing="false" text="Управление персоналом">
+            <Menu fx:id="Menu_Users" mnemonicParsing="false" text="Управление персоналом">
                <items>
                   <MenuItem fx:id="MenuItem_users" mnemonicParsing="false" onAction="#MenuItem_users" text="Показать пользователей" />
                </items>

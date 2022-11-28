@@ -31,7 +31,7 @@ public class WindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CreateScene createScene = new CreateScene();
-        button_prixod.setOnAction(actionEvent -> createScene.createScene("Prixod.fxml", "Привет урод", 400, 400));
+        button_prixod.setOnAction(actionEvent -> createScene.createScene("Prixod.fxml", 400, 400));
 
         Go_to_order.setOnAction(actionEvent -> goToOrder(createScene));
 
@@ -42,16 +42,16 @@ public class WindowController implements Initializable {
 
     public void getViewUsers(CreateScene createScene) {
         view_users.getScene().getWindow();
-        createScene.createScene("List_Users.fxml", "Список пользователей", 900, 500);
+        createScene.createScene("List_Users.fxml", 900, 500);
     }
 
     public void addUser(CreateScene createScene) {
         Add_user.getScene().getWindow();
-        createScene.createScene("Registration.fxml", "Регистрация", 550, 370);
+        createScene.createScene("Registration.fxml", 550, 370);
     }
 
     public void goToOrder(CreateScene createScene) {
         Go_to_order.getScene().getWindow().hide();
-        createScene.createScene("OrderView.fxml", "Список заказов", 800, 600);
+        createScene.createScene("OrderView.fxml", 800, 600);
     }
 }

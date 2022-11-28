@@ -4,14 +4,14 @@ public class Authentication {
     private int id;
     private String login;
     private String password;
-    private StatusUser statusUser;
+    private int statusUserId;
     private String email;
 
-    public Authentication(int id, String login, String password, StatusUser statusUser, String email) {
+    public Authentication(int id, String login, String password, int statusUserId, String email) {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.statusUser = statusUser;
+        this.statusUserId = statusUserId;
         this.email = email;
     }
 
@@ -39,12 +39,12 @@ public class Authentication {
         this.password = password;
     }
 
-    public StatusUser getStatusUser() {
-        return statusUser;
+    public int getStatusUserId() {
+        return statusUserId;
     }
 
-    public void setStatusUser(StatusUser statusUser) {
-        this.statusUser = statusUser;
+    public void setStatusUserId(int statusUserId) {
+        this.statusUserId = statusUserId;
     }
 
     public String getEmail() {

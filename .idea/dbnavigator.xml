@@ -29,7 +29,8 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="998ee8ff-7a51-4bbe-8059-a5f03352d953">
-      <console name="Sklad" type="STANDARD" schema="sklad" session="Main" />
+      <console name="Sklad" type="STANDARD" schema="sklad" session="Main"><![CDATA[SELECT authentication.login ,
+                    authentication.password FROM authentication)"]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -40,6 +41,7 @@
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="998ee8ff-7a51-4bbe-8059-a5f03352d953" dataset="sklad.orders" active-filter-id="" />
+    <filter-actions connection-id="998ee8ff-7a51-4bbe-8059-a5f03352d953" dataset="sklad.order_status" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />

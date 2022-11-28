@@ -72,6 +72,6 @@ public class UsersViewController implements Initializable {
     @FXML
     public void Button_addUser(ActionEvent actionEvent) {
         CreateScene createScene = new CreateScene();
-        createScene.createScene("Registration.fxml", "Регистрация", 550, 370);
+        createScene.createScene("Registration.fxml", 550, 370);
     }
 }

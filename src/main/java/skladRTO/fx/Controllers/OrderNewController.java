@@ -1,6 +1,8 @@
 package skladRTO.fx.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import skladRTO.api.models.Authorization;
 import skladRTO.api.models.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -13,7 +15,6 @@ import java.util.ResourceBundle;
 public class OrderNewController implements Initializable {
     @FXML
     private Button button_gone;
-    private Order order;
     @FXML
     private TextField order_date;
     @FXML
@@ -25,19 +26,16 @@ public class OrderNewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        button_gone.setOnAction(actionEvent -> {
-            try {
-                buttonGone();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+//        order_zakazchik.setText(Authorization.getUser().getFerstName() + " " + Authorization.getUser().getLastName());
+
     }
 
-    public void buttonGone() throws IOException {
-        this.order = new Order(order_proper.getText(), order_zakazchik.getText(), order_date.getText(), order_number.getText());
+    @FXML
+    public void button_gone(ActionEvent actionEvent){
+
+        Order order = new Order(order_proper.getText(), order_date.getText(), order_number.getText());
         CreateScene createScene = new CreateScene();
-        createScene.createScene("Product_add.fxml", "Заказ позиции", 600, 400);
+        createScene.createScene("Product_add.fxml", 600, 400);
         ((ProductNewController) createScene.getLoader().getController()).createOrder(order);
         cleanUpString();
     }

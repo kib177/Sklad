@@ -1,15 +1,19 @@
 package skladRTO.dao.requestsDB.Get;
 
 import javafx.collections.ObservableList;
+import skladRTO.api.models.Authentication;
+import skladRTO.api.models.StatusUser;
+import skladRTO.api.models.User;
+import skladRTO.api.models.lists.UserStatusLIst;
 import skladRTO.dao.modelDAO.UserFunction;
 import skladRTO.api.models.lists.ListUser;
 import skladRTO.dao.connectDB.DatabaseConnection;
-import skladRTO.api.models.lists.ListUserStatus;
 import skladRTO.api.models.FX.UserFX;
-import skladRTO.api.models.StatusUser;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -44,34 +48,73 @@ public class getUserDAO implements UserFunction {
 
     }
 
-    public Boolean CheckUsers(String name, String password) {
-        try {
-            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT authentication.login, " +
-                    "authentication.password FROM authentication");
-
-            while (rs.next()) {
-                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
-                    return true;
-                }
+    public User getUser(int id) {
+        User user = null;
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM sklad.users WHERE users.authentication_id = ?;")) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                user = new User(resultSet.getInt("id_users"), resultSet.getString("first_name"),
+                        resultSet.getString("last_name"), resultSet.getInt("authentication_id"));
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return user;
     }
 
+    public StatusUser getStatusUser(int id) {
+        StatusUser statusUser = null;
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM sklad.status_user WHERE status_user.id = ?;")) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                statusUser = new StatusUser(resultSet.getString("status"));
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        return statusUser;
+    }
+
+    public Authentication getAuthentication(String login, String password) {
+        Authentication authentication = null;
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(
+                     "SELECT * FROM authentication " +
+                             " WHERE login = ? AND password = ?")) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                System.out.println("111"+resultSet);
+                authentication = new Authentication(resultSet.getInt("id"), resultSet.getString("login"),
+                        resultSet.getString("password"), resultSet.getInt("status_user_id"), resultSet.getString("email"));
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        return authentication;
+    }
+
+
+
     public ObservableList<StatusUser> getStatus() {
-        ListUserStatus listUserStatus = new ListUserStatus();
+        UserStatusLIst listUserStatus = new UserStatusLIst();
         try {
-            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT status_user.status FROM status_user");
+            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT status_user.status FROM status_user;");
 
             while (rs.next()) {
                 listUserStatus.create(rs.getString("status"));
             }
-        } catch (SQLException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } return listUserStatus.getObservableList();
+        }
+        return listUserStatus.getObservableList();
     }
 }

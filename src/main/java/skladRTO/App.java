@@ -16,7 +16,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         CreateScene createScene = new CreateScene();
-        createScene.createScene("Authorization.fxml", "Склад РТО", 350,250);
+        createScene.createScene("Authorization.fxml", 350,250);
 
     }
 
