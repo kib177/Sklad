@@ -2,6 +2,7 @@ package skladRTO.api.models.FX;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 import java.util.Objects;
 
@@ -82,8 +83,8 @@ public class ProductFX {
     @Override
     public String toString() {
         return  id +
-                ", name=" + name +
-                ", amount=" + amount +
-                ", status=" + status;
+                " название: " + name +
+                " количество: " + amount +
+                " статус: " + status;
     }
 }

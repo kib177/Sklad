@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.AuthorizationController">
+    <Label layoutX="76.0" layoutY="14.0" text="Авторизация" textFill="#000000de">
+      <font>
+         <Font name="Times New Roman" size="36.0" />
+      </font></Label>
+    <Button fx:id="SingIn_ButSingIn" alignment="CENTER" layoutX="126.0" layoutY="181.0" mnemonicParsing="false" onAction="#SingIn_ButSingIn" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Войти">
+      <font>
+         <Font name="Times New Roman" size="14.0" />
+      </font></Button>
+    <TextField fx:id="SingIn_login" alignment="CENTER" layoutX="76.0" layoutY="74.0" prefHeight="30.0" prefWidth="200.0" promptText="Логин" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;">
+      <font>
+         <Font name="Times New Roman" size="14.0" />
+      </font>
+      <cursor>
+         <Cursor fx:constant="DEFAULT" />
+      </cursor></TextField>
+    <PasswordField fx:id="SingIn_password" alignment="CENTER" layoutX="76.0" layoutY="126.0" onAction="#SingIn_ButSingIn" prefHeight="30.0" prefWidth="200.0" promptText="Пароль" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;">
+      <font>
+         <Font name="Times New Roman" size="14.0" />
+      </font></PasswordField>
+   <Label fx:id="SMS" alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="230.0">
+      <font>
+         <Font name="Times New Roman" size="14.0" />
+      </font>
+   </Label>
+</AnchorPane>

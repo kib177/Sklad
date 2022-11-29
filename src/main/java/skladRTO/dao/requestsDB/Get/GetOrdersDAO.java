@@ -2,6 +2,7 @@ package skladRTO.dao.requestsDB.Get;
 
 import javafx.collections.ObservableList;
 import skladRTO.api.models.Authorization;
+import skladRTO.api.models.OrderStatus;
 import skladRTO.dao.modelDAO.OrderFunction;
 import skladRTO.api.models.lists.ListOrder;
 import skladRTO.dao.connectDB.DatabaseConnection;
@@ -71,26 +72,65 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, ListOrder> {
     }
 
     @Override
-    public void delete(int id) {
-        try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             Statement statement = connection.createStatement()) {
-            String str = "INSERT INTO sklad.product_info (articul,arrival_date,description) VALUES ('article3', '646' , '321323');" ;
-              String str1 =      " INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id)" +
-                    " VALUES ('product3', 20 , 1,2, LAST_INSERT_ID());";
-              statement.addBatch(str);
-              statement.addBatch(str1);
-           statement.executeBatch();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void delete(Order order, List<ProductAdd> list) {
 
-
-//INSERT INTO sklad.product_info (articul,arrival_date,description) VALUES ('2464', '646' , '321323');
-//INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id) VALUES ('ksdjfh', 20 , 1,2, LAST_INSERT_ID());
     }
 
+    //    @Override // пробный метод не трогать!!! артем пидор
+//    public void delete(Order order, List<ProductAdd> list) {
+//        String SQL = "   INSERT INTO sklad.product_info () VALUES ();" +
+//                "           SET @num1 := LAST_INSERT_ID();  " +
+//                "           INSERT INTO orders (order_description, user_id, order_date, number_order) Values (?, ?, ?, ?);" +
+//                "           SET @num2 := LAST_INSERT_ID();  " +
+//                "           INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id)" +
+//                "           VALUES ('sd', 'sad' , 1,@num2, @num1);";
+//
+////        String addProductInfo = "INSERT INTO sklad.product_info () VALUES ();";
+////        String lastIndexId = "SELECT LAST_INSERT_ID();";
+////        String addOrder_Product = " INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id)" +
+////                " VALUES ('product3', 20 , 1,2, LAST_INSERT_ID());";
+////        String addOrder = "INSERT INTO orders (order_description, user_id, order_date, number_order) Values (?, ?, ?, ?)";
+//        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+//             PreparedStatement statement = connection.prepareStatement(SQL)){
+//            statement.setString(1, order.getOrderDescription());
+//            System.out.println("начало");
+//            // надо вернуть ид юзера, можно вернуть текущий ид аутентифицированного пользователя
+//            statement.setInt(2, 4);
+//            statement.setString(3, order.getOrderDate());
+//            statement.setInt(4, order.getNumberOrder());
+//           statement.addBatch();
+//            System.out.println("после пуша");
+//            System.out.println("перебор массива");
+//            for (ProductAdd product : list) {
+//                statement.setString(5, product.getNameProduct());
+//                statement.setInt(6, product.getAmount());
+//                statement.addBatch();
+//            }
+////            statement.addBatch(lastIndexId);
+////            statement.addBatch(addOrder);
+//        statement.addBatch();
+//            statement.executeBatch();
+//        } catch (SQLException | IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    //        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+//    //             Statement statement = connection.createStatement()) {
+//    //            String str = "INSERT INTO sklad.product_info (articul,arrival_date,description) VALUES ('article3', '646' , '321323');" ;
+//    //              String str1 =      " INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id)" +
+//    //                    " VALUES ('product3', 20 , 1,2, LAST_INSERT_ID());";
+//    //              statement.addBatch(str);
+//    //              statement.addBatch(str1);
+//    //    INSERT INTO sklad.product_info () VALUES ();
+//    //    SET @num := LAST_INSERT_ID();
+//    //    INSERT INTO orders (order_description, user_id, order_date, number_order) Values ('order24', 1, '2002', '2021');
+//    //	INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id)
+//    //                    VALUES ('product3', 20 , 1,LAST_INSERT_ID(), @num);
+//
+//
+//
+//    ////INSERT INTO sklad.product_info (articul,arrival_date,description) VALUES ('2464', '646' , '321323');
+//    ////INSERT INTO sklad.order_product (name_product,amount,status_id,order_id,product_info_id) VALUES ('ksdjfh', 20 , 1,2, LAST_INSERT_ID());
     @Override
     public void add(Order order, List<ProductAdd> list) {
         //для добавления объектов через транзакции мне нужен объект конекшена, пока создаю новый, но он сам закроется
@@ -104,6 +144,8 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, ListOrder> {
             String SQL = "INSERT INTO orders (order_description, user_id, order_date, number_order) Values (?, ?, ?, ?)";
             String str = "INSERT INTO order_product (name_product,amount,status_id,order_id,product_info_id)" +
                     "VALUES(?,?,?,?,?);";
+
+            //
             try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
                 //создаю новый ордер
                 System.out.println("Create order");
@@ -116,6 +158,8 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, ListOrder> {
                 preparedStatement.executeUpdate();
                 System.out.println("Complete create order");
                 int lastInsertId = 0;
+
+                //возвращаю последний индекс
                 try (Statement statement = connection.createStatement();) {
                     String str1 = "SELECT LAST_INSERT_ID();";
                     ResultSet resultSet = statement.executeQuery(str1);
@@ -125,16 +169,19 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, ListOrder> {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
+                // перебираю лист и ложу в БАТЧ а затем передаю в БД
                 try (PreparedStatement preparedStatement1 = connection.prepareStatement(str);) {
                     if (lastInsertId != 0) {
                         System.out.println("перебор массива");
                         for (ProductAdd product : list) {
                             preparedStatement1.setString(1, product.getNameProduct());
                             preparedStatement1.setInt(2, product.getAmount());
+                            // status_id водиться в ручную, а надо создавать объект!!!!
                             preparedStatement1.setInt(3, 1);
                             //проблема с LAST_INSERT_ID()
                             //     preparedStatement1.setString(4,"LAST_INSERT_ID()");
                             preparedStatement1.setInt(4, lastInsertId);
+                            //product_info_id вводиться в ручную, а надо создавать объект!!!!
                             preparedStatement1.setInt(5, 1);
                             preparedStatement1.addBatch();
                         }
@@ -165,4 +212,12 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, ListOrder> {
                 resultSet.getString("order_description"),
                 resultSet.getString("last_name"), resultSet.getString("order_date"));
     }
+
+    public void UpdateOrder() {
+
+    }
+
+//    public OrderStatus getStatus(){
+//
+//    }
 }

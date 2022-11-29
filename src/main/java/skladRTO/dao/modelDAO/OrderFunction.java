@@ -19,7 +19,7 @@ public interface OrderFunction<T, K> {
         return null;
     }
 
-    public void delete(int id);
+    public void delete(Order order, List<ProductAdd> list);
 
     public void add(Order order, List<ProductAdd> list);
 

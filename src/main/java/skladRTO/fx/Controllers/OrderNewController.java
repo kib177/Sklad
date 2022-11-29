@@ -8,13 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import skladRTO.fx.sceneFX.CreateScene;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OrderNewController implements Initializable {
     @FXML
-    private Button button_gone;
+    private Button button_next;
     @FXML
     private TextField order_date;
     @FXML
@@ -26,13 +25,11 @@ public class OrderNewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        order_zakazchik.setText(Authorization.getUser().getFerstName() + " " + Authorization.getUser().getLastName());
-
+        order_zakazchik.setText(Authorization.getUser().getFerstName() + " " + Authorization.getUser().getLastName());
     }
 
     @FXML
-    public void button_gone(ActionEvent actionEvent){
-
+    public void button_next(ActionEvent actionEvent) {
         Order order = new Order(order_proper.getText(), order_date.getText(), order_number.getText());
         CreateScene createScene = new CreateScene();
         createScene.createScene("Product_add.fxml", 600, 400);
