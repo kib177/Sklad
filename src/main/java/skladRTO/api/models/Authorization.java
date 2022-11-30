@@ -1,7 +1,7 @@
 package skladRTO.api.models;
 
 import skladRTO.dao.connectDB.DatabaseConnection;
-import skladRTO.dao.requestsDB.Get.getUserDAO;
+import skladRTO.dao.modelDAO.getUserDAO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Authorization {
-   static  Authentication auth ;
-   static  StatusUser statusUser;
-   static  User user ;
+   static Authentication auth ;
+   static StatusUser statusUser;
+   static User user ;
 
     public Authorization() {
     }

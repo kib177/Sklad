@@ -5,8 +5,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import skladRTO.api.models.Order;
-import skladRTO.api.models.ProductAdd;
-import skladRTO.dao.requestsDB.Get.GetOrdersDAO;
+import skladRTO.api.models.Product;
+import skladRTO.dao.modelDAO.GetOrdersDAO;
 
 import java.lang.ref.WeakReference;
 import java.net.URL;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProductNewController implements Initializable {
-    private List<ProductAdd> list = new ArrayList<>();
+    private List<Product> list = new ArrayList<>();
     private Order order;
     @FXML
     private Button button_add;
@@ -31,8 +31,8 @@ public class ProductNewController implements Initializable {
         button_add.setOnAction(actionEvent -> ProductAdd(list));
         Button_gone.setOnAction(actionEvent -> gone(list));
     }
-    public void ProductAdd(List<ProductAdd> list) {
-        list.add(new ProductAdd(Product_name.getText(), Product_amount.getText()));
+    public void ProductAdd(List<Product> list) {
+        list.add(new Product(Product_name.getText(), Product_amount.getText()));
         Product_name.setText("");
         Product_amount.setText("");
     }
@@ -41,7 +41,7 @@ public class ProductNewController implements Initializable {
         this.order = order;
     }
 
-    public void gone(List<ProductAdd> list) {
+    public void gone(List<Product> list) {
 
         GetOrdersDAO getOrdersDAO = new GetOrdersDAO();
         WeakReference<GetOrdersDAO> weakReference = new WeakReference<>(getOrdersDAO);

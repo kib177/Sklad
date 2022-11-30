@@ -7,8 +7,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import skladRTO.api.models.StatusUser;
-import skladRTO.dao.requestsDB.Add.addUser;
-import skladRTO.dao.requestsDB.Get.getUserDAO;
+import skladRTO.dao.modelDAO.addUser;
+import skladRTO.dao.modelDAO.getUserDAO;
 import skladRTO.fx.sceneFX.CreateScene;
 
 import java.net.URL;

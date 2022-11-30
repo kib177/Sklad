@@ -6,25 +6,29 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import skladRTO.api.models.FX.ProductFX;
-import skladRTO.api.models.StatusUser;
-import skladRTO.dao.requestsDB.Get.getUserDAO;
+import skladRTO.api.models.Product;
+import skladRTO.api.models.ProductStatus;
+import skladRTO.api.models.ProductInfo;
+import skladRTO.dao.modelDAO.getProduct;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PrixodController implements Initializable {
-    private getUserDAO getUserDAO;
+    private getProduct getProduct;
+    private Product product;
     @FXML
-    private TableColumn<ProductFX, String> Column_ID;
+    private Button Gone;
     @FXML
-    private TableColumn<ProductFX, String> Column_Name;
+    private TableColumn<Product, String> Column_ID;
     @FXML
-    private TableColumn<ProductFX, String> Column_Number;
+    private TableColumn<Product, String> Column_Name;
     @FXML
-    private TableColumn<ProductFX, String> Column_Status;
+    private TableColumn<Product, String> Column_Number;
     @FXML
-    private TableView<ProductFX> Table_Product;
+    private TableColumn<Product, String> Column_Status;
+    @FXML
+    private TableView<Product> Table_Product;
     @FXML
     private TextField articul;
     @FXML
@@ -32,27 +36,33 @@ public class PrixodController implements Initializable {
     @FXML
     private TextArea description;
     @FXML
-    private ChoiceBox<StatusUser> status;
+    private ChoiceBox<ProductStatus> status;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getUserDAO = new getUserDAO();
-        status.setItems(getUserDAO.getStatus());
+        getProduct = new getProduct();
+        status.setItems(getProduct.getProductStatus());
+        Gone.setOnAction(actionEvent -> addProductInfo());
     }
 
-    public void addProductFX(ProductFX productFX) {
-        ObservableList<ProductFX> product = FXCollections.observableArrayList();
-        product.add(productFX);
+    public void addProduct(Product prod) {
+        this.product = prod;
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        products.add(product);
         Column_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         Column_Name.setCellValueFactory(new PropertyValueFactory<>("name"));
         Column_Number.setCellValueFactory(new PropertyValueFactory<>("amount"));
         Column_Status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        Table_Product.setItems(product);
+        Table_Product.setItems(products);
     }
 
-    public void addProductInfo(){
-        description.getText();
-        articul.getText();
-        data.getText();
+    public void addProductInfo() {
+
+        getProduct = new getProduct();
+        ProductInfo productInfo = new ProductInfo(articul.getText(), data.getText(), description.getText());
+        product.setStatus(getProduct.getIdStatus(String.valueOf(status.getValue())));
+
+        System.out.println(product);
+        Gone.getScene().getWindow().hide();
     }
 }

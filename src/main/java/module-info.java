@@ -12,16 +12,21 @@ module skladrto {
 
     opens skladRTO to javafx.fxml;
     exports skladRTO;
-    exports skladRTO.api.models.FX;
-    opens skladRTO.api.models.FX to javafx.fxml;
-    exports skladRTO.api.models.lists;
-    opens skladRTO.api.models.lists to javafx.fxml;
+
+
+    exports skladRTO.api.lists;
+    opens skladRTO.api.lists to javafx.fxml;
     exports skladRTO.fx.Controllers;
     opens skladRTO.fx.Controllers to javafx.fxml;
-    exports skladRTO.api.models;
-    opens skladRTO.api.models to javafx.fxml;
+
     exports skladRTO.fx.sceneFX;
     opens skladRTO.fx.sceneFX to javafx.fxml;
+    exports skladRTO.api.FX.models;
+    opens skladRTO.api.FX.models to javafx.fxml;
+    exports skladRTO.api.FX.lists;
+    opens skladRTO.api.FX.lists to javafx.fxml;
+    exports skladRTO.api.models;
+    opens skladRTO.api.models to javafx.fxml;
 
 
 }

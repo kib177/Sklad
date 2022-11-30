@@ -5,6 +5,7 @@ public class ProductInfo {
     private String article;
     private String arrivalDate;
     private String description;
+    public ProductInfo(){}
 
     public ProductInfo(int id, String article, String arrivalDate, String description) {
         this.id = id;
@@ -13,7 +14,10 @@ public class ProductInfo {
         this.description = description;
     }
 
-    public ProductInfo() {
+    public ProductInfo(String article, String arrivalDate, String description) {
+        this.article = article;
+        this.arrivalDate = arrivalDate;
+        this.description = description;
     }
 
     public int getId() {
@@ -46,5 +50,15 @@ public class ProductInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductInfo{" +
+                "id=" + id +
+                ", article='" + article + '\'' +
+                ", arrivalDate='" + arrivalDate + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

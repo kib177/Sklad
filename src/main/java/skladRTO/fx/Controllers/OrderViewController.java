@@ -1,6 +1,5 @@
 package skladRTO.fx.Controllers;
 
-import java.io.ObjectInputFilter;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,15 +10,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
-import javafx.util.Callback;
 
 import skladRTO.api.models.Authorization;
-import skladRTO.api.models.FX.OrderFX;
-import skladRTO.api.models.FX.ProductFX;
-import skladRTO.dao.requestsDB.Get.GetOrdersDAO;
+import skladRTO.api.FX.models.OrderFX;
+import skladRTO.api.FX.models.ProductFX;
+import skladRTO.api.models.Product;
+import skladRTO.dao.modelDAO.GetOrdersDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
-import skladRTO.dao.requestsDB.Get.getProduct;
+import skladRTO.dao.modelDAO.getProduct;
 import skladRTO.fx.sceneFX.CreateScene;
 
 
@@ -62,7 +61,7 @@ public class OrderViewController implements Initializable {
     @FXML
     private Menu Menu_Users;
     @FXML
-    private TableView<ProductFX> Table_Items;
+    private TableView<Product> Table_Items;
     @FXML
     private Button Watch_order;
     @FXML
@@ -80,10 +79,7 @@ public class OrderViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         Watch_order(new ActionEvent());
-
-
         if (Authorization.getStatusUser().getStatus().equals("Пользователь")) {
             Menu_Users.disableProperty().setValue(true);
             MenuItem_confirmOrder.disableProperty().setValue(true);
@@ -100,23 +96,14 @@ public class OrderViewController implements Initializable {
 
         Column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         Column_number_order.setCellValueFactory(new PropertyValueFactory<>("number_order"));
-        Сolumn_description.setCellValueFactory(new PropertyValueFactory<ProductFX,String>("order_description"));
-        Сolumn_description.setCellFactory(tc -> {
-            TableCell<ProductFX, String> cell = new TableCell<>();
-            Text text = new Text();
-            cell.setGraphic(text);
-            cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
-            text.wrappingWidthProperty().bind(Сolumn_description.widthProperty());
-            text.textProperty().bind(cell.itemProperty());
-            return cell ;
-        });
+        Сolumn_description.setCellValueFactory(new PropertyValueFactory<>("order_description"));
+        Сolumn_description.setCellFactory(tc -> textWrap());
         Column_user.setCellValueFactory(new PropertyValueFactory<>("user"));
         Column_date.setCellValueFactory(new PropertyValueFactory<>("order_date"));
         List_order.setItems(ordersDAO.showListOfOrders());
 
         TableView.TableViewSelectionModel<OrderFX> selectionModel = List_order.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(new ChangeListener<OrderFX>() {
-
             @Override
             public void changed(ObservableValue<? extends OrderFX> observableValue, OrderFX orderFX, OrderFX newOrderFX) {
                 if (newOrderFX != null) {
@@ -128,16 +115,20 @@ public class OrderViewController implements Initializable {
         });
     }
 
-
-    public void info(String str) {
-
+    public TableCell<ProductFX, String> textWrap(){
+        TableCell<ProductFX, String> cell = new TableCell<>();
+        Text text = new Text();
+        cell.setGraphic(text);
+        cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+        text.wrappingWidthProperty().bind(Сolumn_description.widthProperty());
+        text.textProperty().bind(cell.itemProperty());
+        return cell;
     }
 
     @FXML
     public void MenuItem_addOrder(ActionEvent actionEvent) {
         createScene = new CreateScene();
         createScene.createScene("New_order.fxml", 800, 400);
-
     }
 
     @FXML
@@ -172,14 +163,12 @@ public class OrderViewController implements Initializable {
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         Table_Items.setItems(getProduct.showListOfProducts(id));
 
-        TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
-
-        selectionModel.selectedItemProperty().addListener(new ChangeListener<ProductFX>() {
-
+        TableView.TableViewSelectionModel<Product> selectionModel = Table_Items.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.models.Product>() {
             @Override
-            public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
+            public void changed(ObservableValue<? extends Product> observableValue, Product product, Product newProduct) {
                 if (newProduct != null) {
-                    ((PrixodController) createScene.getLoader().getController()).addProductFX(newProduct);
+                    ((PrixodController) createScene.getLoader().getController()).addProduct(newProduct);
 
                 }
             }
