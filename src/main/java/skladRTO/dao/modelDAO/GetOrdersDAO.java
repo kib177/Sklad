@@ -68,13 +68,32 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
         return listOrder.getOrderData();
     }
 
+    /**
+     * Метод удаляет заказ и все его позиции
+     * (Сначало вызывается метод удаления позиций, после чего удаляется объект
+     * @param order - принимает на вход объект типа Ордер, который необходимо удалить
+     * @param list - лист со всеми позициями данного ордера
+     */
     @Override
-    public void delete(Order order, List<Product> list) {}
+    public void delete(Order order, List<Product> list) {
+
+        // Добавить транзакцию
+        String SQL = "DELETE FROM orders WHERE id =?;";
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+            getProduct getProduct = new getProduct();
+            for (Product product :list){
+                getProduct.delete(product);
+            }
+            preparedStatement.setInt(1, order.getId());
+            preparedStatement.executeUpdate();
+        }catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void add(Order order, List<Product> list) { // лист приходит заполненым только имя и количество id создать
-        //для добавления объектов через транзакции мне нужен объект конекшена, пока создаю новый, но он сам закроется
-        // добавление через JDBS транзакцию
 
         try (Connection connection = DatabaseConnection.getDatabaseConnection()) {
             connection.setAutoCommit(false);

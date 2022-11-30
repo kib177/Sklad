@@ -11,6 +11,7 @@ import skladRTO.api.FX.models.ProductFX;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -72,5 +73,29 @@ public class getProduct implements FillingInListsDAO<ProductListFX> {
             e.printStackTrace();
         }
         return id;
+    }
+
+    /**
+     * Метод удаляет продукт по его id, но сперва удаляет объект product_info который на него ссылается
+     * @param product - принимает на вход объект типа продукт (позиция)
+     */
+    public void delete (Product product){
+        // возможно необходимо добавить транзакцию!
+        String SQL = "DELETE FROM order_product WHERE id_product =?;";
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+            preparedStatement.setString(1, "product_info");
+            preparedStatement.setString(1, "id");
+            preparedStatement.setInt(2, product.getProductInfo());
+            preparedStatement.addBatch();
+
+            preparedStatement.setString(1, "order_product");
+            preparedStatement.setString(2, "id_product");
+            preparedStatement.setInt(2, product.getId());
+            preparedStatement.addBatch();
+            preparedStatement.executeBatch();
+        }catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }
