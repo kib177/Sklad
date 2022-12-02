@@ -1,49 +1,27 @@
 package skladRTO.api.models;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-
 public class Product {
     private int id;
-    private String nameProduct;
+    private String name;
     private int amount;
     private int Status;
     private int order;
     private int productInfo;
 
-    public Product(SimpleIntegerProperty id, SimpleStringProperty nameProduct, SimpleIntegerProperty amount, SimpleIntegerProperty orderStatus, SimpleIntegerProperty order, SimpleIntegerProperty productInfo) {
-        this.id = id.getValue();
-        this.nameProduct = nameProduct.getValue();
-        this.amount = amount.getValue();
-        this.Status = orderStatus.getValue();
-        this.order = order.getValue();
-        this.productInfo = productInfo.getValue();
-    }
-
     public Product(String nameProduct, String amount){
-        this.nameProduct = nameProduct;
+        this.name = nameProduct;
         this.amount = Integer.parseInt(amount);
         this.Status = 1;
     }
 
     public Product(int id, String nameProduct, int amount, int orderStatus, int order, int productInfo) {
         this.id = id;
-        this.nameProduct = nameProduct;
+        this.name = nameProduct;
         this.amount = amount;
         this.Status = orderStatus;
         this.order = order;
         this.productInfo = productInfo;
     }
-
-    //    public Product(SimpleIntegerProperty id, SimpleStringProperty nameProduct, SimpleIntegerProperty amount,
-//                   SimpleIntegerProperty orderStatus, SimpleIntegerProperty order, SimpleIntegerProperty productInfo) {
-//        this.id = id.getValue();
-//        this.nameProduct = nameProduct.getValue();
-//        this.amount = amount.getValue();
-//        this.orderStatus = orderStatus.getValue();
-//        this.order = order.getValue();
-//        this.productInfo = productInfo.getValue();
-//    }
 
     public int getId() {
         return id;
@@ -54,11 +32,11 @@ public class Product {
     }
 
     public String getNameProduct() {
-        return nameProduct;
+        return name;
     }
 
     public void setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
+        this.name = nameProduct;
     }
 
     public int getAmount() {
@@ -97,7 +75,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", nameProduct='" + nameProduct + '\'' +
+                ", nameProduct='" + name +
                 ", amount=" + amount +
                 ", orderStatus=" + Status +
                 ", order=" + order +

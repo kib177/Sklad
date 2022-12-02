@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.AuthorizationController">
-    <Label layoutX="76.0" layoutY="14.0" text="Авторизация" textFill="#000000de">
+    <Label layoutX="92.0" layoutY="14.0" text="Авторизация" textFill="#000000de">
       <font>
-         <Font name="Times New Roman" size="36.0" />
+         <Font name="Times New Roman" size="30.0" />
       </font></Label>
-    <Button fx:id="SingIn_ButSingIn" alignment="CENTER" layoutX="126.0" layoutY="181.0" mnemonicParsing="false" onAction="#SingIn_ButSingIn" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Войти">
+    <Button fx:id="SingIn_ButSingIn" alignment="CENTER" layoutX="125.0" layoutY="198.0" mnemonicParsing="false" onAction="#SingIn_ButSingIn" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Войти">
       <font>
          <Font name="Times New Roman" size="14.0" />
       </font></Button>
@@ -28,7 +28,7 @@
       <font>
          <Font name="Times New Roman" size="14.0" />
       </font></PasswordField>
-   <Label fx:id="SMS" alignment="CENTER" contentDisplay="CENTER" layoutX="98.0" layoutY="230.0">
+   <Label fx:id="SMS" alignment="CENTER" contentDisplay="CENTER" layoutX="103.0" layoutY="169.0">
       <font>
          <Font name="Times New Roman" size="14.0" />
       </font>

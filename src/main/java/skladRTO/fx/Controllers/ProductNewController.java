@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import skladRTO.api.models.Order;
 import skladRTO.api.models.Product;
-import skladRTO.dao.modelDAO.GetOrdersDAO;
+import skladRTO.dao.modelDAO.OrdersDAO;
 
 import java.lang.ref.WeakReference;
 import java.net.URL;
@@ -43,8 +43,8 @@ public class ProductNewController implements Initializable {
 
     public void gone(List<Product> list) {
 
-        GetOrdersDAO getOrdersDAO = new GetOrdersDAO();
-        WeakReference<GetOrdersDAO> weakReference = new WeakReference<>(getOrdersDAO);
+        OrdersDAO getOrdersDAO = new OrdersDAO();
+        WeakReference<OrdersDAO> weakReference = new WeakReference<>(getOrdersDAO);
 
         getOrdersDAO.add(order, list);
         button_add.getScene().getWindow().hide();

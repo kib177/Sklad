@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class getUserDAO implements UserFunction {
+public class UserDAO implements UserFunction {
 
     @Override
     public ObservableList<UserFX> showListOfUsers() {

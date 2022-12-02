@@ -1,6 +1,7 @@
 package skladRTO.dao.modelDAO;
 
 import javafx.collections.ObservableList;
+import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.*;
 import skladRTO.dao.interfaces.OrderFunction;
 import skladRTO.api.FX.lists.OrderListFX;
@@ -12,7 +13,7 @@ import java.lang.ref.WeakReference;
 import java.sql.*;
 import java.util.List;
 
-public class GetOrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
+public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
 
     @Override
     public ObservableList<OrderFX> showListOfOrders() {
@@ -70,22 +71,21 @@ public class GetOrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
 
     /**
      * Метод удаляет заказ и все его позиции
-     * (Сначало вызывается метод удаления позиций, после чего удаляется объект
      * @param order - принимает на вход объект типа Ордер, который необходимо удалить
      * @param list - лист со всеми позициями данного ордера
      */
     @Override
-    public void delete(Order order, List<Product> list) {
+    public void delete(Order order, List<ProductFX> list) {
 
         // Добавить транзакцию
         String SQL = "DELETE FROM orders WHERE id =?;";
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
-            getProduct getProduct = new getProduct();
-            for (Product product :list){
+            preparedStatement.setInt(1, order.getId());
+            ProductDAO getProduct = new ProductDAO();
+            for (ProductFX product :list){
                 getProduct.delete(product);
             }
-            preparedStatement.setInt(1, order.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException | IOException e) {
             e.printStackTrace();

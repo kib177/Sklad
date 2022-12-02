@@ -8,19 +8,17 @@ import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.Product;
 
 public class ProductListFX {
-    private ObservableList<Product> productList = FXCollections.observableArrayList();
+    private ObservableList<ProductFX> productList = FXCollections.observableArrayList();
 
     public void create(int id, String name, int amount, int status, int order, int productInfo) {
-        productList.add(new Product(new SimpleIntegerProperty(id), new SimpleStringProperty(name),
-                new SimpleIntegerProperty(amount), new SimpleIntegerProperty(status), new SimpleIntegerProperty(order),
-                new SimpleIntegerProperty(productInfo)));
+        productList.add(new ProductFX(id, name, amount, status, order, productInfo));
     }
 
-    public ObservableList<Product> getProductList() {
+    public ObservableList<ProductFX> getProductList() {
         return productList;
     }
 
-    public void setProductList(ObservableList<Product> productList) {
+    public void setProductList(ObservableList<ProductFX> productList) {
         this.productList = productList;
     }
 

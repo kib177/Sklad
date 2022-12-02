@@ -1,13 +1,13 @@
 package skladRTO.dao.modelDAO;
 
 import javafx.collections.ObservableList;
+import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.Product;
 import skladRTO.api.models.ProductStatus;
 import skladRTO.dao.connectDB.DatabaseConnection;
 import skladRTO.dao.interfaces.FillingInListsDAO;
 import skladRTO.api.FX.lists.ProductListFX;
-import skladRTO.api.FX.models.ProductFX;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -16,9 +16,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class getProduct implements FillingInListsDAO<ProductListFX> {
+public class ProductDAO implements FillingInListsDAO<ProductListFX> {
 
-    public ObservableList<Product> showListOfProducts(Integer id) {
+    public ObservableList<ProductFX> showListOfProducts(Integer id) {
         ProductListFX listProduct = new ProductListFX();
         WeakReference<ProductListFX> weakReference = new WeakReference<>(listProduct);
         try {
@@ -45,18 +45,17 @@ public class getProduct implements FillingInListsDAO<ProductListFX> {
                 rs.getInt("status_id"), rs.getInt("order_id"), rs.getInt("product_info_id"));
     }
 
-    public ObservableList<ProductStatus> getProductStatus() {
-        ProductStatusList list = new ProductStatusList();
+    public void getProductStatus() {
+
         try {
-            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT order_status.status FROM order_status");
+            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT * FROM order_status");
 
             while (rs.next()) {
-                list.create(rs.getString("status"));
+                ProductStatusList.create(rs.getInt("id"), rs.getString("status"));
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-        return list.getObservableList();
     }
 
     public int getIdStatus(String status) {
@@ -77,25 +76,48 @@ public class getProduct implements FillingInListsDAO<ProductListFX> {
 
     /**
      * Метод удаляет продукт по его id, но сперва удаляет объект product_info который на него ссылается
+     *
      * @param product - принимает на вход объект типа продукт (позиция)
      */
-    public void delete (Product product){
+    public void delete(ProductFX product) {
         // возможно необходимо добавить транзакцию!
         String SQL = "DELETE FROM order_product WHERE id_product =?;";
+        String SQL1 = "DELETE FROM product_info WHERE id =?;";
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
-            preparedStatement.setString(1, "product_info");
-            preparedStatement.setString(1, "id");
-            preparedStatement.setInt(2, product.getProductInfo());
-            preparedStatement.addBatch();
+            preparedStatement.setInt(1, product.getId());
+            preparedStatement.executeUpdate();
+            try (PreparedStatement preparedStatement1 = connection.prepareStatement(SQL1)) {
+                preparedStatement1.setInt(1, product.getProductInfo());
 
-            preparedStatement.setString(1, "order_product");
-            preparedStatement.setString(2, "id_product");
-            preparedStatement.setInt(2, product.getId());
-            preparedStatement.addBatch();
-            preparedStatement.executeBatch();
-        }catch (SQLException | IOException e) {
+                preparedStatement1.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
+
+    public ObservableList<ProductFX> getProduct(int id) {
+        ProductListFX listProduct = new ProductListFX();
+        WeakReference<ProductListFX> weakReference = new WeakReference<>(listProduct);
+        try {
+            PreparedStatement preparedStatement = DatabaseConnection.getDatabaseConnection().prepareStatement(
+                    "SELECT * FROM order_product " +
+                            " LEFT JOIN order_status ON (order_product.status_id=order_status.id)" +
+                            " WHERE order_product.status_id = ?;");
+
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                FillingInList(listProduct, resultSet);
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        return listProduct.getProductList();
+    }
 }
+

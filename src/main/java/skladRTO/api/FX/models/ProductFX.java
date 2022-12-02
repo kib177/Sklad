@@ -2,32 +2,50 @@ package skladRTO.api.FX.models;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import skladRTO.api.lists.ProductStatusList;
+import skladRTO.api.models.ProductStatus;
 
 import java.util.Objects;
 
 public class ProductFX {
-    private int id;
+    private SimpleIntegerProperty id;
     private SimpleStringProperty name;
     private SimpleIntegerProperty amount;
-    private SimpleIntegerProperty status;
+    private SimpleStringProperty status;
     private SimpleIntegerProperty order;
     private SimpleIntegerProperty productInfo;
 
-    public ProductFX(SimpleIntegerProperty id, String name, int amount, int status, int order, int productInfo) {
-        this.id = id.getValue();
+    public ProductFX(int id, String name, int amount, int status, int order, int productInfo) {
+        this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.amount = new SimpleIntegerProperty(amount);
-        this.status = new SimpleIntegerProperty(status);
+        this.status = getStringStatus(status);
         this.order = new SimpleIntegerProperty(order);
         this.productInfo = new SimpleIntegerProperty(productInfo);
     }
 
+    public SimpleStringProperty getStringStatus(int stat){
+        for(ProductStatus status: ProductStatusList.getObservableList()){
+            if(status.getId().equals(stat)) {
+                return new SimpleStringProperty(status.getStatus());
+            }
+        } return null;
+    }
+
+    public ProductFX() {
+    }
+
     public int getId() {
+        return id.get();
+    }
+
+    public SimpleIntegerProperty idProperty() {
         return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public String getName() {
@@ -54,15 +72,15 @@ public class ProductFX {
         this.amount.set(amount);
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status.get();
     }
 
-    public SimpleIntegerProperty statusProperty() {
+    public SimpleStringProperty statusProperty() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status.set(status);
     }
 

@@ -1,7 +1,7 @@
 package skladRTO.api.models;
 
 import skladRTO.dao.connectDB.DatabaseConnection;
-import skladRTO.dao.modelDAO.getUserDAO;
+import skladRTO.dao.modelDAO.UserDAO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,7 +18,7 @@ public class Authorization {
     }
 
     public Boolean CheckUsers(String name, String password) {
-        getUserDAO getUserDAO = new getUserDAO();
+        UserDAO getUserDAO = new UserDAO();
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
              Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery("SELECT authentication.login, " +

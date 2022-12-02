@@ -4,54 +4,45 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import skladRTO.fx.sceneFX.CreateScene;
+import skladRTO.api.FX.models.ProductFX;
+import skladRTO.api.models.Order;
+import skladRTO.dao.modelDAO.OrdersDAO;
+import skladRTO.dao.modelDAO.ProductDAO;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-
 
 public class WindowController implements Initializable {
     @FXML
-    private Button Add_user;
+    private Button button_cancel;
     @FXML
-    private Button button_prixod;
+    private Button button_gone;
     @FXML
-    private Button Delete_user;
-    @FXML
-    private Button Go_to_order;
-   @FXML
-    private Button Just_button;
-    @FXML
-    private Label Lvl_user;
-    @FXML
-    private Label Name_User;
-    @FXML
-    private Button view_users;
+    private Label label_text;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        CreateScene createScene = new CreateScene();
-        button_prixod.setOnAction(actionEvent -> createScene.createScene("Prixod.fxml", 400, 400));
-
-        Go_to_order.setOnAction(actionEvent -> goToOrder(createScene));
-
-        Add_user.setOnAction(actionEvent -> addUser(createScene));
-
-        view_users.setOnAction(actionEvent -> getViewUsers(createScene));
+        label_text.setText("");
+        button_cancel.setOnAction(actionEvent -> button_cancel.getScene().getWindow().hide());
     }
 
-    public void getViewUsers(CreateScene createScene) {
-        view_users.getScene().getWindow();
-        createScene.createScene("List_Users.fxml", 900, 500);
+    public void deleteOrder(Order order, List<ProductFX> list) {
+        OrdersDAO ordersDAO = new OrdersDAO();
+        label_text.setText("Вы действительно хотите удалить заказ №" + order.getId());
+        button_gone.setOnAction(actionEvent ->  {
+            ordersDAO.delete(order, list);
+            button_gone.getScene().getWindow().hide();
+        });
     }
 
-    public void addUser(CreateScene createScene) {
-        Add_user.getScene().getWindow();
-        createScene.createScene("Registration.fxml", 550, 370);
-    }
-
-    public void goToOrder(CreateScene createScene) {
-        Go_to_order.getScene().getWindow().hide();
-        createScene.createScene("OrderView.fxml", 800, 600);
+    public void deleteProduct(ProductFX product){
+        ProductDAO productDAO = new ProductDAO();
+        label_text.setText("Вы действительно хотите удалить позицию №" + product.getId());
+        button_gone.setOnAction(actionEvent -> {
+            productDAO.delete(product);
+            button_gone.getScene().getWindow().hide();
+        });
     }
 }

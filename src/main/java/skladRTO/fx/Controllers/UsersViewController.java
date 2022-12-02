@@ -3,7 +3,7 @@ package skladRTO.fx.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import skladRTO.dao.modelDAO.getUserDAO;
+import skladRTO.dao.modelDAO.UserDAO;
 import skladRTO.api.FX.models.UserFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -54,8 +54,8 @@ public class UsersViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getUserDAO userDAO = new getUserDAO();
-        WeakReference<getUserDAO> weakReference = new WeakReference<>(userDAO);
+        UserDAO userDAO = new UserDAO();
+        WeakReference<UserDAO> weakReference = new WeakReference<>(userDAO);
         showUsers();
         Table_Users.setItems(userDAO.showListOfUsers());
     }

@@ -17,7 +17,7 @@
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="338.0" layoutY="58.0" text="Количество" textFill="#000000c4" AnchorPane.topAnchor="58.0">
+      <Label layoutX="338.0" layoutY="58.0" text="Количество" textFill="#000000c4" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="58.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>

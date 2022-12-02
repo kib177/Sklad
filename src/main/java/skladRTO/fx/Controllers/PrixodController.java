@@ -6,17 +6,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import skladRTO.api.FX.models.ProductFX;
+import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.Product;
 import skladRTO.api.models.ProductStatus;
 import skladRTO.api.models.ProductInfo;
-import skladRTO.dao.modelDAO.getProduct;
+import skladRTO.dao.modelDAO.ProductDAO;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PrixodController implements Initializable {
-    private getProduct getProduct;
-    private Product product;
+    private ProductDAO getProduct;
+    private ProductFX product;
     @FXML
     private Button Gone;
     @FXML
@@ -28,7 +30,7 @@ public class PrixodController implements Initializable {
     @FXML
     private TableColumn<Product, String> Column_Status;
     @FXML
-    private TableView<Product> Table_Product;
+    private TableView<ProductFX> Table_Product;
     @FXML
     private TextField articul;
     @FXML
@@ -40,14 +42,14 @@ public class PrixodController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getProduct = new getProduct();
-        status.setItems(getProduct.getProductStatus());
+        getProduct = new ProductDAO();
+        status.setItems(ProductStatusList.getObservableList());
         Gone.setOnAction(actionEvent -> addProductInfo());
     }
 
-    public void addProduct(Product prod) {
+    public void addProduct(ProductFX prod) {
         this.product = prod;
-        ObservableList<Product> products = FXCollections.observableArrayList();
+        ObservableList<ProductFX> products = FXCollections.observableArrayList();
         products.add(product);
         Column_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         Column_Name.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -58,9 +60,9 @@ public class PrixodController implements Initializable {
 
     public void addProductInfo() {
 
-        getProduct = new getProduct();
+        getProduct = new ProductDAO();
         ProductInfo productInfo = new ProductInfo(articul.getText(), data.getText(), description.getText());
-        product.setStatus(getProduct.getIdStatus(String.valueOf(status.getValue())));
+//        product.setStatus(getProduct.getIdStatus(String.valueOf(status.getValue())));
 
         System.out.println(product);
         Gone.getScene().getWindow().hide();
