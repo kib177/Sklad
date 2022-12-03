@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import skladRTO.api.models.Authorization;
+import skladRTO.dao.modelDAO.ver1_1.AuthorizationDAO;
 import skladRTO.fx.sceneFX.CreateScene;
 
 public class AuthorizationController implements Initializable {
@@ -27,8 +28,8 @@ public class AuthorizationController implements Initializable {
 
     @FXML
     public void SingIn_ButSingIn(ActionEvent actionEvent) {
-        Authorization avtoriz = new Authorization();
-        WeakReference<Authorization> weakReference = new WeakReference<>(avtoriz);
+        AuthorizationDAO avtoriz = new AuthorizationDAO();
+        WeakReference<AuthorizationDAO> weakReference = new WeakReference<>(avtoriz);
         if (avtoriz.CheckUsers(SingIn_login.getText(), SingIn_password.getText())) {
 
             // проверка статик переменных

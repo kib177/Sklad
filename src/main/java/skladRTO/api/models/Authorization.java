@@ -17,30 +17,6 @@ public class Authorization {
     public Authorization() {
     }
 
-    public Boolean CheckUsers(String name, String password) {
-        UserDAO getUserDAO = new UserDAO();
-        try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery("SELECT authentication.login, " +
-                    "authentication.password FROM authentication");
-            while (rs.next()) {
-                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
-                    System.out.println( name + password);
-                    auth = getUserDAO.getAuthentication(rs.getString("login"), rs.getString("password"));
-                    System.out.println("auth"+auth);
-                    statusUser = getUserDAO.getStatusUser(auth.getStatusUserId());
-                    System.out.println("status"+statusUser);
-                    user = getUserDAO.getUser(auth.getId());
-                    System.out.println("user"+ user);
-                    return true;
-                }
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     public static Authentication getAuth() {
         return auth;
     }
