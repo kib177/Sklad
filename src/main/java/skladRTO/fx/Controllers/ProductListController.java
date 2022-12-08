@@ -2,6 +2,7 @@ package skladRTO.fx.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -11,10 +12,12 @@ import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.ProductStatus;
 import skladRTO.dao.modelDAO.ProductDAO;
 
+import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ProductListController implements Initializable {
+    private ProductDAO productDAO = new ProductDAO();
     @FXML
     private ChoiceBox<ProductStatus> ChoiceBox;
     @FXML
@@ -27,20 +30,35 @@ public class ProductListController implements Initializable {
     private TableColumn<?, ?> ColumnProduct_status;
     @FXML
     private TableView<ProductFX> Table_Items;
+    @FXML
+    private Button ViewAll;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        getProductDefault();
         ChoiceBox.setItems(ProductStatusList.getObservableList());
-        ChoiceBox.setOnAction(actionEvent -> getProduct());
+        ChoiceBox.setOnAction(actionEvent -> getProductChoiceBox());
     }
 
-    public void getProduct(){
-        ProductDAO productDAO = new ProductDAO();
+    public void getProductChoiceBox(){
         ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         Table_Items.setItems(productDAO.getProduct(ChoiceBox.getValue().getId()));
+    }
+
+    public void getProductDefault(){
+        ChoiceBox.setValue(ProductStatusList.getObservableList().get(0));
+        ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        Table_Items.setItems(productDAO.showAllProducts());
+    }
+    @FXML
+    public void ViewAll(){
+        getProductDefault();
     }
 }

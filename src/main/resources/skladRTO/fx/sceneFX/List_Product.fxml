@@ -4,20 +4,30 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductListController">
    <children>
-      <TableView fx:id="Table_Items" prefHeight="347.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;">
+      <TableView fx:id="Table_Items" prefHeight="347.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columns>
-            <TableColumn fx:id="ColumnProduct_id" prefWidth="69.5999755859375" text="ID" />
-            <TableColumn fx:id="ColumnProduct_name" prefWidth="304.8000183105469" text="Наименование" />
-            <TableColumn fx:id="ColumnProduct_amount" prefWidth="94.39996337890625" text="Количество" />
-            <TableColumn fx:id="ColumnProduct_status" prefWidth="132.0" text="Статус" />
+            <TableColumn fx:id="ColumnProduct_id" minWidth="-1.0" prefWidth="69.5999755859375" style="-fx-alignment: CENTER" text="ID" />
+            <TableColumn fx:id="ColumnProduct_name" minWidth="-1.0" prefWidth="304.8000183105469" style="-fx-alignment: CENTER" text="Наименование" />
+            <TableColumn fx:id="ColumnProduct_amount" minWidth="-1.0" prefWidth="94.39996337890625" style="-fx-alignment: CENTER" text="Количество" />
+            <TableColumn fx:id="ColumnProduct_status" minWidth="-1.0" prefWidth="132.0" style="-fx-alignment: CENTER" text="Статус" />
          </columns>
+         <tooltip>
+            <Tooltip text="Список позиций" />
+         </tooltip>
       </TableView>
-      <ChoiceBox fx:id="ChoiceBox" layoutX="443.0" layoutY="361.0" prefWidth="150.0" />
-      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Button" />
+      <ChoiceBox fx:id="ChoiceBox" layoutX="443.0" layoutY="361.0" prefWidth="150.0" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0">
+         <tooltip>
+            <Tooltip text="Выберите для отображения " />
+         </tooltip></ChoiceBox>
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Button" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="14.0">
+         <tooltip>
+            <Tooltip text="Просто кнопка" />
+         </tooltip></Button>
+      <Button fx:id="ViewAll" layoutX="319.0" layoutY="361.0" mnemonicParsing="false" onAction="#ViewAll" text="Показать все" />
    </children>
 </AnchorPane>

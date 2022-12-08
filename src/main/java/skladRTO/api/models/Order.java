@@ -3,24 +3,33 @@ package skladRTO.api.models;
 public class Order {
     private int id;
     private String orderDescription;
-//    private int userId;
+    private int userId;
     //потом заменить на Date
     private String orderDate;
-    private int numberOrder;
+    private String numberOrder;
 
-    public Order(int id, String orderDescription, String orderDate, int numberOrder) {
+    public Order(int id, String orderDescription, String orderDate, String numberOrder) {
         this.id = id;
         this.orderDescription = orderDescription;
-//        this.userId = userId;
+  //      this.userId = userId;
+        this.orderDate = orderDate;
+        this.numberOrder = numberOrder;
+    }
+
+    //добавил конструктор полный для пробы
+    public Order(int id, String orderDescription, int userId, String orderDate, String numberOrder) {
+        this.id = id;
+        this.orderDescription = orderDescription;
+        this.userId = userId;
         this.orderDate = orderDate;
         this.numberOrder = numberOrder;
     }
 
     public Order (String orderDescription, String orderDate, String numberOrder){
         this.orderDescription = orderDescription;
-//        this.userId = Integer.parseInt(userId);
+        this.userId = userId;
         this.orderDate = orderDate;
-        this.numberOrder = Integer.parseInt(numberOrder);
+        this.numberOrder = numberOrder;
     }
 
     public int getId() {
@@ -39,13 +48,13 @@ public class Order {
         this.orderDescription = orderDescription;
     }
 
-//    public int getUserId() {
-//        return userId;
-//    }
-//
-//    public void setUserId(int userId) {
-//        this.userId = userId;
-//    }
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getOrderDate() {
         return orderDate;
@@ -55,11 +64,11 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public int getNumberOrder() {
+    public String getNumberOrder() {
         return numberOrder;
     }
 
-    public void setNumberOrder(int numberOrder) {
+    public void setNumberOrder(String numberOrder) {
         this.numberOrder = numberOrder;
     }
 

@@ -8,8 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import skladRTO.api.models.Authorization;
-import skladRTO.dao.modelDAO.ver1_1.AuthorizationDAO;
+import skladRTO.dao.modelDAO.AuthorizationDAO;
 import skladRTO.fx.sceneFX.CreateScene;
 
 public class AuthorizationController implements Initializable {
@@ -31,14 +30,11 @@ public class AuthorizationController implements Initializable {
         AuthorizationDAO avtoriz = new AuthorizationDAO();
         WeakReference<AuthorizationDAO> weakReference = new WeakReference<>(avtoriz);
         if (avtoriz.CheckUsers(SingIn_login.getText(), SingIn_password.getText())) {
-
-            // проверка статик переменных
-           // System.out.println(Avtoriz.getAuth() + "\n" + Avtoriz.getStatusUser() + "\n" + Avtoriz.getUser());
-
-
             CreateScene createScene = new CreateScene();
             createScene.createScene("OrderView.fxml", 800, 600);
+            ((OrderViewController) createScene.getLoader().getController()).stage(createScene.getStage());
             SingIn_ButSingIn.getScene().getWindow().hide();
         } else SMS.setText("Пользователь не найден!");
     }
+
 }

@@ -1,7 +1,6 @@
 package skladRTO.dao.interfaces.ver1_1;
 
-import javafx.collections.ObservableList;
-import skladRTO.api.FX.models.OrderFX;
+
 import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.Order;
 import skladRTO.api.models.Product;

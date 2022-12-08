@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class PrixodController implements Initializable {
     private ProductDAO getProduct;
-    private ProductFX product;
+    private ProductFX product = new ProductFX();
     @FXML
     private Button Gone;
     @FXML
@@ -59,10 +59,9 @@ public class PrixodController implements Initializable {
     }
 
     public void addProductInfo() {
-
         getProduct = new ProductDAO();
         ProductInfo productInfo = new ProductInfo(articul.getText(), data.getText(), description.getText());
-//        product.setStatus(getProduct.getIdStatus(String.valueOf(status.getValue())));
+        product.setStatus(String.valueOf(status.getValue()));
 
         System.out.println(product);
         Gone.getScene().getWindow().hide();

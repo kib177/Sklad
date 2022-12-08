@@ -1,8 +1,7 @@
-package skladRTO.dao.modelDAO.ver1_1;
+package skladRTO.dao.modelDAO;
 
 import skladRTO.api.models.Authorization;
 import skladRTO.dao.connectDB.DatabaseConnection;
-import skladRTO.dao.modelDAO.UserDAO;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -18,14 +17,14 @@ public class AuthorizationDAO {
             ResultSet rs = statement.executeQuery("SELECT authentication.login, " +
                     "authentication.password FROM authentication");
             while (rs.next()) {
-                if (name.equals(rs.getString("login")) & password.equals(rs.getString("password"))) {
-                    System.out.println( name + password);
+                if (name.equalsIgnoreCase(rs.getString("login")) & password.equals(rs.getString("password"))) {
+                    System.out.println("Login: " + name + "; Password: " + password + ";");
                     Authorization.setAuth(getUserDAO.getAuthentication(rs.getString("login"), rs.getString("password")));
-                    System.out.println("auth"+Authorization.getAuth());
+                    System.out.println("auth: " + Authorization.getAuth());
                     Authorization.setStatusUser(getUserDAO.getStatusUser(Authorization.getAuth().getStatusUserId()));
-                    System.out.println("status"+ Authorization.getStatusUser());
+                    System.out.println("status: " + Authorization.getStatusUser());
                     Authorization.setUser(getUserDAO.getUser(Authorization.getAuth().getId()));
-                    System.out.println("user"+ Authorization.getUser());
+                    System.out.println("user: " + Authorization.getUser());
                     return true;
                 }
             }

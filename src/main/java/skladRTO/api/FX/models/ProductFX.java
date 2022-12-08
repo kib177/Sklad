@@ -2,7 +2,6 @@ package skladRTO.api.FX.models;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.ProductStatus;
 
@@ -25,12 +24,19 @@ public class ProductFX {
         this.productInfo = new SimpleIntegerProperty(productInfo);
     }
 
-    public SimpleStringProperty getStringStatus(int stat){
-        for(ProductStatus status: ProductStatusList.getObservableList()){
-            if(status.getId().equals(stat)) {
+    public ProductFX(String name, String number) {
+        this.name = new SimpleStringProperty(name);
+        this.amount = new SimpleIntegerProperty(Integer.parseInt(number));
+
+    }
+
+    public SimpleStringProperty getStringStatus(int stat) {
+        for (ProductStatus status : ProductStatusList.getObservableList()) {
+            if (status.getId().equals(stat)) {
                 return new SimpleStringProperty(status.getStatus());
             }
-        } return null;
+        }
+        return null;
     }
 
     public ProductFX() {
@@ -123,7 +129,7 @@ public class ProductFX {
 
     @Override
     public String toString() {
-        return  id +
+        return id +
                 " название: " + name +
                 " количество: " + amount +
                 " статус: " + status;

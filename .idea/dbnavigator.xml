@@ -40,6 +40,7 @@
     <connection id="998ee8ff-7a51-4bbe-8059-a5f03352d953" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="998ee8ff-7a51-4bbe-8059-a5f03352d953" dataset="sklad.users" active-filter-id="" />
     <filter-actions connection-id="998ee8ff-7a51-4bbe-8059-a5f03352d953" dataset="sklad.orders" active-filter-id="" />
     <filter-actions connection-id="998ee8ff-7a51-4bbe-8059-a5f03352d953" dataset="sklad.order_status" active-filter-id="" />
   </component>

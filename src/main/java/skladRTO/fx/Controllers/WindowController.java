@@ -6,8 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.Order;
-import skladRTO.dao.modelDAO.OrdersDAO;
-import skladRTO.dao.modelDAO.ProductDAO;
+import skladRTO.dao.modelDAO.UserDAO;
+import skladRTO.dao.modelDAO.ver1_1.OrdersDAO;
+import skladRTO.dao.modelDAO.ver1_1.ProductDAO;
 
 import java.net.URL;
 import java.util.List;
@@ -42,6 +43,15 @@ public class WindowController implements Initializable {
         label_text.setText("Вы действительно хотите удалить позицию №" + product.getId());
         button_gone.setOnAction(actionEvent -> {
             productDAO.delete(product);
+            button_gone.getScene().getWindow().hide();
+        });
+    }
+
+    public void deleteUser(int id){
+        UserDAO userDAO = new UserDAO();
+        label_text.setText("Вы действительно хотите удалить пользователя " + id);
+        button_gone.setOnAction(actionEvent -> {
+            userDAO.delete(id);
             button_gone.getScene().getWindow().hide();
         });
     }

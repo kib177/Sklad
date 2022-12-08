@@ -19,6 +19,15 @@ import java.util.List;
 
 public class OrdersDAO implements OrdersDAOInterface {
 
+   private Order order;
+
+    public OrdersDAO(Order order) {
+        this.order = order;
+    }
+
+    public OrdersDAO() {
+    }
+
     @Override
     public List<Order> findAll() {
         OrderListFX listOrder = new OrderListFX();
@@ -26,9 +35,10 @@ public class OrdersDAO implements OrdersDAOInterface {
         WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
         String str = "SELECT * FROM orders " +
                 " LEFT JOIN users ON (orders.user_id=users.id_users)";
-        try (ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str);) {
+        try (ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str)) {
             while (resultSet.next()) {
                 FillingInList(listOrder, resultSet);
+                fillingInList(list, resultSet);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -37,20 +47,18 @@ public class OrdersDAO implements OrdersDAOInterface {
         return list;
     }
 
-
-
     @Override
     public List<Order> findEntityByName(String orderDescription) {
         List<Order> list = new ArrayList<>();
-       // OrderListFX listOrder = new OrderListFX();
-       // WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
+        // OrderListFX listOrder = new OrderListFX();
+        // WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
         String str = "SELECT * FROM orders " +
                 " LEFT JOIN users ON (orders.user_id=users.id_users)" +
                 " WHERE order_description LIKE '%" + orderDescription + "%'";
         try (PreparedStatement preparedStatement = DatabaseConnection.getDatabaseConnection().prepareStatement(str)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-               // FillingInList(listOrder, resultSet);
+                // FillingInList(listOrder, resultSet);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
@@ -61,9 +69,9 @@ public class OrdersDAO implements OrdersDAOInterface {
 
     @Override
     public List<Order> findEntityByNumber(String numberOrder) {
-      //  OrderListFX listOrder = new OrderListFX();
+        //  OrderListFX listOrder = new OrderListFX();
         List<Order> list = new ArrayList<>();
-      //  WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
+        //  WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
         String str = "SELECT * FROM orders" +
                 " LEFT JOIN users ON (orders.user_id=users.id_users)" +
                 " WHERE orders.number_order = ?;";
@@ -71,21 +79,21 @@ public class OrdersDAO implements OrdersDAOInterface {
             preparedStatement.setString(1, numberOrder);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-               // FillingInList(listOrder, resultSet);
+                // FillingInList(listOrder, resultSet);
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
-       // return listOrder.getOrderData();
+        // return listOrder.getOrderData();
         return list;
     }
 
 
-
     /**
      * Метод удаляет заказ и все его позиции
+     *
      * @param order - принимает на вход объект типа Ордер, который необходимо удалить
-     * @param list - лист со всеми позициями данного ордера
+     * @param list  - лист со всеми позициями данного ордера
      */
     @Override
     public void delete(Order order, List<ProductFX> list) {
@@ -96,14 +104,15 @@ public class OrdersDAO implements OrdersDAOInterface {
              PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
             preparedStatement.setInt(1, order.getId());
             ProductDAO getProduct = new ProductDAO();
-            for (ProductFX product :list){
+            for (ProductFX product : list) {
                 getProduct.delete(product);
             }
             preparedStatement.executeUpdate();
-        }catch (SQLException | IOException e) {
+        } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
     }
+
     @Override
     public void delete(Integer id) {
 
@@ -135,7 +144,7 @@ public class OrdersDAO implements OrdersDAOInterface {
                 // надо вернуть ид юзера, можно вернуть текущий ид аутентифицированного пользователя
                 preparedStatement.setInt(2, Authorization.getUser().getId());
                 preparedStatement.setString(3, order.getOrderDate());
-                preparedStatement.setInt(4, order.getNumberOrder());
+                preparedStatement.setString(4, order.getNumberOrder());
                 preparedStatement.executeUpdate();
                 System.out.println("Complete create order");
                 int lastInsertId1 = 0;
@@ -198,11 +207,16 @@ public class OrdersDAO implements OrdersDAOInterface {
 
 
     public void FillingInList(OrderListFX listOrder, ResultSet resultSet) throws SQLException {
-        listOrder.create(resultSet.getInt("id"), resultSet.getInt("number_order"),
-                resultSet.getString("order_description"),
+        listOrder.create(resultSet.getInt("id"), resultSet.getString("number_order"),
+                resultSet.getString("order_description"), resultSet.getString("first_name"),
                 resultSet.getString("last_name"), resultSet.getString("order_date"));
     }
 
+    public void fillingInList(List<Order> list, ResultSet resultSet) throws SQLException {
+        list.add(new Order(resultSet.getInt("id"), resultSet.getString("order_description"),
+                resultSet.getInt("last_name"), resultSet.getString("order_date"),
+                resultSet.getString("number_order")));
+    }
 
 
     @Override

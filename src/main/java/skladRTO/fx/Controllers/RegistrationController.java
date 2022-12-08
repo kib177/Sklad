@@ -48,10 +48,7 @@ public class RegistrationController implements Initializable {
     }
 
     public void buttonBack(){
-        SingUp_back.getScene().getWindow().hide();
 
-        CreateScene createScene = new CreateScene();
-        createScene.createScene("AdminWindow.fxml", 600, 400);
 
     }
 

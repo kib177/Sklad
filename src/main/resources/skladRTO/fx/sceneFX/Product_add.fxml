@@ -2,24 +2,47 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductNewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductNewController">
    <children>
-      <Button fx:id="Button_gone" layoutX="347.0" layoutY="126.0" mnemonicParsing="false" text="готово" AnchorPane.bottomAnchor="98.4" />
-      <TextField fx:id="Product_name" layoutX="29.0" layoutY="76.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="26.0" />
-      <TextField fx:id="Product_amount" layoutX="274.0" layoutY="76.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="26.0" />
-      <Button fx:id="button_add" layoutX="68.0" layoutY="126.0" mnemonicParsing="false" text="добавить позицию" AnchorPane.bottomAnchor="98.4" />
-      <Label layoutX="85.0" layoutY="58.0" text="Наименование" textFill="#030303c4" AnchorPane.topAnchor="58.0">
+      <Button fx:id="Button_gone" layoutX="312.0" layoutY="95.0" mnemonicParsing="false" text="Завершить" AnchorPane.bottomAnchor="229.4" AnchorPane.leftAnchor="312.0" />
+      <TextField fx:id="Product_name" layoutX="30.0" layoutY="45.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.leftAnchor="30.0">
+         <tooltip>
+            <Tooltip text="Введите наименование позиции заказа" />
+         </tooltip></TextField>
+      <TextField fx:id="Product_amount" layoutX="266.0" layoutY="45.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.rightAnchor="30.0">
+         <tooltip>
+            <Tooltip text="Введите требуемое количество " />
+         </tooltip></TextField>
+      <Button fx:id="button_add" layoutX="69.0" layoutY="95.0" mnemonicParsing="false" text="Добавить позицию" AnchorPane.bottomAnchor="229.4" AnchorPane.leftAnchor="69.0" />
+      <Label layoutX="87.0" layoutY="21.0" text="Наименование" textFill="#030303c4" AnchorPane.leftAnchor="87.0" AnchorPane.topAnchor="21.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="338.0" layoutY="58.0" text="Количество" textFill="#000000c4" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="58.0">
+      <Label layoutX="315.0" layoutY="21.0" text="Количество" textFill="#000000c4" AnchorPane.topAnchor="21.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="Table_Items" layoutX="37.0" layoutY="160.0" prefHeight="175.0" prefWidth="405.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="38.0" AnchorPane.rightAnchor="38.0">
+         <columns>
+            <TableColumn fx:id="ColumnProduct_name" prefWidth="304.8000183105469" style=" -fx-alignment: CENTER" text="Наименование" />
+            <TableColumn fx:id="ColumnProduct_amount" prefWidth="94.39996337890625" style=" -fx-alignment: CENTER" text="Количество" />
+         </columns>
+         <tooltip>
+            <Tooltip text="Список добавленных позиций в заказ" />
+         </tooltip>
+      </TableView>
+      <Label fx:id="warning" layoutX="191.0" layoutY="143.0" text="Добавьте позицию!" visible="false">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
    </children>

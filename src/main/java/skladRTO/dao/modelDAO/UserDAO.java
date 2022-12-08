@@ -1,6 +1,7 @@
 package skladRTO.dao.modelDAO;
 
 import javafx.collections.ObservableList;
+import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.Authentication;
 import skladRTO.api.models.StatusUser;
 import skladRTO.api.models.User;
@@ -92,16 +93,16 @@ public class UserDAO implements UserFunction {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                System.out.println("111"+resultSet);
+                System.out.println("111" + resultSet);
                 authentication = new Authentication(resultSet.getInt("id"), resultSet.getString("login"),
-                        resultSet.getString("password"), resultSet.getInt("status_user_id"), resultSet.getString("email"));
+                        resultSet.getString("password"), resultSet.getInt("status_user_id"),
+                        resultSet.getString("email"));
             }
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
         return authentication;
     }
-
 
 
     public ObservableList<StatusUser> getStatus() {
@@ -116,5 +117,39 @@ public class UserDAO implements UserFunction {
             e.printStackTrace();
         }
         return listUserStatus.getObservableList();
+    }
+
+    /**
+     * @param id
+     */
+
+    public void delete(int id) {
+        String SQL = "DELETE FROM users WHERE id_users =?;";
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Boolean pereborID(int id) {
+        String SQL = "SELECT * FROM users WHERE id_users =?;";
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void update() {
+
     }
 }

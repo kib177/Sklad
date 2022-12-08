@@ -10,28 +10,28 @@ import java.util.Objects;
 
 public class OrderFX {
     private SimpleIntegerProperty id;
-    private SimpleIntegerProperty number_order;
+    private SimpleStringProperty number_order;
     private SimpleStringProperty order_description;
     private SimpleStringProperty user;
     private SimpleStringProperty order_date;
 
-    public OrderFX(int id, int number_order, String order_description, String user, String order_date) {
+    public OrderFX(int id, String number_order, String order_description, String user, String order_date) {
         this.id = new SimpleIntegerProperty(id);
-        this.number_order = new SimpleIntegerProperty(number_order);
+        this.number_order = new SimpleStringProperty(number_order);
         this.order_description = new SimpleStringProperty(order_description);
         this.user = new SimpleStringProperty(user);
         this.order_date = new SimpleStringProperty(order_date);
     }
 
-    public int getNumber_order() {
+    public String getNumber_order() {
         return number_order.get();
     }
 
-    public SimpleIntegerProperty number_orderProperty() {
+    public SimpleStringProperty number_orderProperty() {
         return number_order;
     }
 
-    public void setNumber_order(int number_order) {
+    public void setNumber_order(String number_order) {
         this.number_order.set(number_order);
     }
 

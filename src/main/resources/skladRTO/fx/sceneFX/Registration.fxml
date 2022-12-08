@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="370.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.RegistrationController">
    <children>
-      <Label layoutX="143.0" layoutY="14.0" text="Добавление пользователя">
+      <Label layoutX="156.0" layoutY="14.0" text="Добавить пользователя">
          <font>
             <Font name="Times New Roman" size="24.0" />
          </font>
@@ -45,12 +45,12 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="SingUp_back" alignment="CENTER" layoutX="93.0" layoutY="319.0" mnemonicParsing="false" onAction="#SingUp_back" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Вернуться">
+      <Button fx:id="SingUp_back" alignment="CENTER" layoutX="93.0" layoutY="319.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Вернуться">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Button>
-      <ChoiceBox fx:id="ChoiceBox_status" layoutX="352.0" layoutY="222.0" maxHeight="25.0" maxWidth="75.0" minHeight="25.0" minWidth="75.0" prefHeight="25.0" prefWidth="75.0" />
+      <ChoiceBox fx:id="ChoiceBox_status" layoutX="315.0" layoutY="223.0" maxHeight="25.0" maxWidth="150.0" minHeight="25.0" minWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
       <Label layoutX="143.0" layoutY="88.0" text="Имя" textFill="#000000c4">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
