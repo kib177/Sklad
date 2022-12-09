@@ -14,6 +14,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -35,11 +36,10 @@ import skladRTO.fx.sceneFX.CreateScene;
 
 public class OrderViewController implements Initializable {
     private OrdersDAO ordersDAO = new OrdersDAO();
-    private Date currentDate;
+    private Date currentDate = new Date();
     private DateFormat dateFormat;
-    private ProductDAO getProduct;
+    private ProductDAO getProduct = new ProductDAO();
     private CreateScene createScene = new CreateScene();
-    private Stage stageThis;
     @FXML
     private CheckMenuItem CheckMenuItem_Delete_Order;
     @FXML
@@ -48,6 +48,8 @@ public class OrderViewController implements Initializable {
     private CheckMenuItem CheckMenuItem_deleteProduct;
     @FXML
     private CheckMenuItem CheckMenuItem_updateOrder;
+    @FXML
+    private CheckMenuItem CheckMenuItem_Info;
     @FXML
     private TableColumn<?, ?> ColumnProduct_amount;
     @FXML
@@ -105,8 +107,8 @@ public class OrderViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         date();
-        getProduct = new ProductDAO();
         getProduct.getProductStatus();
         Watch_order(new ActionEvent());
         if (Authorization.getStatusUser().getStatus().equals("Пользователь")) {
@@ -119,12 +121,7 @@ public class OrderViewController implements Initializable {
         }
     }
 
-    public void stage(Stage stage) {
-        this.stageThis = stage;
-    }
-
     public void date() {
-        currentDate = new Date();
         dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         date.setText(dateFormat.format(currentDate));
     }
@@ -168,6 +165,14 @@ public class OrderViewController implements Initializable {
                 }
             }
         });
+    }
+
+    public void viewProductInfo(int id) {
+        if (CheckMenuItem_Info.isSelected()) {
+            createScene.createScene("ViewProductInfo.fxml", 400, 200);
+            ((ProductInfoListController) createScene.getLoader().getController()).viewProductInfo(id);
+            createScene.getStage().setAlwaysOnTop(true);
+        }
     }
 
     public TableCell<OrderFX, String> textWrap() {
@@ -258,12 +263,23 @@ public class OrderViewController implements Initializable {
         Table_Items.setItems(getListProduct(id));
 
 
-    }
+            TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
+            selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
+                @Override
+                public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
+                    if (newProduct != null) {
+                        if(CheckMenuItem_Info.isSelected()){
+                            viewProductInfo(newProduct.getId());
+                        }
+                    }
+                }
+            });
+        }
+
 
     @FXML
     public void MenuItem_users() {
         createScene.createScene("List_Users.fxml", 950, 370);
-        stageThis.close();
     }
 
     @FXML
@@ -279,12 +295,12 @@ public class OrderViewController implements Initializable {
                 public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
                     if (newProduct != null) {
                         ((PrixodController) createScene.getLoader().getController()).addProduct(newProduct);
+                        ((PrixodController) createScene.getLoader().getController()).close(createScene);
                         CheckMenuItem_confirmOrder.selectedProperty().setValue(false);
                     }
                 }
             });
         }
-
     }
 }
 

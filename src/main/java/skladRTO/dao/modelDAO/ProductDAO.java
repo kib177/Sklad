@@ -6,6 +6,7 @@ import skladRTO.api.FX.lists.ProductStatistic;
 import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.Product;
+import skladRTO.api.models.ProductInfo;
 import skladRTO.api.models.ProductStatus;
 import skladRTO.dao.connectDB.DatabaseConnection;
 import skladRTO.dao.interfaces.FillingInListsDAO;
@@ -21,6 +22,14 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
     public static final String ADD_NEW_PRODUCT = "INSERT INTO order_product (name_product,amount,status_id,order_id,product_info_id)" +
             "VALUES(?,?,?,?,?);";
     public static final String LAST_INSERT_ID = "SELECT LAST_INSERT_ID();";
+    public static final String UPDATE_PRODUCT = "UPDATE order_product" +
+            " SET status_id = ?" +
+            " WHERE id_product = ?;";
+    public static final String UPDATE_PRODUCT_INFO = "UPDATE product_info SET articul = ?," +
+            " arrival_date = ?," +
+            " description = ?" +
+            " WHERE id = ?";
+
 
     public ObservableList<ProductFX> showListOfProducts(Integer id) {
         ProductListFX listProduct = new ProductListFX();
@@ -78,6 +87,8 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
         return id;
     }
 
+
+
     /**
      * Метод удаляет продукт по его id, но сперва удаляет объект product_info который на него ссылается
      *
@@ -103,6 +114,11 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
         }
     }
 
+    /**
+     * Метод передает лист продуктов по его id
+     *
+     * @param id - принимает на вход id заказа
+     */
     public ObservableList<ProductFX> getProduct(int id) {
         ProductListFX listProduct = new ProductListFX();
         WeakReference<ProductListFX> weakReference = new WeakReference<>(listProduct);
@@ -124,6 +140,9 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
         return listProduct.getProductList();
     }
 
+    /**
+     * Метод выгружает продукты и их статусы, сортирует по значениям и передает в лист
+     */
     public ObservableList<PieChart.Data> getStatistic() {
         int num1 = 0, num2 = 0, num3 = 0, num4 = 0;
         ProductStatistic listProduct = new ProductStatistic();
@@ -138,14 +157,14 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
                     num2++;
                 } else if (str.equals("принят")) {
                     num1++;
-                } else if (str.equals("доставлен")){
+                } else if (str.equals("доставлен")) {
                     num3++;
-                } else if (str.equals("отклонен")){
+                } else if (str.equals("отклонен")) {
                     num4++;
                 }
             }
-            listProduct.create("Принятых"+" "+num1, "В ожидании"+" "+num2,"Доставленных"+" "+num3,
-                    "Отклоненных"+" "+num4, num1, num2, num3, num4);
+            listProduct.create("Принятых" + " " + num1, "В ожидании" + " " + num2, "Доставленных" + " " + num3,
+                    "Отклоненных" + " " + num4, num1, num2, num3, num4);
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }
@@ -205,5 +224,42 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
             e.printStackTrace();
         }
         return listProduct.getProductList();
+    }
+
+    /**
+     * Метод изменяет значения ProductFX и Product_Info в БД.
+     * Метод использует транзакцию.
+     *
+     * @param product     Заполненный объект типа ProductFX
+     * @param productInfo Заполненный объект типа ProductInfo
+     */
+    public void updateProduct(ProductFX product, ProductInfo productInfo) {
+        //    Возможно стоит создать лист
+        try (Connection connection = DatabaseConnection.getDatabaseConnection()) {
+            connection.setAutoCommit(false);
+            Savepoint savepointOne = connection.setSavepoint("SavepointOne");
+            try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT_INFO)) {
+                preparedStatement.setString(1, productInfo.getArticle());
+                preparedStatement.setString(2, productInfo.getArrivalDate());
+                preparedStatement.setString(3, productInfo.getDescription());
+                preparedStatement.setInt(4, productInfo.getId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                connection.rollback(savepointOne);
+            }
+            try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT)) {
+                preparedStatement.setInt(1, product.getStatusFX());
+                preparedStatement.setInt(2, product.getId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                connection.rollback(savepointOne);
+            }
+            connection.commit();
+            connection.setAutoCommit(true);
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

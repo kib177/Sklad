@@ -12,6 +12,7 @@ public class ProductFX {
     private SimpleStringProperty name;
     private SimpleIntegerProperty amount;
     private SimpleStringProperty status;
+    private Integer statusFX;
     private SimpleIntegerProperty order;
     private SimpleIntegerProperty productInfo;
 
@@ -37,6 +38,15 @@ public class ProductFX {
             }
         }
         return null;
+    }
+
+    public Integer getStatusFX() {
+        return statusFX;
+    }
+
+    public void setStatusFX(Integer statusFX) {
+        this.statusFX = statusFX;
+        this.status = getStringStatus(statusFX);
     }
 
     public ProductFX() {
@@ -129,9 +139,14 @@ public class ProductFX {
 
     @Override
     public String toString() {
-        return id +
-                " название: " + name +
-                " количество: " + amount +
-                " статус: " + status;
+        return "ProductFX{" +
+                "id=" + id +
+                ", name=" + name +
+                ", amount=" + amount +
+                ", status=" + status +
+                ", statusFX=" + statusFX +
+                ", order=" + order +
+                ", productInfo=" + productInfo +
+                '}';
     }
 }

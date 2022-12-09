@@ -70,7 +70,6 @@ public class UsersViewController implements Initializable {
     public void Button_back(ActionEvent actionEvent) {
         CreateScene createScene = new CreateScene();
         createScene.createScene("OrderView.fxml", 800, 600);
-        ((OrderViewController) createScene.getLoader().getController()).stage(createScene.getStage());
         Button_back.getScene().getWindow().hide();
     }
 

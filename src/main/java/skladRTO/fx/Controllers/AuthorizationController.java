@@ -32,7 +32,6 @@ public class AuthorizationController implements Initializable {
         if (avtoriz.CheckUsers(SingIn_login.getText(), SingIn_password.getText())) {
             CreateScene createScene = new CreateScene();
             createScene.createScene("OrderView.fxml", 800, 600);
-            ((OrderViewController) createScene.getLoader().getController()).stage(createScene.getStage());
             SingIn_ButSingIn.getScene().getWindow().hide();
         } else SMS.setText("Пользователь не найден!");
     }

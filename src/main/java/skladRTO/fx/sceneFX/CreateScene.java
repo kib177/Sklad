@@ -36,8 +36,10 @@ public class CreateScene {
         }else{
             stage.toFront();
         }
+    }
 
-
+    public void close(){
+        stage.close();
     }
 
     public FXMLLoader getLoader() {

@@ -50,7 +50,6 @@ public class ProductListController implements Initializable {
     }
 
     public void getProductDefault(){
-        ChoiceBox.setValue(ProductStatusList.getObservableList().get(0));
         ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));

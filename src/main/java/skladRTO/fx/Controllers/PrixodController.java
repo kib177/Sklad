@@ -12,13 +12,18 @@ import skladRTO.api.models.Product;
 import skladRTO.api.models.ProductStatus;
 import skladRTO.api.models.ProductInfo;
 import skladRTO.dao.modelDAO.ProductDAO;
+import skladRTO.dao.modelDAO.ProductInfoDAO;
+import skladRTO.fx.sceneFX.CreateScene;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PrixodController implements Initializable {
-    private ProductDAO getProduct;
+    private ProductDAO getProduct = new ProductDAO();
     private ProductFX product = new ProductFX();
+    private ProductInfoDAO productInfoDAO = new ProductInfoDAO();
+    private CreateScene createScene;
+
     @FXML
     private Button Gone;
     @FXML
@@ -58,12 +63,14 @@ public class PrixodController implements Initializable {
         Table_Product.setItems(products);
     }
 
-    public void addProductInfo() {
-        getProduct = new ProductDAO();
-        ProductInfo productInfo = new ProductInfo(articul.getText(), data.getText(), description.getText());
-        product.setStatus(String.valueOf(status.getValue()));
+    public void close(CreateScene createScene) {
+        this.createScene = createScene;
+    }
 
-        System.out.println(product);
-        Gone.getScene().getWindow().hide();
+    public void addProductInfo() {
+        ProductInfo productInfo = new ProductInfo(productInfoDAO.getIdProduct_info(product.getId()), articul.getText(), data.getText(), description.getText());
+        product.setStatusFX(getProduct.getIdStatus(String.valueOf(status.getValue()).trim()));
+        getProduct.updateProduct(product, productInfo);
+        createScene.close();
     }
 }

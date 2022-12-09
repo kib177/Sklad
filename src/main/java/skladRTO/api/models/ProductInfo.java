@@ -14,12 +14,6 @@ public class ProductInfo {
         this.description = description;
     }
 
-    public ProductInfo(String article, String arrivalDate, String description) {
-        this.article = article;
-        this.arrivalDate = arrivalDate;
-        this.description = description;
-    }
-
     public int getId() {
         return id;
     }

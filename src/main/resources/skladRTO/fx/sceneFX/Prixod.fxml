@@ -15,15 +15,15 @@
          <tooltip>
             <Tooltip text="Выбрать новый статус для позиции" />
          </tooltip></ChoiceBox>
-      <TextArea fx:id="description" disable="true" layoutX="14.0" layoutY="81.0" prefHeight="112.0" prefWidth="296.0" promptText="Описание">
+      <TextArea fx:id="description" layoutX="14.0" layoutY="81.0" prefHeight="112.0" prefWidth="296.0" promptText="Описание">
          <tooltip>
             <Tooltip text="Окно для комментариев" />
          </tooltip></TextArea>
-      <TextField fx:id="data" disable="true" layoutX="349.0" layoutY="167.0" promptText="дата поставки">
+      <TextField fx:id="data" layoutX="349.0" layoutY="167.0" promptText="дата поставки">
          <tooltip>
             <Tooltip text="Дата поставки" />
          </tooltip></TextField>
-      <TextField fx:id="articul" disable="true" layoutX="350.0" layoutY="124.0" promptText="артикул">
+      <TextField fx:id="articul" layoutX="350.0" layoutY="124.0" promptText="артикул">
          <tooltip>
             <Tooltip text="Артикул позиции если имеется" />
          </tooltip></TextField>

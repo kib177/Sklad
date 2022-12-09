@@ -26,4 +26,5 @@ public class ProductStatusList {
     public static void setObservableList(ObservableList<ProductStatus> observableList) {
         ProductStatusList.observableList = observableList;
     }
+
 }

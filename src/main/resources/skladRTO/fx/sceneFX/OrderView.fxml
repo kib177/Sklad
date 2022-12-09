@@ -68,20 +68,21 @@
           </Menu>
           <Menu fx:id="menu_help" mnemonicParsing="false" text="Помощь">
             <items>
-              <MenuItem disable="true" mnemonicParsing="false" text="5 руб давай" />
+              <MenuItem mnemonicParsing="false" text="Бог поможет, а я добью" />
             </items>
           </Menu>
             <Menu fx:id="Menu_Orders" mnemonicParsing="false" text="Заказы">
               <items>
                   <MenuItem fx:id="MenuItem_addOrder" mnemonicParsing="false" onAction="#MenuItem_addOrder" style="-fx-alignment: CENTER" text="Создать заказ" />
                   <CheckMenuItem fx:id="CheckMenuItem_updateOrder" disable="true" mnemonicParsing="false" text="Изменить заказ" />
-                  <CheckMenuItem fx:id="CheckMenuItem_confirmOrder" mnemonicParsing="false" onAction="#CheckMenuItem_confirmOrder" text="Подтвердить заказ" />
                   <CheckMenuItem fx:id="CheckMenuItem_Delete_Order" mnemonicParsing="false" onAction="#CheckMenuItem_Delete_Order" text="Удалить заказ" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Позиции">
               <items>
                 <MenuItem fx:id="MenuItem_List_Product" mnemonicParsing="false" onAction="#MenuItem_List_Product" text="Показать список позиций" />
+                  <CheckMenuItem fx:id="CheckMenuItem_Info" mnemonicParsing="false" text="Показать информацию о позиции" />
+                  <CheckMenuItem fx:id="CheckMenuItem_confirmOrder" mnemonicParsing="false" onAction="#CheckMenuItem_confirmOrder" text="Подтвердить позицию" />
                   <CheckMenuItem fx:id="CheckMenuItem_deleteProduct" mnemonicParsing="false" onAction="#CheckMenuItem_deleteProduct" text="Удалить позицию" />
                   <MenuItem fx:id="MenuItem_Statistic" mnemonicParsing="false" onAction="#MenuItem_Statistic" text="Статистика по позициям" />
               </items>
