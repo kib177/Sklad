@@ -1,5 +1,6 @@
 package skladRTO.fx.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -21,6 +22,8 @@ public class WindowController implements Initializable {
     private Button button_gone;
     @FXML
     private Label label_text;
+    private OrderViewController orderViewController;
+    private UsersViewController usersViewController;
 
 
     @Override
@@ -32,26 +35,37 @@ public class WindowController implements Initializable {
     public void deleteOrder(Order order, List<ProductFX> list) {
         OrdersDAO ordersDAO = new OrdersDAO();
         label_text.setText("Вы действительно хотите удалить заказ №" + order.getId());
-        button_gone.setOnAction(actionEvent ->  {
+        button_gone.setOnAction(actionEvent -> {
             ordersDAO.delete(order, list);
+            orderViewController.Watch_order(new ActionEvent());
             button_gone.getScene().getWindow().hide();
         });
     }
 
-    public void deleteProduct(ProductFX product){
+    public void getUsersController(UsersViewController usersViewController) {
+        this.usersViewController = usersViewController;
+    }
+
+    public void getOrderView(OrderViewController orderViewController) {
+        this.orderViewController = orderViewController;
+    }
+
+    public void deleteProduct(ProductFX product) {
         ProductDAO productDAO = new ProductDAO();
         label_text.setText("Вы действительно хотите удалить позицию №" + product.getId());
         button_gone.setOnAction(actionEvent -> {
             productDAO.delete(product);
+            orderViewController.viewProduct();
             button_gone.getScene().getWindow().hide();
         });
     }
 
-    public void deleteUser(int id){
+    public void deleteUser(int id) {
         UserDAO userDAO = new UserDAO();
         label_text.setText("Вы действительно хотите удалить пользователя " + id);
         button_gone.setOnAction(actionEvent -> {
             userDAO.delete(id);
+            usersViewController.showUsers();
             button_gone.getScene().getWindow().hide();
         });
     }

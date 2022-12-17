@@ -40,12 +40,12 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </PasswordField>
-      <Button fx:id="SingUp_ButttonGone" alignment="CENTER" layoutX="340.0" layoutY="319.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Подтвердить">
+      <Button fx:id="SingUp_ButttonGone" alignment="CENTER" layoutX="340.0" layoutY="319.0" mnemonicParsing="false" onAction="#SingUp_ButttonGone" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Подтвердить">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="SingUp_back" alignment="CENTER" layoutX="93.0" layoutY="319.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Вернуться">
+      <Button fx:id="SingUp_back" alignment="CENTER" layoutX="93.0" layoutY="319.0" mnemonicParsing="false" onAction="#SingUp_back" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Вернуться">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>

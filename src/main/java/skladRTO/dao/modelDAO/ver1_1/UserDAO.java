@@ -44,9 +44,11 @@ public class UserDAO implements UserFunction {
     }
 
     @Override
-    public void deleteUser() {
+    public void delete(int id) {
 
     }
+
+
 
     public User getUser(int id) {
         User user = null;

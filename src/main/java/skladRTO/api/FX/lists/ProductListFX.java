@@ -1,11 +1,8 @@
 package skladRTO.api.FX.lists;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import skladRTO.api.FX.models.ProductFX;
-import skladRTO.api.models.Product;
 
 public class ProductListFX {
     private ObservableList<ProductFX> productList = FXCollections.observableArrayList();

@@ -8,7 +8,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
-import skladRTO.api.FX.models.OrderFX;
 import skladRTO.api.FX.models.ProductInfoFX;
 import skladRTO.dao.modelDAO.ProductInfoDAO;
 
@@ -31,7 +30,6 @@ public class ProductInfoListController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     public void viewProductInfo(int id) {

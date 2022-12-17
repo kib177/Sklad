@@ -1,15 +1,17 @@
 package skladRTO.dao.modelDAO;
 
 import javafx.collections.ObservableList;
-import skladRTO.api.FX.models.ProductFX;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import skladRTO.api.FX.lists.UserListFX;
+import skladRTO.api.FX.models.UserFX;
+import skladRTO.api.lists.UserNameList;
+import skladRTO.api.lists.UserStatusLIst;
 import skladRTO.api.models.Authentication;
 import skladRTO.api.models.StatusUser;
 import skladRTO.api.models.User;
-import skladRTO.api.lists.UserStatusLIst;
-import skladRTO.dao.interfaces.UserFunction;
-import skladRTO.api.FX.lists.UserListFX;
 import skladRTO.dao.connectDB.DatabaseConnection;
-import skladRTO.api.FX.models.UserFX;
+import skladRTO.dao.interfaces.UserFunction;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -17,132 +19,191 @@ import java.sql.*;
 
 
 public class UserDAO implements UserFunction {
+    private static final Logger logger = LogManager.getLogger(UserDAO.class.getName());
 
+    /**
+     * Метод заполняет лист всех юзеров из БД в необходимом формате
+     *
+     * @return лист всех юзеров
+     */
     @Override
     public ObservableList<UserFX> showListOfUsers() {
         UserListFX listUser = new UserListFX();
         WeakReference<UserListFX> weakReference = new WeakReference<>(listUser);
-        try {
-            ResultSet resultSet = DatabaseConnection.getStatement().executeQuery("SELECT users.id_users," +
-                    " users.first_name, users.last_name, authentication.login, authentication.password," +
-                    " authentication.email, status_user.status" +
-                    " FROM users " +
-                    " LEFT JOIN authentication ON (users.authentication_id=authentication.id) " +
-                    " LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);");
+        String str = "SELECT users.id_users, users.first_name, users.last_name, authentication.login, " +
+                "authentication.password, authentication.email, status_user.status" +
+                " FROM users " +
+                " LEFT JOIN authentication ON (users.authentication_id=authentication.id) " +
+                " LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
+        try (ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str)) {
+            logger.debug("Перебираем полученные данные из БД");
             while (resultSet.next()) {
+                logger.debug("Записываем данные из БД в объект типа UserListFX");
                 listUser.create(resultSet.getInt("id_users"), resultSet.getString("login"),
                         resultSet.getString("password"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getString("status"),
                         resultSet.getString("email"));
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+        logger.debug("Возвращаем заполненный лист юзеров ->\n -> " + listUser);
         return listUser.getUsersData();
     }
 
-    @Override
-    public void deleteUser() {
-
-    }
-
+    /**
+     * Метод находит юзера по его ID
+     *
+     * @param id ID юзера
+     * @return объект типа User
+     */
     public User getUser(int id) {
         User user = null;
+        String str = "SELECT * FROM sklad.users WHERE users.authentication_id = ?;";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM sklad.users WHERE users.authentication_id = ?;")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(str)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            logger.debug("Получение данных из БД");
             if (resultSet.next()) {
                 user = new User(resultSet.getInt("id_users"), resultSet.getString("first_name"),
                         resultSet.getString("last_name"), resultSet.getInt("authentication_id"));
+                logger.debug("Запись данных из БД в объект User ->\n-> " + user);
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+        logger.debug("Возвращаем полученный объект типа User -> " + user);
         return user;
     }
 
+    /**
+     * Метод определяет статус юзера по ID
+     *
+     * @param id status_user id
+     * @return объект StatusUser
+     */
     public StatusUser getStatusUser(int id) {
         StatusUser statusUser = null;
+        String str = "SELECT * FROM sklad.status_user WHERE status_user.id = ?;";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM sklad.status_user WHERE status_user.id = ?;")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(str)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            logger.debug("Получение данных из БД");
             if (resultSet.next()) {
                 statusUser = new StatusUser(resultSet.getString("status"));
+                logger.debug("Запись данных из БД в объект User ->\n-> " + statusUser);
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+        logger.debug("Возвращаем полученный объект типа StatusUser -> " + statusUser);
         return statusUser;
     }
 
+    /**
+     * Метод ищет в БД совпадение login and password
+     *
+     * @param login    логин введенный пользователем
+     * @param password пароль введенный пользователем
+     * @return найденный объект при совпадении, иначе null
+     */
     public Authentication getAuthentication(String login, String password) {
         Authentication authentication = null;
+        String str = "SELECT * FROM authentication WHERE login = ? AND password = ?";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(
-                     "SELECT * FROM authentication " +
-                             " WHERE login = ? AND password = ?")) {
+             PreparedStatement preparedStatement = connection.prepareStatement(str)) {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-
+            logger.debug("Получение данных из БД");
             if (resultSet.next()) {
-                System.out.println("111" + resultSet);
                 authentication = new Authentication(resultSet.getInt("id"), resultSet.getString("login"),
                         resultSet.getString("password"), resultSet.getInt("status_user_id"),
                         resultSet.getString("email"));
+                logger.debug("Запись данных из БД в объект Authentication ->\n-> " + authentication);
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+        logger.debug("Возвращаем полученный объект типа Authentication -> " + authentication);
         return authentication;
     }
 
-
+    /**
+     * Метод возвращает всех юзеров
+     *
+     * @return лист юзеров типа UserStatusLIst
+     */
     public ObservableList<StatusUser> getStatus() {
         UserStatusLIst listUserStatus = new UserStatusLIst();
+        String str = "SELECT * FROM status_user;";
         try {
-            ResultSet rs = DatabaseConnection.getStatement().executeQuery("SELECT status_user.status FROM status_user;");
-
+            logger.debug("Отправляем запрос в БД ->\n -> " + str);
+            ResultSet rs = DatabaseConnection.getStatement().executeQuery(str);
+            logger.debug("Перебираем полученные данные из БД");
             while (rs.next()) {
                 listUserStatus.create(rs.getString("status"));
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+        logger.debug("Возвращаем полученный список типа UserStatusLIst -> " + listUserStatus);
         return listUserStatus.getObservableList();
     }
 
     /**
-     * @param id
+     * Метод удаляет объект User из БД по ID
+     *
+     * @param id ID юзера
      */
-
+    @Override
     public void delete(int id) {
-        String SQL = "DELETE FROM users WHERE id_users =?;";
+        String str = "DELETE FROM users WHERE id_users =?;";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(str)) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
     }
 
+    /**
+     * Метод проверяет есть ли юзер в БД с таким ID
+     *
+     * @param id ID юзера
+     * @return возвращает Boolean значение в зависимости от результата
+     */
     public Boolean pereborID(int id) {
-        String SQL = "SELECT * FROM users WHERE id_users =?;";
+        String str = "SELECT * FROM users WHERE id_users =?;";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(str)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+            logger.debug("Получение данных из БД");
             if (resultSet.next()) {
+                logger.debug("Возвращаем значение true");
                 return true;
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+        logger.debug("Возвращаем значение false");
         return false;
     }
 
@@ -150,6 +211,14 @@ public class UserDAO implements UserFunction {
 
     }
 
+    /**
+     * @param firstName
+     * @param secondName
+     * @param login
+     * @param email
+     * @param password
+     * @param status
+     */
     public void add(String firstName, String secondName, String login, String email, String password, String status) {
         try (Connection connection = DatabaseConnection.getDatabaseConnection()) {
 
@@ -202,19 +271,48 @@ public class UserDAO implements UserFunction {
                             connection.rollback(savepointOne);
                         }
                     } catch (SQLException e) {
+                        logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
                         e.printStackTrace();
                     }
                 } catch (SQLException e) {
+                    logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
                     e.printStackTrace();
                 }
                 System.out.println("Перед коммитом");
                 connection.commit();
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
+                logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
                 e.printStackTrace();
             }
         } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Метод получает из БД ID, ИМЯ и ФАМИЛИЮ всех юзеров
+     *
+     * @return лист юзеров
+     */
+    public ObservableList<User> showListName() {
+        UserNameList listUser = new UserNameList();
+        WeakReference<UserNameList> weakReference = new WeakReference<>(listUser);
+        String str = "SELECT users.id_users, users.first_name, users.last_name FROM users";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
+        try (
+                ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str)) {
+            logger.debug("Перебираем полученные данные из БД");
+            while (resultSet.next()) {
+                listUser.create(resultSet.getInt("id_users"), resultSet.getString("first_name"),
+                        resultSet.getString("last_name"));
+            }
+        } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
+            e.printStackTrace();
+        }
+        logger.debug("Возвращаем полученный список типа UserNameList -> " + listUser);
+        return listUser.getList();
     }
 }

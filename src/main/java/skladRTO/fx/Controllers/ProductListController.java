@@ -12,7 +12,6 @@ import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.ProductStatus;
 import skladRTO.dao.modelDAO.ProductDAO;
 
-import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,7 +45,7 @@ public class ProductListController implements Initializable {
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        Table_Items.setItems(productDAO.getProduct(ChoiceBox.getValue().getId()));
+        Table_Items.setItems(productDAO.getProductByStatus(ChoiceBox.getValue().getId()));
     }
 
     public void getProductDefault(){

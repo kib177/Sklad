@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.MachinesController">
+   <children>
+      <TableView fx:id="Table" prefHeight="400.0" prefWidth="278.0">
+        <columns>
+          <TableColumn fx:id="Column_id" prefWidth="72.0" text="ID" />
+          <TableColumn fx:id="Column_name" prefWidth="205.60001220703123" text="Наименование" />
+        </columns>
+      </TableView>
+      <Button layoutX="418.0" layoutY="23.0" mnemonicParsing="false" text="Удалить" />
+      <Button layoutX="418.0" layoutY="79.0" mnemonicParsing="false" text="Добавить" />
+      <Button layoutX="427.0" layoutY="137.0" mnemonicParsing="false" text="Изменить" />
+   </children>
+</AnchorPane>

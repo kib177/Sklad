@@ -1,15 +1,14 @@
 package skladRTO;
 
 
-import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Main {
-    private static final Logger log = Logger.getLogger(Main.class.getName());
-
+    private static final Logger logger = LogManager.getLogger(Main.class.getName());
     public static void main(String[] args) {
-        log.info("Start program");
-        App.main(args);
-
+        logger.info("Происходит загрузка программы");
+         App.main(args);
     }
 }
 

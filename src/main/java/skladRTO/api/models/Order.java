@@ -4,7 +4,8 @@ public class Order {
     private int id;
     private String orderDescription;
     private int userId;
-    //потом заменить на Date
+
+    private int machinesId;
     private String orderDate;
     private String numberOrder;
 
@@ -17,19 +18,29 @@ public class Order {
     }
 
     //добавил конструктор полный для пробы
-    public Order(int id, String orderDescription, int userId, String orderDate, String numberOrder) {
+    public Order(int id, String orderDescription, int userId, int machinesId, String orderDate, String numberOrder) {
         this.id = id;
         this.orderDescription = orderDescription;
         this.userId = userId;
+        this.machinesId = machinesId;
         this.orderDate = orderDate;
         this.numberOrder = numberOrder;
     }
 
-    public Order (String orderDescription, String orderDate, String numberOrder){
+    public Order (String orderDescription, int userId, int machinesId, String orderDate, String numberOrder){
         this.orderDescription = orderDescription;
         this.userId = userId;
+        this.machinesId = machinesId;
         this.orderDate = orderDate;
         this.numberOrder = numberOrder;
+    }
+
+    public int getMachinesId() {
+        return machinesId;
+    }
+
+    public void setMachinesId(int machinesId) {
+        this.machinesId = machinesId;
     }
 
     public int getId() {

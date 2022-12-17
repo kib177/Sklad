@@ -2,6 +2,7 @@ package skladRTO.fx.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -9,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.Order;
 import skladRTO.api.models.Product;
-import skladRTO.dao.modelDAO.ver1_1.OrdersDAO;
+import skladRTO.dao.modelDAO.OrdersDAO;
 
 import java.lang.ref.SoftReference;
 import java.net.URL;
@@ -44,6 +45,7 @@ public class ProductNewController implements Initializable {
     private TextField Product_name;
     @FXML
     private Label warning;
+    private OrderViewController orderViewController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -51,6 +53,9 @@ public class ProductNewController implements Initializable {
         Button_gone.setOnAction(actionEvent -> gone(list));
     }
 
+    public void getOrderView(OrderViewController orderViewController){
+        this.orderViewController = orderViewController;
+    }
     public void viewAddProduct() {
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
@@ -75,8 +80,9 @@ public class ProductNewController implements Initializable {
         } else {
             OrdersDAO OrdersDAO = new OrdersDAO();
             SoftReference<OrdersDAO> weakReference = new SoftReference<>(OrdersDAO);
-            OrdersDAO.create(order, list);
+            OrdersDAO.add(order, list);
             button_add.getScene().getWindow().hide();
+            orderViewController.Watch_order(new ActionEvent());
         }
     }
 

@@ -21,11 +21,15 @@ public class UserDeleteController implements Initializable {
     private TextField ID;
     @FXML
     private Label Label;
+    private UsersViewController usersViewController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
 
+    public void getUsersController(UsersViewController usersViewController){
+        this.usersViewController = usersViewController;
+    }
     @FXML
     public void Gone(ActionEvent event) {
         if (ID.getText().equals("")) {
@@ -34,6 +38,8 @@ public class UserDeleteController implements Initializable {
             createScene.createScene("Window.fxml", 400, 200);
             createScene.getStage().setAlwaysOnTop(true);
             ((WindowController) createScene.getLoader().getController()).deleteUser(Integer.parseInt(ID.getText()));
+            WindowController controller = createScene.getLoader().getController();
+            controller.getUsersController(usersViewController);
         } else{
             Label.setText("Проверьте правильность ID!");
         }

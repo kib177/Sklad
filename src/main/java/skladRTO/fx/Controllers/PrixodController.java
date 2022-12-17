@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.lists.ProductStatusList;
 import skladRTO.api.models.Product;
@@ -19,6 +21,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PrixodController implements Initializable {
+    private static final Logger logger = LogManager.getLogger(PrixodController.class.getName());
     private ProductDAO getProduct = new ProductDAO();
     private ProductFX product = new ProductFX();
     private ProductInfoDAO productInfoDAO = new ProductInfoDAO();
@@ -44,12 +47,17 @@ public class PrixodController implements Initializable {
     private TextArea description;
     @FXML
     private ChoiceBox<ProductStatus> status;
+    private OrderViewController orderViewController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getProduct = new ProductDAO();
         status.setItems(ProductStatusList.getObservableList());
         Gone.setOnAction(actionEvent -> addProductInfo());
+    }
+
+    public void getOrderView(OrderViewController orderViewController){
+        this.orderViewController = orderViewController;
     }
 
     public void addProduct(ProductFX prod) {
@@ -71,6 +79,7 @@ public class PrixodController implements Initializable {
         ProductInfo productInfo = new ProductInfo(productInfoDAO.getIdProduct_info(product.getId()), articul.getText(), data.getText(), description.getText());
         product.setStatusFX(getProduct.getIdStatus(String.valueOf(status.getValue()).trim()));
         getProduct.updateProduct(product, productInfo);
+        orderViewController.viewProduct();
         createScene.close();
     }
 }

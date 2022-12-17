@@ -6,5 +6,5 @@ import skladRTO.api.FX.models.UserFX;
 public interface UserFunction {
     public ObservableList<UserFX> showListOfUsers();
 
-    public void deleteUser();
+    public void delete(int id);
 }

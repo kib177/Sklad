@@ -9,8 +9,8 @@ import java.util.Objects;
 public class OrderListFX {
     private ObservableList<OrderFX> orderFXData = FXCollections.observableArrayList();
 
-    public void create(int id, String number_order, String order_description,String firstName, String lastName, String order_date) {
-        orderFXData.add(new OrderFX(id,number_order, order_description, firstName+" "+lastName, order_date));
+    public void create(int id, String number_order, String order_description, String machine, String firstName, String lastName, String order_date) {
+        orderFXData.add(new OrderFX(id,number_order, order_description, machine, firstName+" "+lastName, order_date));
     }
 
     public ObservableList<OrderFX> getOrderData() {

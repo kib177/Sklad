@@ -57,19 +57,21 @@ public class UsersViewController implements Initializable {
     @FXML
     public void Button_addUser(ActionEvent actionEvent) {
         createScene.createScene("Registration.fxml", 550, 370);
+        RegistrationController controller = createScene.getLoader().getController();
+        controller.getOrderView(this);
         createScene.getStage().setAlwaysOnTop(true);
     }
 
     @FXML
     public void Button_deleteUser() {
         createScene.createScene("DeleteUser.fxml", 300, 100);
+        UserDeleteController controller = createScene.getLoader().getController();
+        controller.getUsersController(this);
         createScene.getStage().setAlwaysOnTop(true);
     }
 
     @FXML
     public void Button_back(ActionEvent actionEvent) {
-        CreateScene createScene = new CreateScene();
-        createScene.createScene("OrderView.fxml", 800, 600);
         Button_back.getScene().getWindow().hide();
     }
 

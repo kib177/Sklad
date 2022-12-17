@@ -14,12 +14,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="650.0" maxWidth="800.0" prefHeight="650.0" prefWidth="800.0" style="-fx-background-color: #ededed;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.OrderViewController">
+<AnchorPane maxHeight="650.0" maxWidth="920.0" prefHeight="650.0" prefWidth="920.0" style="-fx-background-color: #ededed;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.OrderViewController">
    <children>
-      <TableView fx:id="List_order" layoutY="31.0" minHeight="252.0" minWidth="800.0" prefHeight="252.0" prefWidth="800.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="317.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+      <TableView fx:id="List_order" layoutY="31.0" minHeight="252.0" minWidth="800.0" prefHeight="252.0" prefWidth="800.0" style="-fx-background: -fx-control-inner-background ;   -fx-background-color: -fx-table-cell-border-color, -fx-background ;   -fx-background-insets: 0, 0 0 1 0 ;   -fx-table-cell-border-color: derive(-fx-color, 5%); -fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="317.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
         <columns>
           <TableColumn fx:id="Column_Id" maxWidth="100.0" minWidth="40.0" prefWidth="70.39999085664749" style="-fx-alignment: CENTER" text="ID заказа" />
-            <TableColumn fx:id="Column_number_order" prefWidth="104.79998779296875" style="-fx-alignment: CENTER" text="Номер заказа">
+            <TableColumn fx:id="Column_number_order" prefWidth="115.99996948242188" style="-fx-alignment: CENTER" text="Номер заказа">
                <contextMenu>
                   <ContextMenu fx:id="NumberOrderContextMenu">
                     <items>
@@ -27,9 +27,10 @@
                     </items>
                   </ContextMenu>
                </contextMenu></TableColumn>
-            <TableColumn fx:id="Сolumn_description" maxWidth="360.79998779296875" minWidth="274.4000244140625" prefWidth="340.0" text="Описание" />
-            <TableColumn fx:id="Column_user" maxWidth="1.7976931348623157E308" prefWidth="171.99993896484375" style=" -fx-alignment: CENTER" text="Заказчик" />
-            <TableColumn fx:id="Column_date" maxWidth="127.2" minWidth="90.0" prefWidth="109.60009765625" style=" -fx-alignment: CENTER" text="Дата заказа" />
+            <TableColumn fx:id="Сolumn_description" maxWidth="360.79998779296875" minWidth="274.4000244140625" prefWidth="341.6000518798828" style="-fx-alignment: CENTER;" text="Описание" />
+            <TableColumn fx:id="Column_machine" maxWidth="144.0" minWidth="112.800048828125" prefWidth="144.79998779296875" style="-fx-alignment: CENTER;" text="Оборудование" />
+            <TableColumn fx:id="Column_user" maxWidth="200.0" minWidth="115.2000732421875" prefWidth="122.4000244140625" style=" -fx-alignment: CENTER" text="Заказчик" />
+            <TableColumn fx:id="Column_date" maxWidth="158.39996337890625" minWidth="60.800048828125" prefWidth="124.0" style=" -fx-alignment: CENTER" text="Дата заказа" />
         </columns>
          <tooltip>
             <Tooltip text="Список заказов" />
@@ -42,23 +43,15 @@
             </ContextMenu>
          </contextMenu>
       </TableView>
-      <Button fx:id="Watch_order" alignment="CENTER" layoutX="657.0" layoutY="412.0" maxHeight="25.0" maxWidth="120.0" mnemonicParsing="false" onAction="#Watch_order" prefHeight="25.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Обновить" AnchorPane.bottomAnchor="212.39999999999998" AnchorPane.rightAnchor="23.0">
+      <Button fx:id="Watch_order" alignment="CENTER" layoutX="732.0" layoutY="412.0" maxHeight="25.0" maxWidth="120.0" mnemonicParsing="false" onAction="#Watch_order" prefHeight="25.0" prefWidth="120.0" style="-fx-background-radius: 5; -fx-border-radius: 5;" text="Обновить" AnchorPane.bottomAnchor="212.39999999999998" AnchorPane.rightAnchor="68.0">
          <tooltip>
             <Tooltip text="Нажмите для обновления списка заказов" />
          </tooltip></Button>
-      <TextField fx:id="search_name" alignment="CENTER" layoutX="557.0" layoutY="364.0" maxHeight="25.0" maxWidth="220.0" minHeight="25.0" minWidth="220.0" onAction="#SearchOrderDescription" prefHeight="25.0" prefWidth="220.0" promptText="Введите часть или полное описание" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: silver;" AnchorPane.bottomAnchor="260.4" AnchorPane.leftAnchor="557.0">
-         <tooltip>
-            <Tooltip text="Введите часть/полное описание и нажмите Enter" />
-         </tooltip></TextField>
-      <TextField fx:id="search_articul" alignment="CENTER" layoutX="282.0" layoutY="364.0" maxHeight="25.0" maxWidth="220.0" minHeight="25.0" minWidth="220.0" onAction="#SearchOrderNumber" prefHeight="25.0" prefWidth="220.0" promptText="Введите номер заказа" style="-fx-background-color: #ffffff; -fx-border-color: silver; -fx-border-radius: 5;" AnchorPane.bottomAnchor="260.4" AnchorPane.leftAnchor="291.0">
-         <tooltip>
-            <Tooltip text="Введите номер заказа и нажмите Enter" />
-         </tooltip></TextField>
       <MenuBar maxHeight="25.0" maxWidth="800.0" minHeight="25.0" minWidth="800.0" prefHeight="25.0" prefWidth="800.0" style="-fx-border-color: silver; -fx-background-radius: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu fx:id="menu_file" mnemonicParsing="false" text="File">
+          <Menu fx:id="menu_file" mnemonicParsing="false" text="Параметры">
             <items>
-              <MenuItem fx:id="MenuItem_exit" disable="true" mnemonicParsing="false" text="Выйти" />
+              <MenuItem fx:id="MenuItem_exit" mnemonicParsing="false" onAction="#MenuItem_exit" text="Выйти из аккаунта" />
             </items>
           </Menu>
           <Menu fx:id="menu_edit" mnemonicParsing="false" text="Edit">
@@ -68,7 +61,7 @@
           </Menu>
           <Menu fx:id="menu_help" mnemonicParsing="false" text="Помощь">
             <items>
-              <MenuItem mnemonicParsing="false" text="Бог поможет, а я добью" />
+              <MenuItem mnemonicParsing="false" text="Бог поможет" />
             </items>
           </Menu>
             <Menu fx:id="Menu_Orders" mnemonicParsing="false" text="Заказы">
@@ -76,13 +69,14 @@
                   <MenuItem fx:id="MenuItem_addOrder" mnemonicParsing="false" onAction="#MenuItem_addOrder" style="-fx-alignment: CENTER" text="Создать заказ" />
                   <CheckMenuItem fx:id="CheckMenuItem_updateOrder" disable="true" mnemonicParsing="false" text="Изменить заказ" />
                   <CheckMenuItem fx:id="CheckMenuItem_Delete_Order" mnemonicParsing="false" onAction="#CheckMenuItem_Delete_Order" text="Удалить заказ" />
+                  <MenuItem fx:id="MenuItem_listMachine" mnemonicParsing="false" onAction="#MenuItem_listMachine" text="Список оборудования" />
               </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Позиции">
               <items>
                 <MenuItem fx:id="MenuItem_List_Product" mnemonicParsing="false" onAction="#MenuItem_List_Product" text="Показать список позиций" />
-                  <CheckMenuItem fx:id="CheckMenuItem_Info" mnemonicParsing="false" text="Показать информацию о позиции" />
-                  <CheckMenuItem fx:id="CheckMenuItem_confirmOrder" mnemonicParsing="false" onAction="#CheckMenuItem_confirmOrder" text="Подтвердить позицию" />
+                  <CheckMenuItem fx:id="CheckMenuItem_Info" disable="true" mnemonicParsing="false" text="Показать информацию о позиции" />
+                  <MenuItem fx:id="CheckMenuItem_confirmOrder" mnemonicParsing="false" onAction="#CheckMenuItem_confirmOrder" text="Подтвердить позицию" />
                   <CheckMenuItem fx:id="CheckMenuItem_deleteProduct" mnemonicParsing="false" onAction="#CheckMenuItem_deleteProduct" text="Удалить позицию" />
                   <MenuItem fx:id="MenuItem_Statistic" mnemonicParsing="false" onAction="#MenuItem_Statistic" text="Статистика по позициям" />
               </items>
@@ -97,36 +91,54 @@
             <Tooltip text="Меню управления" />
          </tooltip>
       </MenuBar>
-      <TableView fx:id="Table_Items" layoutY="412.0" prefHeight="224.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0">
+      <TableView fx:id="Table_Items" layoutY="412.0" prefHeight="224.0" prefWidth="658.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0">
          <columns>
             <TableColumn fx:id="ColumnProduct_id" prefWidth="69.5999755859375" style=" -fx-alignment: CENTER" text="ID" />
-            <TableColumn fx:id="ColumnProduct_name" prefWidth="304.8000183105469" style=" -fx-alignment: CENTER" text="Наименование" />
-            <TableColumn fx:id="ColumnProduct_amount" prefWidth="94.39996337890625" style=" -fx-alignment: CENTER" text="Количество" />
-            <TableColumn fx:id="ColumnProduct_status" prefWidth="132.0" style=" -fx-alignment: CENTER" text="Статус" />
+            <TableColumn fx:id="ColumnProduct_name" prefWidth="323.20008850097656" style=" -fx-alignment: CENTER" text="Наименование" />
+            <TableColumn fx:id="ColumnProduct_amount" prefWidth="112.7999267578125" style=" -fx-alignment: CENTER" text="Количество" />
+            <TableColumn fx:id="ColumnProduct_status" prefWidth="150.4000244140625" style=" -fx-alignment: CENTER" text="Статус" />
          </columns>
          <tooltip>
             <Tooltip text="Список позиций по выбранному заказу" />
          </tooltip>
       </TableView>
-      <Label layoutX="350.0" layoutY="346.0" text="Поиск по номеру" textFill="#000000c4" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="350.0">
+      <Label layoutX="290.0" layoutY="348.0" text="Поиск по номеру" textFill="#000000c4" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="290.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="609.0" layoutY="346.0" text="Поиск по описанию" textFill="#000000c4" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="609.0">
+      <Label layoutX="502.0" layoutY="348.0" text="Поиск по описанию" textFill="#000000c4" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="502.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="64.0" layoutY="346.0" text="Поиск по пользователю" textFill="#000000c4" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="64.0">
+      <Label layoutX="49.0" layoutY="348.0" text="Поиск по пользователю" textFill="#000000c4" AnchorPane.bottomAnchor="286.0" AnchorPane.leftAnchor="49.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="SearchForName" alignment="CENTER" layoutX="27.0" layoutY="364.0" maxHeight="25.0" maxWidth="220.0" minHeight="25.0" minWidth="220.0" onAction="#SearchForName" prefHeight="25.0" prefWidth="220.0" promptText="Введите фамилию " AnchorPane.bottomAnchor="260.4" AnchorPane.leftAnchor="25.0">
+      <TextField fx:id="search_articul" alignment="CENTER" layoutX="261.0" layoutY="364.0" maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" onAction="#SearchOrderNumber" prefHeight="25.0" prefWidth="200.0" promptText="Введите номер заказа" style="-fx-background-color: #ffffff; -fx-border-color: silver; -fx-border-radius: 5;" AnchorPane.bottomAnchor="260.4" AnchorPane.leftAnchor="250.0">
+         <tooltip>
+            <Tooltip text="Введите номер заказа и нажмите Enter" />
+         </tooltip></TextField>
+      <TextField fx:id="search_name" alignment="CENTER" layoutX="505.0" layoutY="364.0" maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" onAction="#SearchOrderDescription" prefHeight="25.0" prefWidth="200.0" promptText="Введите описание" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: silver;" AnchorPane.bottomAnchor="260.4" AnchorPane.leftAnchor="470.0">
+         <tooltip>
+            <Tooltip text="Введите часть/полное описание и нажмите Enter" />
+         </tooltip></TextField>
+      <TextField fx:id="SearchForName" alignment="CENTER" layoutX="80.0" layoutY="364.0" maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" onAction="#SearchForName" prefHeight="25.0" prefWidth="200.0" promptText="Введите фамилию " style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: silver;" AnchorPane.bottomAnchor="260.4" AnchorPane.leftAnchor="30.0">
          <tooltip>
             <Tooltip text="Введите фамилию пользователя" />
          </tooltip></TextField>
-      <Label fx:id="date" layoutX="657.0" layoutY="450.0" />
+      <Label fx:id="date" layoutX="774.0" layoutY="455.0" />
+      <Label layoutX="722.0" layoutY="348.0" text="Поиск по оборудованию" textFill="#000000c4">
+         <font>
+            <Font name="Times New Roman Italic" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="search_machine" alignment="CENTER" layoutX="692.0" layoutY="364.0" maxHeight="25.0" maxWidth="200.0" minHeight="25.0" minWidth="200.0" onAction="#search_machine" prefHeight="25.0" prefWidth="200.0" promptText="Введите оборудование" style="-fx-background-color: #ffffff; -fx-border-radius: 5; -fx-border-color: silver;" AnchorPane.leftAnchor="690.0">
+         <tooltip>
+            <Tooltip text="Введите часть/полное описание и нажмите Enter" />
+         </tooltip>
+      </TextField>
    </children>
 </AnchorPane>

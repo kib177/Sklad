@@ -1,5 +1,23 @@
 package skladRTO.fx.Controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import skladRTO.api.FX.models.OrderFX;
+import skladRTO.api.FX.models.ProductFX;
+import skladRTO.api.models.Authorization;
+import skladRTO.api.models.Order;
+import skladRTO.dao.modelDAO.MachinesDAO;
+import skladRTO.dao.modelDAO.OrdersDAO;
+import skladRTO.dao.modelDAO.ProductDAO;
+import skladRTO.fx.sceneFX.CreateScene;
+
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.text.DateFormat;
@@ -9,30 +27,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
-
-import javafx.stage.Stage;
-import skladRTO.api.models.Authorization;
-import skladRTO.api.FX.models.OrderFX;
-import skladRTO.api.FX.models.ProductFX;
-import skladRTO.api.models.Order;
-import skladRTO.dao.modelDAO.OrdersDAO;
-import javafx.fxml.FXML;
-import javafx.scene.control.cell.PropertyValueFactory;
-import skladRTO.dao.modelDAO.ProductDAO;
-import skladRTO.fx.sceneFX.CreateScene;
-
 
 public class OrderViewController implements Initializable {
     private OrdersDAO ordersDAO = new OrdersDAO();
@@ -40,10 +34,12 @@ public class OrderViewController implements Initializable {
     private DateFormat dateFormat;
     private ProductDAO getProduct = new ProductDAO();
     private CreateScene createScene = new CreateScene();
+    private MachinesDAO machinesDAO = new MachinesDAO();
+    private CreateScene createSceneOrderView;
     @FXML
     private CheckMenuItem CheckMenuItem_Delete_Order;
     @FXML
-    private CheckMenuItem CheckMenuItem_confirmOrder;
+    private MenuItem CheckMenuItem_confirmOrder;
     @FXML
     private CheckMenuItem CheckMenuItem_deleteProduct;
     @FXML
@@ -66,6 +62,8 @@ public class OrderViewController implements Initializable {
     private TableColumn<?, ?> Column_number_order;
     @FXML
     private TableColumn<?, ?> Column_user;
+    @FXML
+    private TableColumn<OrderFX, String> Column_machine;
     @FXML
     private TableView<OrderFX> List_order;
     @FXML
@@ -97,6 +95,8 @@ public class OrderViewController implements Initializable {
     @FXML
     private TextField search_name;
     @FXML
+    private TextField search_machine;
+    @FXML
     private TextField SearchForName;
     @FXML
     private TableColumn<OrderFX, String> Сolumn_description;
@@ -104,9 +104,11 @@ public class OrderViewController implements Initializable {
     private Label date;
     @FXML
     private ContextMenu NumberOrderContextMenu;
+    private Integer id;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        List_order.getSelectionModel().clearSelection();
 
         date();
         getProduct.getProductStatus();
@@ -121,6 +123,29 @@ public class OrderViewController implements Initializable {
         }
     }
 
+    @FXML
+    public void MenuItem_listMachine() {
+        createScene = new CreateScene();
+        createScene.createScene("Machines.fxml", 600, 400);
+    }
+
+    @FXML
+    public void search_machine() {
+        WeakReference<MachinesDAO> weakReference = new WeakReference<>(machinesDAO);
+        Watch_order(new ActionEvent());
+        List_order.setItems(machinesDAO.searchForMachine(search_machine.getText()));
+    }
+
+    public void setCreateScene(CreateScene createScene) {
+        this.createSceneOrderView = createScene;
+    }
+
+    @FXML
+    public void MenuItem_exit() {
+        createScene.createScene("Authorization.fxml", 350, 250);
+        createSceneOrderView.getStage().close();
+    }
+
     public void date() {
         dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         date.setText(dateFormat.format(currentDate));
@@ -130,7 +155,6 @@ public class OrderViewController implements Initializable {
     public void MenuItem_Statistic() {
         createScene.createScene("PieChart.fxml", 500, 350);
         createScene.getStage().setAlwaysOnTop(true);
-
     }
 
     @FXML
@@ -150,6 +174,7 @@ public class OrderViewController implements Initializable {
         WeakReference<OrdersDAO> weakReference = new WeakReference<>(ordersDAO);
         Column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         Column_number_order.setCellValueFactory(new PropertyValueFactory<>("number_order"));
+        Column_machine.setCellValueFactory(new PropertyValueFactory<>("machine"));
         Сolumn_description.setCellValueFactory(new PropertyValueFactory<>("order_description"));
         Сolumn_description.setCellFactory(tc -> textWrap());
         Column_user.setCellValueFactory(new PropertyValueFactory<>("user"));
@@ -161,7 +186,8 @@ public class OrderViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends OrderFX> observableValue, OrderFX orderFX, OrderFX newOrderFX) {
                 if (newOrderFX != null) {
-                    viewProduct(newOrderFX.getId());
+                    id = newOrderFX.getId();
+                    viewProduct();
                 }
             }
         });
@@ -188,6 +214,8 @@ public class OrderViewController implements Initializable {
     @FXML
     public void MenuItem_addOrder(ActionEvent actionEvent) {
         createScene.createScene("New_order.fxml", 505, 400);
+        OrderNewController controller = createScene.getLoader().getController();
+        controller.setOrderViewController(this);
         createScene.getStage().setAlwaysOnTop(true);
     }
 
@@ -203,13 +231,15 @@ public class OrderViewController implements Initializable {
                     if (newProduct != null) {
                         CreateScene createScene = new CreateScene();
                         createScene.createScene("Window.fxml", 400, 200);
-                        ((WindowController) createScene.getLoader().getController()).deleteProduct(newProduct);
+
+                        WindowController controller = createScene.getLoader().getController();
+                        controller.deleteProduct(newProduct);
+                        controller.getOrderView(OrderViewController.this);
                         CheckMenuItem_deleteProduct.selectedProperty().setValue(false);
                     }
                 }
             }
         });
-
     }
 
     @FXML
@@ -225,9 +255,11 @@ public class OrderViewController implements Initializable {
                         List<ProductFX> list1 = Table_Items.getItems();
                         CreateScene createScene = new CreateScene();
                         createScene.createScene("Window.fxml", 400, 200);
-                        ((WindowController) createScene.getLoader().getController()).deleteOrder(order1, list1);
-                        CheckMenuItem_Delete_Order.selectedProperty().setValue(false);
 
+                        WindowController controller = createScene.getLoader().getController();
+                        controller.deleteOrder(order1, list1);
+                        controller.getOrderView(OrderViewController.this);
+                        CheckMenuItem_Delete_Order.selectedProperty().setValue(false);
                     }
                 }
             }
@@ -255,26 +287,25 @@ public class OrderViewController implements Initializable {
         List_order.setItems(ordersDAO.searchNumber(search_articul.getText()));
     }
 
-    public void viewProduct(int id) {
+    public void viewProduct() {
         ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         Table_Items.setItems(getListProduct(id));
 
-
-            TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
-            selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
-                @Override
-                public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
-                    if (newProduct != null) {
-                        if(CheckMenuItem_Info.isSelected()){
-                            viewProductInfo(newProduct.getId());
-                        }
+        TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
+            @Override
+            public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
+                if (newProduct != null) {
+                    if (CheckMenuItem_Info.isSelected()) {
+                        viewProductInfo(newProduct.getId());
                     }
                 }
-            });
-        }
+            }
+        });
+    }
 
 
     @FXML
@@ -284,23 +315,23 @@ public class OrderViewController implements Initializable {
 
     @FXML
     public void CheckMenuItem_confirmOrder() {
-        if (CheckMenuItem_confirmOrder.isSelected()) {
+        CreateScene createScene = new CreateScene();
+        createScene.createScene("Prixod.fxml", 533, 247);
+        createScene.getStage().setAlwaysOnTop(true);
 
-            createScene.createScene("Prixod.fxml", 533, 247);
-            createScene.getStage().setAlwaysOnTop(true);
-
-            TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
-            selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
-                @Override
-                public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
-                    if (newProduct != null) {
-                        ((PrixodController) createScene.getLoader().getController()).addProduct(newProduct);
-                        ((PrixodController) createScene.getLoader().getController()).close(createScene);
-                        CheckMenuItem_confirmOrder.selectedProperty().setValue(false);
-                    }
+        TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
+            @Override
+            public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
+                if (newProduct != null) {
+                    PrixodController controller = createScene.getLoader().getController();
+                    controller.addProduct(newProduct);
+                    controller.close(createScene);
+                    controller.getOrderView(OrderViewController.this);
                 }
-            });
-        }
+            }
+        });
     }
 }
+
 

@@ -1,14 +1,10 @@
 package skladRTO.dao.modelDAO.ver1_1;
 
-import javafx.collections.ObservableList;
 import skladRTO.api.FX.lists.OrderListFX;
-import skladRTO.api.FX.models.OrderFX;
 import skladRTO.api.FX.models.ProductFX;
-import skladRTO.api.models.Authorization;
 import skladRTO.api.models.Order;
 import skladRTO.api.models.Product;
 import skladRTO.dao.connectDB.DatabaseConnection;
-import skladRTO.dao.interfaces.OrderFunction;
 import skladRTO.dao.interfaces.ver1_1.OrdersDAOInterface;
 
 import java.io.IOException;
@@ -142,7 +138,7 @@ public class OrdersDAO implements OrdersDAOInterface {
                 System.out.println(order);
                 preparedStatement.setString(1, order.getOrderDescription());
                 // надо вернуть ид юзера, можно вернуть текущий ид аутентифицированного пользователя
-                preparedStatement.setInt(2, Authorization.getUser().getId());
+                preparedStatement.setInt(2, order.getUserId());
                 preparedStatement.setString(3, order.getOrderDate());
                 preparedStatement.setString(4, order.getNumberOrder());
                 preparedStatement.executeUpdate();
@@ -208,16 +204,15 @@ public class OrdersDAO implements OrdersDAOInterface {
 
     public void FillingInList(OrderListFX listOrder, ResultSet resultSet) throws SQLException {
         listOrder.create(resultSet.getInt("id"), resultSet.getString("number_order"),
-                resultSet.getString("order_description"), resultSet.getString("first_name"),
+                resultSet.getString("order_description"), resultSet.getString("machine"), resultSet.getString("first_name"),
                 resultSet.getString("last_name"), resultSet.getString("order_date"));
     }
 
     public void fillingInList(List<Order> list, ResultSet resultSet) throws SQLException {
         list.add(new Order(resultSet.getInt("id"), resultSet.getString("order_description"),
-                resultSet.getInt("last_name"), resultSet.getString("order_date"),
-                resultSet.getString("number_order")));
+                resultSet.getInt("machine_id"), resultSet.getInt("last_name"),
+                resultSet.getString("order_date"), resultSet.getString("number_order")));
     }
-
 
     @Override
     public void update(Order entity) {

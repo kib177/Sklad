@@ -7,7 +7,7 @@ import skladRTO.api.models.StatusUser;
 public class UserStatusLIst {
         private ObservableList<StatusUser> observableList = FXCollections.observableArrayList();
 
-        public void create(String status){
+        public void create( String status){
             observableList.add(new StatusUser(status));
         }
 

@@ -1,5 +1,6 @@
 package skladRTO.fx.Controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -30,24 +31,28 @@ public class RegistrationController implements Initializable {
     private TextField SingUp_login;
     @FXML
     private PasswordField SingUp_password;
+    private UsersViewController usersController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         ChoiceBox_status.setItems(getUserDAO.getStatus());
-
-        SingUp_back.setOnAction(actionEvent -> buttonBack());
-
-        SingUp_ButttonGone.setOnAction(actionEvent -> {
-                getUserDAO.add(SingUp_Name.getText(), SingUp_lastName.getText(), SingUp_login.getText(),
-                        SingUp_Email.getText(), SingUp_password.getText(), String.valueOf(ChoiceBox_status.getValue()));
-                SingUp_ButttonGone.getScene().getWindow().hide();
-        });
     }
 
-    public void buttonBack(){
+    public void getOrderView(UsersViewController usersViewController) {
+        this.usersController = usersViewController;
+    }
 
+    @FXML
+    public void SingUp_ButttonGone(ActionEvent actionEvent) {
+        getUserDAO.add(SingUp_Name.getText(), SingUp_lastName.getText(), SingUp_login.getText(),
+                SingUp_Email.getText(), SingUp_password.getText(), String.valueOf(ChoiceBox_status.getValue()));
+        usersController.showUsers();
+        SingUp_ButttonGone.getScene().getWindow().hide();
+    }
 
+    @FXML
+    public void SingUp_back() {
+        SingUp_back.getScene().getWindow().hide();
     }
 
 

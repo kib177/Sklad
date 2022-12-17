@@ -9,6 +9,8 @@ module skladrto {
 
     requires java.sql;
     requires java.naming;
+    requires org.apache.logging.log4j;
+    requires junit;
 
     opens skladRTO to javafx.fxml;
     exports skladRTO;
