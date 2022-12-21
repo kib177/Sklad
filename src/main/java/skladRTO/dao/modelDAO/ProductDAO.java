@@ -250,6 +250,7 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
             }
             logger.debug("Отправляем запрос в БД для записи всего листа позиций через executeBatch()");
             preparedStatement1.executeBatch();
+            logger.debug("Транзакция выполнена успешно");
             connection.commit();
             connection.setAutoCommit(true);
         } catch (IOException | SQLException e) {

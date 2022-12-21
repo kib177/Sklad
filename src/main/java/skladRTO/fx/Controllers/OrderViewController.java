@@ -4,10 +4,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import skladRTO.api.FX.models.OrderFX;
 import skladRTO.api.FX.models.ProductFX;
@@ -121,6 +124,7 @@ public class OrderViewController implements Initializable {
         } else if (Authorization.getStatusUser().getStatus().equals("Модератор")) {
             Menu_Users.disableProperty().setValue(true);
         }
+
     }
 
     @FXML
@@ -181,6 +185,16 @@ public class OrderViewController implements Initializable {
         Column_date.setCellValueFactory(new PropertyValueFactory<>("order_date"));
         List_order.setItems(ordersDAO.showListOfOrders());
 
+        List_order.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                if (e.getButton() == MouseButton.SECONDARY) {
+                    NumberOrderContextMenu.show(List_order, e.getScreenX(), e.getScreenY());
+                } else {
+                    System.out.println("No right click");
+                }
+            }
+        });
         TableView.TableViewSelectionModel<OrderFX> selectionModel = List_order.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(new ChangeListener<OrderFX>() {
             @Override
@@ -219,7 +233,6 @@ public class OrderViewController implements Initializable {
         createScene.getStage().setAlwaysOnTop(true);
     }
 
-
     @FXML
     public void CheckMenuItem_deleteProduct() {
 
@@ -244,6 +257,30 @@ public class OrderViewController implements Initializable {
 
     @FXML
     public void CheckMenuItem_Delete_Order() {
+        TableView.TableViewSelectionModel<OrderFX> selectionModel = List_order.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.OrderFX>() {
+            @Override
+            public void changed(ObservableValue<? extends OrderFX> observableValue, OrderFX order, OrderFX newOrder) {
+                if (CheckMenuItem_Delete_Order.isSelected() && !CheckMenuItem_deleteProduct.isSelected()) {
+                    if (newOrder != null) {
+                        Order order1 = new Order(newOrder.getId(), newOrder.getOrder_description(), newOrder.getOrder_date(),
+                                newOrder.getNumber_order());
+                        List<ProductFX> list1 = Table_Items.getItems();
+                        CreateScene createScene = new CreateScene();
+                        createScene.createScene("Window.fxml", 400, 200);
+
+                        WindowController controller = createScene.getLoader().getController();
+                        controller.deleteOrder(order1, list1);
+                        controller.getOrderView(OrderViewController.this);
+                        CheckMenuItem_Delete_Order.selectedProperty().setValue(false);
+                    }
+                }
+            }
+        });
+    }
+
+    @FXML
+    public void ContextMenu_Delete_Order() {
         TableView.TableViewSelectionModel<OrderFX> selectionModel = List_order.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.OrderFX>() {
             @Override

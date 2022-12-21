@@ -38,7 +38,8 @@
          <contextMenu>
             <ContextMenu>
               <items>
-                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                <MenuItem mnemonicParsing="false" text="Копировать" />
+                  <MenuItem mnemonicParsing="false" onAction="#CheckMenuItem_Delete_Order" text="Удалить" />
               </items>
             </ContextMenu>
          </contextMenu>

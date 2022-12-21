@@ -212,18 +212,22 @@ public class UserDAO implements UserFunction {
     }
 
     /**
-     * @param firstName
-     * @param secondName
-     * @param login
-     * @param email
-     * @param password
-     * @param status
+     * Метод добавляет пользователя в БД. В методе используется транзакция. Сначала по указанному статусу возвращаем ID статуса,
+     * затем заполняем таблицу authentication в БД из данных нового пользователя,
+     * далее возвращаем вновь созданный ID из таблицы authentication, затем делаем проверку вернулся ли ID, если да тогда
+     * заполняем таблицу users.
+     *
+     * @param firstName  имя пользователя
+     * @param secondName фамилия пользователя
+     * @param login      логин пользователя
+     * @param email      почта пользователя
+     * @param password   пароль пользователя
+     * @param status     статус пользователя
      */
     public void add(String firstName, String secondName, String login, String email, String password, String status) {
         try (Connection connection = DatabaseConnection.getDatabaseConnection()) {
-
+            logger.debug("Создание Savepoint для транзакции");
             connection.setAutoCommit(false);
-            System.out.println("Creating savepoint...");
             Savepoint savepointOne = connection.setSavepoint("SavepointOne");
             String userSQL = "INSERT INTO users (first_name, last_name, authentication_id) Values (?, ?, ?);";
             String authenticationSQL = "INSERT INTO authentication (login,password,email,status_user_id)" +
@@ -231,43 +235,47 @@ public class UserDAO implements UserFunction {
             String statusSQL = "SELECT id FROM sklad.status_user" +
                     " where status= ? ;";
             int num = 0;
-            System.out.println("Первый трай");
+            logger.debug("Отправляем запрос в БД ->\n -> " + statusSQL);
             try (PreparedStatement preparedStatement = connection.prepareStatement(statusSQL)) {
                 preparedStatement.setString(1, status);
                 ResultSet resultSet = preparedStatement.executeQuery();
+                logger.debug("Получение данных из БД");
                 if (resultSet.next()) {
                     num = resultSet.getInt(1);
+                    logger.debug("Запись данных из БД -> " + num);
                 }
-                System.out.println("Второй трай");
+                logger.debug("Отправляем запрос в БД ->\n -> " + authenticationSQL);
                 try (PreparedStatement preparedStatement2 = connection.prepareStatement(authenticationSQL)) {
                     preparedStatement2.setString(1, login);
                     preparedStatement2.setString(2, password);
                     preparedStatement2.setString(3, email);
                     preparedStatement2.setInt(4, num);
                     preparedStatement2.executeUpdate();
-
-                    System.out.println("Третий трай");
                     int lastInsertId = 0;
                     try (Statement statement = connection.createStatement();) {
                         String str1 = "SELECT LAST_INSERT_ID();";
+                        logger.debug("Отправляем запрос в БД ->\n -> " + str1);
                         ResultSet resultSet1 = statement.executeQuery(str1);
+                        logger.debug("Получение данных из БД");
                         if (resultSet1.next()) {
                             lastInsertId = resultSet1.getInt(1);
+                            logger.debug("Запись данных из БД последнего ID-> " + lastInsertId);
                         }
-                        System.out.println("Четвертый трай");
                         if (lastInsertId != 0) {
+                            logger.debug("Отправляем запрос в БД ->\n -> " + userSQL);
                             try (PreparedStatement preparedStatement1 = connection.prepareStatement(userSQL)) {
                                 preparedStatement1.setString(1, firstName);
                                 preparedStatement1.setString(2, secondName);
                                 preparedStatement1.setInt(3, lastInsertId);
                                 preparedStatement1.executeUpdate();
                             } catch (Exception e) {
-                                e.printStackTrace();
-                                System.out.println("SQLException. Executing rollback to savepoint...");
+                                logger.warn("Произошла ошибка транзакции -> возвращение на savepoint \n\t " +
+                                        "SQLException. Executing rollback to savepoint...\n" + e);
                                 connection.rollback(savepointOne);
-                                System.out.println("после отката");
                             }
                         } else {
+                            logger.warn("Произошла ошибка транзакции -> возвращение на savepoint \n\t " +
+                                    "SQLException. Executing rollback to savepoint...\n");
                             connection.rollback(savepointOne);
                         }
                     } catch (SQLException e) {
@@ -278,7 +286,7 @@ public class UserDAO implements UserFunction {
                     logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
                     e.printStackTrace();
                 }
-                System.out.println("Перед коммитом");
+                logger.debug("Транзакция выполнена успешно");
                 connection.commit();
                 connection.setAutoCommit(true);
             } catch (SQLException e) {
@@ -287,7 +295,6 @@ public class UserDAO implements UserFunction {
             }
         } catch (SQLException | IOException e) {
             logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
-            throw new RuntimeException(e);
         }
     }
 
