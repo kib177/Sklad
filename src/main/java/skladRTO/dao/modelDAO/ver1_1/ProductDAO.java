@@ -39,8 +39,8 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
 
     @Override
     public void FillingInList(ProductListFX listProduct, ResultSet rs) throws SQLException {
-        listProduct.create(rs.getInt("id_product"), rs.getString("name_product"), rs.getInt("amount"),
-                rs.getInt("status_id"), rs.getInt("order_id"), rs.getInt("product_info_id"));
+        listProduct.create(rs.getInt("id_product"), rs.getString("name_product"), rs.getString("machine"), rs.getInt("amount"),
+                rs.getInt("status_id"), rs.getInt("order_id"), rs.getInt("product_info_id"), rs.getString("name"));
     }
 
     public void getProductStatus() {

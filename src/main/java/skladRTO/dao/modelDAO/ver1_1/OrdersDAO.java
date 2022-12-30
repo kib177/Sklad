@@ -204,14 +204,14 @@ public class OrdersDAO implements OrdersDAOInterface {
 
     public void FillingInList(OrderListFX listOrder, ResultSet resultSet) throws SQLException {
         listOrder.create(resultSet.getInt("id"), resultSet.getString("number_order"),
-                resultSet.getString("order_description"), resultSet.getString("machine"), resultSet.getString("first_name"),
+                resultSet.getString("order_description"), resultSet.getString("first_name"),
                 resultSet.getString("last_name"), resultSet.getString("order_date"));
     }
 
     public void fillingInList(List<Order> list, ResultSet resultSet) throws SQLException {
         list.add(new Order(resultSet.getInt("id"), resultSet.getString("order_description"),
-                resultSet.getInt("machine_id"), resultSet.getInt("last_name"),
-                resultSet.getString("order_date"), resultSet.getString("number_order")));
+                resultSet.getInt("last_name"),resultSet.getString("order_date"),
+                resultSet.getString("number_order")));
     }
 
     @Override

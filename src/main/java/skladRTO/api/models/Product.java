@@ -3,15 +3,19 @@ package skladRTO.api.models;
 public class Product {
     private int id;
     private String name;
+    private int machine;
+    private int units;
     private int amount;
     private int Status;
     private int order;
     private int productInfo;
 
-    public Product(String nameProduct, String amount){
+    public Product(String nameProduct, String amount, int machine, int units){
         this.name = nameProduct;
         this.amount = Integer.parseInt(amount);
         this.Status = 1;
+        this.machine = machine;
+        this.units = units;
     }
 
     public Product(int id, String nameProduct, int amount, int orderStatus, int order, int productInfo) {
@@ -21,6 +25,30 @@ public class Product {
         this.Status = orderStatus;
         this.order = order;
         this.productInfo = productInfo;
+    }
+
+    public int getUnits() {
+        return units;
+    }
+
+    public void setUnits(int units) {
+        this.units = units;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getMachine() {
+        return machine;
+    }
+
+    public void setMachine(int machine) {
+        this.machine = machine;
     }
 
     public int getId() {
@@ -75,9 +103,11 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", nameProduct='" + name +
+                ", name='" + name + '\'' +
+                ", machine=" + machine +
+                ", units=" + units +
                 ", amount=" + amount +
-                ", orderStatus=" + Status +
+                ", Status=" + Status +
                 ", order=" + order +
                 ", productInfo=" + productInfo +
                 '}';

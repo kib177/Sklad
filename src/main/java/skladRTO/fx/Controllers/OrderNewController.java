@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import skladRTO.api.models.Authorization;
-import skladRTO.api.models.Machines;
 import skladRTO.api.models.Order;
 import skladRTO.api.models.User;
 import skladRTO.dao.modelDAO.MachinesDAO;
@@ -26,6 +26,7 @@ public class OrderNewController implements Initializable {
     private static final Logger logger = LogManager.getLogger(OrderNewController.class.getName());
     private CreateScene createScene = new CreateScene();
     private UserDAO userDAO = new UserDAO();
+    private Stage stage = new Stage();
     @FXML
     private Button button_next;
     @FXML
@@ -36,8 +37,6 @@ public class OrderNewController implements Initializable {
     private TextArea order_proper;
     @FXML
     private ChoiceBox<User> order_zakazchik;
-    @FXML
-    private ChoiceBox<Machines> order_machines;
     @FXML
     private Label warning;
     private OrderViewController orderViewController;
@@ -50,7 +49,6 @@ public class OrderNewController implements Initializable {
         MachinesDAO machinesDAO = new MachinesDAO();
         WeakReference<MachinesDAO> weakReference = new WeakReference<>(machinesDAO);
         order_date.setText(dateFormat.format(currentDate));
-        order_machines.setItems(machinesDAO.getMachineName());
 
         if (!Authorization.getStatusUser().getStatus().equals("Администратор")) {
             order_zakazchik.setValue(Authorization.getUser());
@@ -78,22 +76,25 @@ public class OrderNewController implements Initializable {
         } else if (order_number.getText().equals("")) {
             warning.setText("Введите номер заказа");
             logger.debug("Не ввели номер заказа");
-        }else if (order_machines.getValue() == null){
-            warning.setText("Не ввели оборудование");
         } else {
-            // в ордер добавить int id_machines нижу в скобках под конструктор order_machines.getValue().getId()
-            Order order = new Order(order_proper.getText(), order_zakazchik.getValue().getId(), order_machines.getValue().getId(),
-                    order_date.getText(), order_number.getText());
+            Order order = new Order(order_proper.getText(), order_zakazchik.getValue().getId(), order_date.getText(),
+                    order_number.getText());
             logger.info("Создан объект заказа");
             logger.debug("Переход к окну с заполнением позиций");
-            createScene.createScene("Product_add.fxml", 480, 350);
+            createScene.createScene("Product_add.fxml", 600, 350, false);
             createScene.getStage().setAlwaysOnTop(true);
-            ((ProductNewController) createScene.getLoader().getController()).createOrder(order);
-            ((ProductNewController) createScene.getLoader().getController()).getOrderView(orderViewController);
+            ProductNewController controller = createScene.getLoader().getController();
+            controller.getOrder(order);
+            controller.getOrderView(orderViewController);
+            controller.getSceneOrderNewController(stage);
+
             cleanUpString();
         }
     }
 
+    public void getSceneProductNewController(Stage stage){
+        this.stage= stage;
+    }
     private void cleanUpString() {
         logger.debug("Отчистка строк в окне создания заказа");
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());

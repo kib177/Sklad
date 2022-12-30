@@ -11,6 +11,9 @@ module skladrto {
     requires java.naming;
     requires org.apache.logging.log4j;
     requires junit;
+    requires java.desktop;
+    requires org.apache.poi.ooxml;
+
 
     opens skladRTO to javafx.fxml;
     exports skladRTO;

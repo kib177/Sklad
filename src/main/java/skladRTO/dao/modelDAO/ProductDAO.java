@@ -20,8 +20,8 @@ import java.util.List;
 
 public class ProductDAO implements FillingInListsDAO<ProductListFX> {
     private static final Logger logger = LogManager.getLogger(ProductDAO.class.getName());
-    public static final String ADD_NEW_PRODUCT = "INSERT INTO order_product (name_product,amount,status_id,order_id,product_info_id)" +
-            "VALUES(?,?,?,?,?);";
+    public static final String ADD_NEW_PRODUCT = "INSERT INTO order_product (name_product,amount,status_id,order_id,product_info_id, machines_id, units_id)" +
+            " VALUES(?,?,?,?,?,?,?);";
     public static final String LAST_INSERT_ID = "SELECT LAST_INSERT_ID();";
     public static final String UPDATE_PRODUCT = "UPDATE order_product" +
             " SET status_id = ? WHERE id_product = ?;";
@@ -29,11 +29,15 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
             " arrival_date = ?, description = ? WHERE id = ?";
     public static final String SELECT_FROM_ORDER_PRODUCT = "SELECT * FROM order_product " +
             " LEFT JOIN orders ON (order_product.order_id=orders.id)" +
+            " LEFT JOIN machines ON (order_product.machines_id=machines.id)" +
+            " LEFT JOIN units ON (order_product.units_id=units.id)" +
             " WHERE order_product.order_id = ?;";
     public static final String SELECT_FROM_ORDER_STATUS = "SELECT * FROM order_status";
     public static final String ORDER_STATUS_STATUS = "SELECT * FROM order_status WHERE order_status.status = ?;";
     public static final String GET_PRODUCT_BY_STATUS = "SELECT * FROM order_product " +
             " LEFT JOIN order_status ON (order_product.status_id=order_status.id)" +
+            " LEFT JOIN machines ON (order_product.machines_id=machines.id)" +
+            " LEFT JOIN units ON (order_product.units_id=units.id)" +
             " WHERE order_product.status_id = ?;";
 
     /**
@@ -217,7 +221,7 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
     public void createProduct(List<Product> list, int orderId) {
         String createProductInfo = "INSERT INTO sklad.product_info () VALUES ();";
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
-             PreparedStatement preparedStatement1 = connection.prepareStatement(ADD_NEW_PRODUCT)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_NEW_PRODUCT)) {
             logger.debug("Создание Savepoint для транзакции");
             connection.setAutoCommit(false);
             Savepoint savepointOne = connection.setSavepoint("SavepointOne");
@@ -235,13 +239,15 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
                         lastInsertId = resultSet.getInt(1);
                         logger.debug("Сохраняем последний ID в переменную: " + lastInsertId);
                     }
-                    logger.debug("Отправляем запрос в БД для создания позиции через addBatch()");
-                    preparedStatement1.setString(1, product.getNameProduct());
-                    preparedStatement1.setInt(2, product.getAmount());
-                    preparedStatement1.setInt(3, 1);
-                    preparedStatement1.setInt(4, orderId);
-                    preparedStatement1.setInt(5, lastInsertId);
-                    preparedStatement1.addBatch();
+                    logger.debug("Отправляем запрос в БД для создания позиции через addBatch()" + list);
+                    preparedStatement.setString(1, product.getNameProduct());
+                    preparedStatement.setInt(2, product.getAmount());
+                    preparedStatement.setInt(3, 1);
+                    preparedStatement.setInt(4, orderId);
+                    preparedStatement.setInt(5, lastInsertId);
+                    preparedStatement.setInt(6, product.getMachine());
+                    preparedStatement.setInt(7, product.getUnits());
+                    preparedStatement.addBatch();
                 } catch (Exception e) {
                     logger.warn("Произошла ошибка транзакции -> возвращение на savepoint \n\t " +
                             "SQLException. Executing rollback to savepoint...");
@@ -249,7 +255,7 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
                 }
             }
             logger.debug("Отправляем запрос в БД для записи всего листа позиций через executeBatch()");
-            preparedStatement1.executeBatch();
+            preparedStatement.executeBatch();
             logger.debug("Транзакция выполнена успешно");
             connection.commit();
             connection.setAutoCommit(true);
@@ -269,7 +275,9 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
         WeakReference<ProductListFX> weakReference = new WeakReference<>(listProduct);
         try {
             String str = "SELECT * FROM order_product " +
-                    " LEFT JOIN order_status ON (order_product.status_id=order_status.status)";
+                    " LEFT JOIN order_status ON (order_product.status_id=order_status.status)" +
+                    " LEFT JOIN machines ON (order_product.machines_id=machines.id)" +
+                    " LEFT JOIN units ON (order_product.units_id=units.id)";
             ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str);
             logger.debug("Отправляем запрос в БД на поиск всех позиций: ->\n -> " + str);
             while (resultSet.next()) {
@@ -337,8 +345,10 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
     public void FillingInList(ProductListFX listProduct, ResultSet rs) {
         try {
             logger.debug("Выполняем метод заполнения листа  FillingInList");
-            listProduct.create(rs.getInt("id_product"), rs.getString("name_product"), rs.getInt("amount"),
-                    rs.getInt("status_id"), rs.getInt("order_id"), rs.getInt("product_info_id"));
+            listProduct.create(rs.getInt("id_product"), rs.getString("name_product"),
+                    rs.getString("machines.machine"), rs.getInt("amount"),
+                    rs.getInt("status_id"), rs.getInt("order_id"),
+                    rs.getInt("product_info_id"), rs.getString("name"));
         } catch (SQLException e) {
             logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             throw new RuntimeException(e);

@@ -7,8 +7,8 @@ import skladRTO.api.FX.models.ProductFX;
 public class ProductListFX {
     private ObservableList<ProductFX> productList = FXCollections.observableArrayList();
 
-    public void create(int id, String name, int amount, int status, int order, int productInfo) {
-        productList.add(new ProductFX(id, name, amount, status, order, productInfo));
+    public void create(int id, String name, String machine, int amount, int status, int order, int productInfo, String units) {
+        productList.add(new ProductFX(id, name, machine, amount, status, order, productInfo, units));
     }
 
     public ObservableList<ProductFX> getProductList() {

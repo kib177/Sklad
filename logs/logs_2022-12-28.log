@@ -1,0 +1,132 @@
+2022-12-28 00:49:14 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 00:49:20 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2022-12-28 00:49:20 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2022-12-28 00:49:20 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 00:49:22 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2022-12-28 00:49:22 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2022-12-28 00:49:22 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@630b44f8
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@630b44f8
+2022-12-28 00:49:22 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@630b44f8
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2022-12-28 00:49:22 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2022-12-28 00:49:22 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2022-12-28 00:49:22 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2022-12-28 00:49:22 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2022-12-28 00:49:22 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2022-12-28 00:49:22 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2022-12-28 00:49:22 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 00:49:22 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2022-12-28 00:49:22 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 00:49:22 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 2], number_order=StringProperty [value: 422-1209-0456], order_description=StringProperty [value: Тест: Лопаты], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 3], number_order=StringProperty [value: 422-1209-0456], order_description=StringProperty [value: Тест: Смазка], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 4], number_order=StringProperty [value: 422-1209-0542], order_description=StringProperty [value: Тест: перчатки], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 20], number_order=StringProperty [value: 123123], order_description=StringProperty [value: ffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff 
+ffffffffffffff ffffffffffffffffff fffffffffffffff
+fffffffffffffffffffffffffffffff
+], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 26.12.2022]}, OrderFX{id=IntegerProperty [value: 31], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 32], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 33], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 34], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 35], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}]}
+2022-12-28 00:51:32 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 01:22:20 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 01:22:24 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2022-12-28 01:22:24 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2022-12-28 01:22:24 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 01:22:25 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2022-12-28 01:22:25 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2022-12-28 01:22:25 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2022-12-28 01:22:25 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 01:22:25 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2022-12-28 01:22:25 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@493b0399
+2022-12-28 01:22:25 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@493b0399
+2022-12-28 01:22:25 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@493b0399
+2022-12-28 01:22:25 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2022-12-28 01:22:25 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2022-12-28 01:22:26 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2022-12-28 01:22:26 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2022-12-28 01:22:26 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2022-12-28 01:22:26 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2022-12-28 01:22:26 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2022-12-28 01:22:26 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 01:22:26 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2022-12-28 01:22:26 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2022-12-28 01:22:26 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 2], number_order=StringProperty [value: 422-1209-0456], order_description=StringProperty [value: Тест: Лопаты], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 3], number_order=StringProperty [value: 422-1209-0456], order_description=StringProperty [value: Тест: Смазка], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 4], number_order=StringProperty [value: 422-1209-0542], order_description=StringProperty [value: Тест: перчатки], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 20], number_order=StringProperty [value: 123123], order_description=StringProperty [value: ffffffffffffff
+ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff 
+ffffffffffffff ffffffffffffffffff fffffffffffffff
+fffffffffffffffffffffffffffffff
+], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 26.12.2022]}, OrderFX{id=IntegerProperty [value: 31], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 32], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 33], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 34], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}, OrderFX{id=IntegerProperty [value: 35], number_order=StringProperty [value: 123], order_description=StringProperty [value: 123], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 27.12.2022]}]}
+2022-12-28 01:23:54 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:13:12 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:30:09 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:30:47 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:31:13 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:54:45 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:56:10 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 02:56:43 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 03:00:11 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 23:30:44 MECHSEWING INFO  Main main - Происходит загрузка программы
+2022-12-28 23:48:52 MECHSEWING INFO  Main main - Происходит загрузка программы

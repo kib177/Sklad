@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,7 +13,7 @@ public class CreateScene {
     private Stage stage = new Stage();
     private FXMLLoader loader;
 
-    public void createScene(String nameFXML, int width, int heigth) {
+    public void createScene(String nameFXML, int width, int heigth, Boolean Resizable) {
 //        int screenWidth = (int) Screen.getPrimary().getBounds().getWidth();
 //        int screenHeight = (int) Screen.getPrimary().getBounds().getHeight();
 //        int sceneWidth = (screenWidth*98)/100;
@@ -27,7 +26,7 @@ public class CreateScene {
 
                 stage.setTitle("Делком 40");
                 stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("1198294.png"))));
-                stage.setResizable(false);
+                stage.setResizable(Resizable);
                 stage.setScene(new Scene(root, width, heigth));
                 stage.show();
             } catch (IOException e) {

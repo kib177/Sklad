@@ -24,6 +24,8 @@ public class ProductListController implements Initializable {
     @FXML
     private TableColumn<?, ?> ColumnProduct_id;
     @FXML
+    private TableColumn<?, ?> Column_machine;
+    @FXML
     private TableColumn<?, ?> ColumnProduct_name;
     @FXML
     private TableColumn<?, ?> ColumnProduct_status;
@@ -43,7 +45,8 @@ public class ProductListController implements Initializable {
     public void getProductChoiceBox(){
         ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        Column_machine.setCellValueFactory(new PropertyValueFactory<>("machine"));
+        ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("AmountUnits"));
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         Table_Items.setItems(productDAO.getProductByStatus(ChoiceBox.getValue().getId()));
     }
@@ -51,7 +54,8 @@ public class ProductListController implements Initializable {
     public void getProductDefault(){
         ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
-        ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        Column_machine.setCellValueFactory(new PropertyValueFactory<>("machine"));
+        ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("AmountUnits"));
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
         Table_Items.setItems(productDAO.showAllProducts());
     }

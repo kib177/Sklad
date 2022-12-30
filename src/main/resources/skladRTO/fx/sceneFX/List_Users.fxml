@@ -8,27 +8,30 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.UsersViewController">
    <children>
-      <TableView fx:id="Table_Users" layoutY="8.0" prefHeight="310.0" prefWidth="950.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="Table_Users" layoutY="8.0" prefHeight="310.0" prefWidth="950.0" AnchorPane.bottomAnchor="59.60000000000002" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="column_id" maxWidth="40.0" prefWidth="40.0" style="-fx-alignment: CENTER" text="ID" />
-          <TableColumn fx:id="column_login" maxWidth="120.0" minWidth="105.5999984741211" prefWidth="105.5999984741211" style="-fx-alignment: CENTER" text="Логин" />
-            <TableColumn fx:id="colunm_password" maxWidth="160.79998779296875" minWidth="130.0" prefWidth="151.199951171875" style="-fx-alignment: CENTER" text="Пароль" />
-            <TableColumn fx:id="column_first" maxWidth="110.0" minWidth="110.0" prefWidth="110.0" style="-fx-alignment: CENTER" text="Имя" />
-            <TableColumn fx:id="column_second" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" style="-fx-alignment: CENTER" text="Фамилия" />
-            <TableColumn fx:id="column_status" maxWidth="110.0" minWidth="90.0" prefWidth="110.0" style="-fx-alignment: CENTER" text="Доступ" />
-            <TableColumn fx:id="column_email" maxWidth="301.6000122070312" minWidth="150.4000244140625" prefWidth="301.6000122070312" style="-fx-alignment: CENTER" text="Почта" />
+          <TableColumn fx:id="column_id" maxWidth="200.0" minWidth="50.0" prefWidth="50.0" style="-fx-alignment: CENTER" text="ID" />
+          <TableColumn fx:id="column_login" maxWidth="200.0" minWidth="105.0" prefWidth="105.0" style="-fx-alignment: CENTER" text="Логин" />
+            <TableColumn fx:id="colunm_password" maxWidth="200.0" minWidth="150.0" prefWidth="150.0" style="-fx-alignment: CENTER" text="Пароль" />
+            <TableColumn fx:id="column_first" maxWidth="200.0" minWidth="120.0" prefWidth="120.0" style="-fx-alignment: CENTER" text="Имя" />
+            <TableColumn fx:id="column_second" maxWidth="200.0" minWidth="130.0" prefWidth="130.0" style="-fx-alignment: CENTER" text="Фамилия" />
+            <TableColumn fx:id="column_status" maxWidth="200.0" minWidth="110.0" prefWidth="110.0" style="-fx-alignment: CENTER" text="Доступ" />
+            <TableColumn fx:id="column_email" maxWidth="500.0" minWidth="300.0" prefWidth="300.0" style="-fx-alignment: CENTER" text="Почта" />
         </columns>
          <tooltip>
             <Tooltip text="Список пользователей" />
          </tooltip>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <Button fx:id="Button_addUser" layoutX="774.0" layoutY="324.0" mnemonicParsing="false" onAction="#Button_addUser" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Добавить пользователя" />
-      <Button fx:id="Button_updateUser" disable="true" layoutX="615.0" layoutY="324.0" mnemonicParsing="false" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Изменить пользователя" />
-      <Button fx:id="Button_deleteUser" layoutX="464.0" layoutY="324.0" mnemonicParsing="false" onAction="#Button_deleteUser" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Удалить пользователя">
+      <Button fx:id="Button_addUser" layoutX="774.0" layoutY="324.0" mnemonicParsing="false" onAction="#Button_addUser" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Добавить пользователя" AnchorPane.bottomAnchor="18.8" AnchorPane.rightAnchor="27.19999999999999" />
+      <Button fx:id="Button_updateUser" disable="true" layoutX="615.0" layoutY="324.0" mnemonicParsing="false" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Изменить пользователя" AnchorPane.bottomAnchor="18.8" AnchorPane.rightAnchor="185.0" />
+      <Button fx:id="Button_deleteUser" layoutX="464.0" layoutY="324.0" mnemonicParsing="false" onAction="#Button_deleteUser" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Удалить пользователя" AnchorPane.bottomAnchor="18.8" AnchorPane.rightAnchor="345.0">
          <tooltip>
             <Tooltip text="Нажмите чтобы перейти к удалению пользователя" />
          </tooltip></Button>
-      <Button fx:id="Button_back" cancelButton="true" layoutX="14.0" layoutY="324.0" mnemonicParsing="false" onAction="#Button_back" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Вернуться" />
-      <Button fx:id="Replace" layoutX="220.0" layoutY="325.0" mnemonicParsing="false" onAction="#Replace" text="Обновить список" />
+      <Button fx:id="Button_back" cancelButton="true" layoutX="14.0" layoutY="324.0" mnemonicParsing="false" onAction="#Button_back" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Вернуться" AnchorPane.bottomAnchor="19.4" AnchorPane.leftAnchor="20.0" />
+      <Button fx:id="Replace" layoutX="337.0" layoutY="324.0" mnemonicParsing="false" onAction="#Replace" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Обновить список" AnchorPane.bottomAnchor="18.80000000000001" AnchorPane.rightAnchor="499.4" />
    </children>
 </AnchorPane>

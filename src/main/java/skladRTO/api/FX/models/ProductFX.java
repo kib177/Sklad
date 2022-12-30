@@ -11,23 +11,31 @@ public class ProductFX {
     private SimpleIntegerProperty id;
     private SimpleStringProperty name;
     private SimpleIntegerProperty amount;
+    private SimpleStringProperty machine;
+    private SimpleStringProperty AmountUnits;
     private SimpleStringProperty status;
     private Integer statusFX;
     private SimpleIntegerProperty order;
     private SimpleIntegerProperty productInfo;
+    private SimpleStringProperty units;
 
-    public ProductFX(int id, String name, int amount, int status, int order, int productInfo) {
+
+    public ProductFX(int id, String name, String machine, int amount, int status, int order, int productInfo, String units) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
+        this.machine = new SimpleStringProperty(machine);
         this.amount = new SimpleIntegerProperty(amount);
         this.status = getStringStatus(status);
         this.order = new SimpleIntegerProperty(order);
         this.productInfo = new SimpleIntegerProperty(productInfo);
+        this.AmountUnits = new SimpleStringProperty(amount + " " + units);
+        this.units = new SimpleStringProperty(units);
     }
 
-    public ProductFX(String name, String number) {
+    public ProductFX(String name, String number, String machine, String units) {
         this.name = new SimpleStringProperty(name);
-        this.amount = new SimpleIntegerProperty(Integer.parseInt(number));
+        this.machine = new SimpleStringProperty(machine);
+        this.AmountUnits = new SimpleStringProperty(number+" " + units);
 
     }
 
@@ -38,6 +46,42 @@ public class ProductFX {
             }
         }
         return null;
+    }
+
+    public String getUnits() {
+        return units.get();
+    }
+
+    public SimpleStringProperty unitsProperty() {
+        return units;
+    }
+
+    public void setUnits(String units) {
+        this.units.set(units);
+    }
+
+    public String getAmountUnits() {
+        return AmountUnits.get();
+    }
+
+    public SimpleStringProperty amountUnitsProperty() {
+        return AmountUnits;
+    }
+
+    public void setAmountUnits(String amountUnits) {
+        this.AmountUnits.set(amountUnits);
+    }
+
+    public String getMachine() {
+        return machine.get();
+    }
+
+    public SimpleStringProperty machineProperty() {
+        return machine;
+    }
+
+    public void setMachine(String machine) {
+        this.machine.set(machine);
     }
 
     public Integer getStatusFX() {
@@ -129,12 +173,12 @@ public class ProductFX {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductFX productFX = (ProductFX) o;
-        return Objects.equals(id, productFX.id) && Objects.equals(name, productFX.name) && Objects.equals(amount, productFX.amount) && Objects.equals(status, productFX.status);
+        return Objects.equals(id, productFX.id) && Objects.equals(name, productFX.name) && Objects.equals(amount, productFX.amount) && Objects.equals(machine, productFX.machine) && Objects.equals(status, productFX.status) && Objects.equals(statusFX, productFX.statusFX) && Objects.equals(order, productFX.order) && Objects.equals(productInfo, productFX.productInfo);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, amount, status);
+        return Objects.hash(id, name, amount, machine, status, statusFX, order, productInfo);
     }
 
     @Override
@@ -143,6 +187,7 @@ public class ProductFX {
                 "id=" + id +
                 ", name=" + name +
                 ", amount=" + amount +
+                ", machine=" + machine +
                 ", status=" + status +
                 ", statusFX=" + statusFX +
                 ", order=" + order +

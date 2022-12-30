@@ -38,7 +38,7 @@ public class AuthorizationController implements Initializable {
         WeakReference<AuthorizationDAO> weakReference = new WeakReference<>(avtoriz);
         if (avtoriz.CheckUsers(SingIn_login.getText(), SingIn_password.getText())) {
             CreateScene createScene = new CreateScene();
-            createScene.createScene("OrderView.fxml", 920, 650);
+            createScene.createScene("OrderView.fxml", 920, 650, true);
             ((OrderViewController) createScene.getLoader().getController()).setCreateScene(createScene);
             SingIn_ButSingIn.getScene().getWindow().hide();
         } else {

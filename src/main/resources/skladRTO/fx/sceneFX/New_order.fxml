@@ -17,11 +17,11 @@
          </font>
       </Label>
       <Button fx:id="button_next" layoutX="215.0" layoutY="297.0" mnemonicParsing="false" onAction="#button_next" style="-fx-border-radius: 5;" text="Продолжить" />
-      <TextField fx:id="order_number" layoutX="288.0" layoutY="209.0" prefHeight="30.0" prefWidth="200.0" promptText="Номер заказа" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;">
+      <TextField fx:id="order_number" layoutX="288.0" layoutY="161.0" prefHeight="30.0" prefWidth="200.0" promptText="Номер заказа" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;">
          <tooltip>
             <Tooltip text="Номер заказа автоматический, советуем записать." />
          </tooltip></TextField>
-      <TextField fx:id="order_date" editable="false" layoutX="288.0" layoutY="169.0" prefHeight="30.0" prefWidth="200.0" promptText="Дата заказа" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;">
+      <TextField fx:id="order_date" editable="false" layoutX="288.0" layoutY="120.0" prefHeight="30.0" prefWidth="200.0" promptText="Дата заказа" style="-fx-background-color: #fafafa; -fx-border-color: silver; -fx-border-radius: 5;">
          <tooltip>
             <Tooltip text="Дата заказа, не подлежит изменению" />
          </tooltip></TextField>
@@ -35,11 +35,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="order_zakazchik" disable="true" layoutX="288.0" layoutY="82.0" prefHeight="30.0" prefWidth="200.0">
-         <tooltip>
-            <Tooltip text="Выберите пользователя для привязки к заказу" />
-         </tooltip>
-      </ChoiceBox>
-      <ChoiceBox fx:id="order_machines" layoutX="288.0" layoutY="123.0" prefHeight="30.0" prefWidth="200.0">
          <tooltip>
             <Tooltip text="Выберите пользователя для привязки к заказу" />
          </tooltip>

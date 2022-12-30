@@ -35,7 +35,7 @@ public class UserDeleteController implements Initializable {
         if (ID.getText().equals("")) {
             Label.setText("Введите ID пользователя!");
         } else if (userDAO.pereborID(Integer.parseInt(ID.getText()))){
-            createScene.createScene("Window.fxml", 400, 200);
+            createScene.createScene("Window.fxml", 400, 200, false);
             createScene.getStage().setAlwaysOnTop(true);
             ((WindowController) createScene.getLoader().getController()).deleteUser(Integer.parseInt(ID.getText()));
             WindowController controller = createScene.getLoader().getController();

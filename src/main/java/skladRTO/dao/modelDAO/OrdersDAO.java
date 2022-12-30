@@ -20,8 +20,8 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
 
     private static final Logger logger = LogManager.getLogger(OrdersDAO.class.getName());
     public static final String LAST_INDEX_ID = "SELECT LAST_INSERT_ID();";
-    public static final String ADD_NEW_ORDER = "INSERT INTO orders (order_description, user_id, machines_id, order_date, number_order)" +
-            " Values (?, ?, ?, ?, ?)";
+    public static final String ADD_NEW_ORDER = "INSERT INTO orders (order_description, user_id, order_date, number_order)" +
+            " Values (?, ?, ?, ?)";
 
     /**
      * Метод заполняет лист ордеров из БД
@@ -33,8 +33,7 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
         OrderListFX listOrder = new OrderListFX();
         WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
         String str = "SELECT * FROM orders " +
-                " LEFT JOIN users ON (orders.user_id=users.id_users)" +
-                " LEFT JOIN machines ON (orders.machines_id=machines.id)";
+                " LEFT JOIN users ON (orders.user_id=users.id_users)";
         logger.debug("Отправляем запрос в БД ->\n -> " + str);
         try (ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str)) {
             logger.debug("Перебираем полученные данные из БД");
@@ -139,6 +138,29 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
         return listOrder.getOrderData();
     }
 
+    public Order searchOrder(int id) {
+        Order order = null;
+        String str = "SELECT * FROM orders" +
+                " WHERE id = ?;";
+        logger.debug("Отправляем запрос в БД ->\n -> " + str);
+        try (PreparedStatement preparedStatement = DatabaseConnection.getDatabaseConnection().prepareStatement(str)) {
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            logger.debug("Перебираем полученные данные из БД");
+            while (resultSet.next()) {
+               order = new Order(resultSet.getInt("id"), resultSet.getString("order_description"),
+                       resultSet.getInt("user_id"), resultSet.getString("order_date"),
+                       resultSet.getString("number_order"));
+            }
+        } catch (SQLException | IOException e) {
+            logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
+            e.printStackTrace();
+        }
+        return order;
+    }
+
+
+
     /**
      * Метод удаляет заказ и все его позиции. Метод ничего не возвращает.
      * <p>
@@ -194,9 +216,8 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
                 //создаю новый ордер
                 preparedStatement.setString(1, order.getOrderDescription());
                 preparedStatement.setInt(2, order.getUserId());
-                preparedStatement.setInt(3, order.getMachinesId());
-                preparedStatement.setString(4, order.getOrderDate());
-                preparedStatement.setString(5, order.getNumberOrder());
+                preparedStatement.setString(3, order.getOrderDate());
+                preparedStatement.setString(4, order.getNumberOrder());
                 preparedStatement.executeUpdate();
                 int lastInsertId = 0;
                 logger.debug("Отправляем запрос в БД ->\n -> " + LAST_INDEX_ID);
@@ -240,9 +261,8 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
         try {
             logger.debug("Выполняем метод заполнения листа  FillingInList");
             listOrder.create(resultSet.getInt("id"), resultSet.getString("number_order"),
-                    resultSet.getString("order_description"), resultSet.getString("machine"),
-                    resultSet.getString("first_name"), resultSet.getString("last_name"),
-                    resultSet.getString("order_date"));
+                    resultSet.getString("order_description"), resultSet.getString("first_name"),
+                    resultSet.getString("last_name"), resultSet.getString("order_date"));
         } catch (SQLException e) {
             logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             throw new RuntimeException(e);

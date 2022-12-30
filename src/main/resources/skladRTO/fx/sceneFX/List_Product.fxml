@@ -7,20 +7,24 @@
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductListController">
    <children>
-      <TableView fx:id="Table_Items" prefHeight="347.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="Table_Items" prefHeight="347.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="52.80000000000001" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columns>
-            <TableColumn fx:id="ColumnProduct_id" minWidth="-1.0" prefWidth="69.5999755859375" style="-fx-alignment: CENTER" text="ID" />
-            <TableColumn fx:id="ColumnProduct_name" minWidth="-1.0" prefWidth="304.8000183105469" style="-fx-alignment: CENTER" text="Наименование" />
-            <TableColumn fx:id="ColumnProduct_amount" minWidth="-1.0" prefWidth="94.39996337890625" style="-fx-alignment: CENTER" text="Количество" />
-            <TableColumn fx:id="ColumnProduct_status" minWidth="-1.0" prefWidth="132.0" style="-fx-alignment: CENTER" text="Статус" />
+            <TableColumn fx:id="ColumnProduct_id" maxWidth="200.0" minWidth="70.0" prefWidth="70.0" style="-fx-alignment: CENTER" text="ID" />
+            <TableColumn fx:id="ColumnProduct_name" minWidth="100.0" prefWidth="300.0" style="-fx-alignment: CENTER" text="Наименование" />
+            <TableColumn fx:id="Column_machine" maxWidth="150.0" minWidth="120.0" prefWidth="120.0" style="-fx-alignment: CENTER;" text="Оборудование" />
+            <TableColumn fx:id="ColumnProduct_amount" maxWidth="200.0" minWidth="100.0" prefWidth="100.0" style="-fx-alignment: CENTER" text="Количество" />
+            <TableColumn fx:id="ColumnProduct_status" maxWidth="200.0" minWidth="132.0" prefWidth="132.0" style="-fx-alignment: CENTER" text="Статус" />
          </columns>
          <tooltip>
             <Tooltip text="Список позиций" />
          </tooltip>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
       </TableView>
-      <ChoiceBox fx:id="ChoiceBox" layoutX="443.0" layoutY="361.0" prefWidth="150.0" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="14.0">
+      <ChoiceBox fx:id="ChoiceBox" layoutX="443.0" layoutY="361.0" prefWidth="150.0" AnchorPane.bottomAnchor="13.0" AnchorPane.rightAnchor="6.599999999999994">
          <tooltip>
             <Tooltip text="Выберите для отображения " />
          </tooltip></ChoiceBox>
@@ -28,6 +32,6 @@
          <tooltip>
             <Tooltip text="Просто кнопка" />
          </tooltip></Button>
-      <Button fx:id="ViewAll" layoutX="319.0" layoutY="361.0" mnemonicParsing="false" onAction="#ViewAll" text="Показать все" />
+      <Button fx:id="ViewAll" layoutX="319.0" layoutY="361.0" mnemonicParsing="false" onAction="#ViewAll" text="Показать все" AnchorPane.bottomAnchor="13.399999999999999" AnchorPane.rightAnchor="193.0" />
    </children>
 </AnchorPane>
