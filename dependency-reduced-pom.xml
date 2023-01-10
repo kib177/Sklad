@@ -21,11 +21,18 @@
         <version>3.2.4</version>
         <executions>
           <execution>
+            <phase>package</phase>
             <goals>
               <goal>shade</goal>
             </goals>
             <configuration>
               <transformers>
+                <transformer>
+                  <mainClass>foo.bar.Generate</mainClass>
+                  <manifestEntries>
+                    <Multi-Release>true</Multi-Release>
+                  </manifestEntries>
+                </transformer>
                 <transformer>
                   <mainClass>skladRTO.Main</mainClass>
                 </transformer>

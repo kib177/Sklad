@@ -1,2 +1,0 @@
-IntegerProperty [value: 62] название: StringProperty [value: 123] количество: IntegerProperty [value: 2] статус: StringProperty [value: ожидание]
-IntegerProperty [value: 63] название: StringProperty [value: 123] количество: IntegerProperty [value: 2] статус: StringProperty [value: ожидание]

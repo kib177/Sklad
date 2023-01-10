@@ -35,7 +35,9 @@ public class ProductFX {
     public ProductFX(String name, String number, String machine, String units) {
         this.name = new SimpleStringProperty(name);
         this.machine = new SimpleStringProperty(machine);
-        this.AmountUnits = new SimpleStringProperty(number+" " + units);
+        this.amount = new SimpleIntegerProperty(Integer.parseInt(number));
+        this.units = new SimpleStringProperty(units);
+        this.AmountUnits = new SimpleStringProperty(number+" "+units);
 
     }
 

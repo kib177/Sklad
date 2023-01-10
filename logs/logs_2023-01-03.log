@@ -1,0 +1,334 @@
+2023-01-03 19:19:26 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 19:20:10 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2023-01-03 19:20:10 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2023-01-03 19:20:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2023-01-03 19:20:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2023-01-03 19:20:11 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2023-01-03 19:20:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@79201753
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@79201753
+2023-01-03 19:20:12 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@79201753
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2023-01-03 19:20:12 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2023-01-03 19:20:12 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2023-01-03 19:20:12 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2023-01-03 19:20:12 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2023-01-03 19:20:12 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2023-01-03 19:20:12 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2023-01-03 19:20:12 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:12 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2023-01-03 19:20:12 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:20:12 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 36], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}, OrderFX{id=IntegerProperty [value: 37], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ Куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}]}
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Отправляем запрос в БД ->
+ -> SELECT users.id_users, users.first_name, users.last_name, authentication.login, authentication.password, authentication.email, status_user.status FROM users  LEFT JOIN authentication ON (users.authentication_id=authentication.id)  LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);
+2023-01-03 19:20:37 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Перебираем полученные данные из БД
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:20:37 MECHSEWING DEBUG UserDAO showListOfUsers - Возвращаем заполненный лист юзеров ->
+ -> ListUser{usersData=[User{id=IntegerProperty [value: 1], login=StringProperty [value: KIBAB], password=StringProperty [value: brigikib], firstName=StringProperty [value: Кирилл], secondName=StringProperty [value: Бриги], status=StringProperty [value: Администратор], email=StringProperty [value: kirillbrigi177@gmail.com]}, User{id=IntegerProperty [value: 2], login=StringProperty [value: Nova], password=StringProperty [value: nova], firstName=StringProperty [value: Александр], secondName=StringProperty [value: Новоставский], status=StringProperty [value: Администратор], email=StringProperty [value: aleksandr.novostavskii@delkom40.by]}, User{id=IntegerProperty [value: 3], login=StringProperty [value: Druk], password=StringProperty [value: evgen], firstName=StringProperty [value: Евгений], secondName=StringProperty [value: Друк], status=StringProperty [value: Администратор], email=StringProperty [value: evgenij.druk@delkom40.by]}, User{id=IntegerProperty [value: 4], login=StringProperty [value: a], password=StringProperty [value: a], firstName=StringProperty [value: Админ], secondName=StringProperty [value: Админ], status=StringProperty [value: Администратор], email=StringProperty [value: none]}, User{id=IntegerProperty [value: 5], login=StringProperty [value: Sokol], password=StringProperty [value: Sokol], firstName=StringProperty [value: Сергей], secondName=StringProperty [value: Сокол], status=StringProperty [value: Пользователь], email=StringProperty [value: ]}]}
+2023-01-03 19:20:40 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:29:32 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 19:30:09 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2023-01-03 19:30:09 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2023-01-03 19:30:09 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:10 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2023-01-03 19:30:10 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2023-01-03 19:30:10 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2023-01-03 19:30:10 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:10 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2023-01-03 19:30:10 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@19d7470c
+2023-01-03 19:30:10 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@19d7470c
+2023-01-03 19:30:10 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@19d7470c
+2023-01-03 19:30:10 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2023-01-03 19:30:10 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2023-01-03 19:30:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2023-01-03 19:30:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2023-01-03 19:30:11 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2023-01-03 19:30:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2023-01-03 19:30:11 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2023-01-03 19:30:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:11 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2023-01-03 19:30:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:30:11 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 36], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}, OrderFX{id=IntegerProperty [value: 37], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ Куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}]}
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Отправляем запрос в БД ->
+ -> SELECT users.id_users, users.first_name, users.last_name, authentication.login, authentication.password, authentication.email, status_user.status FROM users  LEFT JOIN authentication ON (users.authentication_id=authentication.id)  LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);
+2023-01-03 19:30:31 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Перебираем полученные данные из БД
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:30:31 MECHSEWING DEBUG UserDAO showListOfUsers - Возвращаем заполненный лист юзеров ->
+ -> ListUser{usersData=[User{id=IntegerProperty [value: 1], login=StringProperty [value: KIBAB], password=StringProperty [value: brigikib], firstName=StringProperty [value: Кирилл], secondName=StringProperty [value: Бриги], status=StringProperty [value: Администратор], email=StringProperty [value: kirillbrigi177@gmail.com]}, User{id=IntegerProperty [value: 2], login=StringProperty [value: Nova], password=StringProperty [value: nova], firstName=StringProperty [value: Александр], secondName=StringProperty [value: Новоставский], status=StringProperty [value: Администратор], email=StringProperty [value: aleksandr.novostavskii@delkom40.by]}, User{id=IntegerProperty [value: 3], login=StringProperty [value: Druk], password=StringProperty [value: evgen], firstName=StringProperty [value: Евгений], secondName=StringProperty [value: Друк], status=StringProperty [value: Администратор], email=StringProperty [value: evgenij.druk@delkom40.by]}, User{id=IntegerProperty [value: 4], login=StringProperty [value: a], password=StringProperty [value: a], firstName=StringProperty [value: Админ], secondName=StringProperty [value: Админ], status=StringProperty [value: Администратор], email=StringProperty [value: none]}, User{id=IntegerProperty [value: 5], login=StringProperty [value: Sokol], password=StringProperty [value: Sokol], firstName=StringProperty [value: Сергей], secondName=StringProperty [value: Сокол], status=StringProperty [value: Пользователь], email=StringProperty [value: ]}]}
+2023-01-03 19:30:34 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:34 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2023-01-03 19:32:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2023-01-03 19:32:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@1314d5a5
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@1314d5a5
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@1314d5a5
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2023-01-03 19:32:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2023-01-03 19:32:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2023-01-03 19:32:55 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2023-01-03 19:32:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2023-01-03 19:32:56 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2023-01-03 19:32:56 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:56 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2023-01-03 19:32:56 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:32:56 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 36], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}, OrderFX{id=IntegerProperty [value: 37], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ Куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}]}
+2023-01-03 19:34:44 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2023-01-03 19:35:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2023-01-03 19:35:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@1f887aa
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@1f887aa
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@1f887aa
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2023-01-03 19:35:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2023-01-03 19:35:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2023-01-03 19:35:11 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2023-01-03 19:35:11 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2023-01-03 19:35:11 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2023-01-03 19:35:11 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:12 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2023-01-03 19:35:12 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 19:35:12 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 36], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}, OrderFX{id=IntegerProperty [value: 37], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ Куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}]}
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Отправляем запрос в БД ->
+ -> SELECT users.id_users, users.first_name, users.last_name, authentication.login, authentication.password, authentication.email, status_user.status FROM users  LEFT JOIN authentication ON (users.authentication_id=authentication.id)  LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);
+2023-01-03 19:35:29 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Перебираем полученные данные из БД
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Записываем данные из БД в объект типа UserListFX
+2023-01-03 19:35:29 MECHSEWING DEBUG UserDAO showListOfUsers - Возвращаем заполненный лист юзеров ->
+ -> ListUser{usersData=[User{id=IntegerProperty [value: 1], login=StringProperty [value: KIBAB], password=StringProperty [value: brigikib], firstName=StringProperty [value: Кирилл], secondName=StringProperty [value: Бриги], status=StringProperty [value: Администратор], email=StringProperty [value: kirillbrigi177@gmail.com]}, User{id=IntegerProperty [value: 2], login=StringProperty [value: Nova], password=StringProperty [value: nova], firstName=StringProperty [value: Александр], secondName=StringProperty [value: Новоставский], status=StringProperty [value: Администратор], email=StringProperty [value: aleksandr.novostavskii@delkom40.by]}, User{id=IntegerProperty [value: 3], login=StringProperty [value: Druk], password=StringProperty [value: evgen], firstName=StringProperty [value: Евгений], secondName=StringProperty [value: Друк], status=StringProperty [value: Администратор], email=StringProperty [value: evgenij.druk@delkom40.by]}, User{id=IntegerProperty [value: 4], login=StringProperty [value: a], password=StringProperty [value: a], firstName=StringProperty [value: Админ], secondName=StringProperty [value: Админ], status=StringProperty [value: Администратор], email=StringProperty [value: none]}, User{id=IntegerProperty [value: 5], login=StringProperty [value: Sokol], password=StringProperty [value: Sokol], firstName=StringProperty [value: Сергей], secondName=StringProperty [value: Сокол], status=StringProperty [value: Пользователь], email=StringProperty [value: ]}]}
+2023-01-03 20:36:22 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 20:36:53 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2023-01-03 20:36:53 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2023-01-03 20:36:53 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 20:36:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2023-01-03 20:36:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2023-01-03 20:36:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@1d48dfe
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@1d48dfe
+2023-01-03 20:36:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@1d48dfe
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2023-01-03 20:36:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2023-01-03 20:36:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2023-01-03 20:36:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2023-01-03 20:36:55 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2023-01-03 20:36:55 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2023-01-03 20:36:55 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2023-01-03 20:36:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 20:36:55 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2023-01-03 20:36:55 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 20:36:55 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 36], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}, OrderFX{id=IntegerProperty [value: 37], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ Куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}]}
+2023-01-03 20:39:23 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 21:02:39 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 21:18:07 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 21:21:27 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 21:21:37 MECHSEWING DEBUG AuthorizationController SingIn_ButSingIn - Нажатие кнопки войти
+2023-01-03 21:21:37 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Начало проверки авторизации пользователя
+ отправка запроса в БД -> 
+->SELECT authentication.login, authentication.password FROM authentication
+2023-01-03 21:21:37 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 21:21:38 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Перебираем полученные данные и БД
+2023-01-03 21:21:38 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Найдено совпадение с пользователемLogin: a; Password: a;
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getAuthentication - Отправляем запрос в БД ->
+ -> SELECT * FROM authentication WHERE login = ? AND password = ?
+2023-01-03 21:21:38 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getAuthentication - Получение данных из БД
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getAuthentication - Запись данных из БД в объект Authentication ->
+-> skladRTO.api.models.Authentication@539cd54e
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getAuthentication - Возвращаем полученный объект типа Authentication -> skladRTO.api.models.Authentication@539cd54e
+2023-01-03 21:21:38 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем аутент. данные пользователя -> auth: skladRTO.api.models.Authentication@539cd54e
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getStatusUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.status_user WHERE status_user.id = ?;
+2023-01-03 21:21:38 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getStatusUser - Получение данных из БД
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getStatusUser - Запись данных из БД в объект User ->
+-> Администратор
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getStatusUser - Возвращаем полученный объект типа StatusUser -> Администратор
+2023-01-03 21:21:38 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем статус данные пользователя -> status: Администратор
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getUser - Отправляем запрос в БД ->
+ -> SELECT * FROM sklad.users WHERE users.authentication_id = ?;
+2023-01-03 21:21:38 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getUser - Получение данных из БД
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getUser - Запись данных из БД в объект User ->
+-> Админ Админ
+2023-01-03 21:21:38 MECHSEWING DEBUG UserDAO getUser - Возвращаем полученный объект типа User -> Админ Админ
+2023-01-03 21:21:38 MECHSEWING DEBUG AuthorizationDAO CheckUsers - Заполняем Юзер данные пользователя -> user: Админ Админ
+2023-01-03 21:21:38 MECHSEWING DEBUG ProductDAO getProductStatus - Отправляем запрос в БД ->
+ -> SELECT * FROM order_status
+2023-01-03 21:21:38 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 21:21:39 MECHSEWING DEBUG ProductDAO getProductStatus - Перебираем полученные данные из БД
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO showListOfOrders - Отправляем запрос в БД ->
+ -> SELECT * FROM orders  LEFT JOIN users ON (orders.user_id=users.id_users)
+2023-01-03 21:21:39 MECHSEWING DEBUG DatabaseConnection getDatabaseConnection - Подключение к БД
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO showListOfOrders - Перебираем полученные данные из БД
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO FillingInList - Выполняем метод заполнения листа  FillingInList
+2023-01-03 21:21:39 MECHSEWING DEBUG OrdersDAO showListOfOrders - Возвращаем заполненный лист ордеров ->
+ -> ListOrder{orderData=[OrderFX{id=IntegerProperty [value: 1], number_order=StringProperty [value: 422-1209-0210], order_description=StringProperty [value: Тест: подшипники для стопы Cutter], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 5], number_order=StringProperty [value: 322-1209-0819], order_description=StringProperty [value: Подшипники 6303], user=StringProperty [value: Евгений Друк], order_date=StringProperty [value: 09.12.2022]}, OrderFX{id=IntegerProperty [value: 7], number_order=StringProperty [value: 522-1214-0239], order_description=StringProperty [value: Проба ввода заказа], user=StringProperty [value: Сергей Сокол], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 8], number_order=StringProperty [value: 422-1214-0308], order_description=StringProperty [value: Тест], user=StringProperty [value: Админ Админ], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 17], number_order=StringProperty [value: 228], order_description=StringProperty [value: Тест версии 1.1], user=StringProperty [value: Александр Новоставский], order_date=StringProperty [value: 14.12.2022]}, OrderFX{id=IntegerProperty [value: 36], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}, OrderFX{id=IntegerProperty [value: 37], number_order=StringProperty [value: 1234], order_description=StringProperty [value: Заказ Куллеров], user=StringProperty [value: Кирилл Бриги], order_date=StringProperty [value: 30.12.2022]}]}
+2023-01-03 21:22:26 MECHSEWING INFO  Main main - Происходит загрузка программы
+2023-01-03 21:22:51 MECHSEWING INFO  Main main - Происходит загрузка программы

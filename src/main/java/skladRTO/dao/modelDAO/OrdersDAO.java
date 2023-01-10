@@ -173,7 +173,7 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
     public void delete(Order order, List<ProductFX> list) {
 
         // Добавить транзакцию
-        String SQL = "DELETE FROM orders WHERE id =?;";
+        String SQL ="DELETE FROM orders WHERE id =?";
         logger.debug("Отправляем запрос в БД ->\n -> " + SQL);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
@@ -207,7 +207,7 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
     @Override
     public void add(Order order, List<Product> list) { // лист приходит заполненым только имя и количество id создать
 
-        try (Connection connection = DatabaseConnection.getDatabaseConnection();) {
+        try (Connection connection = DatabaseConnection.getDatabaseConnection()) {
             logger.debug("Создание Savepoint для транзакции");
             connection.setAutoCommit(false);
             Savepoint savepointOne = connection.setSavepoint("SavepointOne");
@@ -221,7 +221,7 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
                 preparedStatement.executeUpdate();
                 int lastInsertId = 0;
                 logger.debug("Отправляем запрос в БД ->\n -> " + LAST_INDEX_ID);
-                try (Statement statement = connection.createStatement();) {
+                try (Statement statement = connection.createStatement()) {
                     ResultSet resultSet = statement.executeQuery(LAST_INDEX_ID);
                     if (resultSet.next()) {
                         lastInsertId = resultSet.getInt(1);

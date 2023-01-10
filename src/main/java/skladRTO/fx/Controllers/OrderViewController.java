@@ -15,7 +15,6 @@ import skladRTO.api.models.Authorization;
 import skladRTO.api.models.Order;
 import skladRTO.dao.modelDAO.OrdersDAO;
 import skladRTO.dao.modelDAO.ProductDAO;
-import skladRTO.dao.modelDAO.UserDAO;
 import skladRTO.fx.sceneFX.CreateScene;
 
 import java.lang.ref.WeakReference;
@@ -34,7 +33,6 @@ public class OrderViewController implements Initializable {
     private DateFormat dateFormat;
     private ProductDAO getProduct = new ProductDAO();
     private CreateScene createScene = new CreateScene();
-    private UserDAO userDAO = new UserDAO();
     private CreateScene createSceneOrderView;
     @FXML
     private CheckMenuItem CheckMenuItem_Delete_Order;
@@ -69,51 +67,23 @@ public class OrderViewController implements Initializable {
     @FXML
     private TableView<OrderFX> List_order;
     @FXML
-    private MenuItem MenuItem_List_Product;
-    @FXML
-    private MenuItem MenuItem_addOrder;
-    @FXML
-    private MenuItem MenuItem_exit;
-    @FXML
-    private MenuItem MenuItem_Statistic;
-    @FXML
-    private MenuItem MenuItem_users;
-    @FXML
-    private Menu Menu_Orders;
-    @FXML
     private Menu Menu_Users;
     @FXML
     private TableView<ProductFX> Table_Items;
     @FXML
-    private Button Watch_order;
-    @FXML
-    private Menu menu_edit;
-    @FXML
-    private Menu menu_file;
-    @FXML
-    private Menu menu_help;
-    @FXML
     private TextField search_articul;
     @FXML
     private TextField search_name;
-    @FXML
-    private TextField search_machine;
     @FXML
     private TextField SearchForName;
     @FXML
     private TableColumn<OrderFX, String> Сolumn_description;
     @FXML
     private Label date;
-    @FXML
-    private ContextMenu NumberOrderContextMenu;
     private Integer id;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List_order.getSelectionModel().clearSelection();
-        date();
-        getProduct.getProductStatus();
-        Watch_order(new ActionEvent());
         if (Authorization.getStatusUser().getStatus().equals("Пользователь")) {
             Menu_Users.disableProperty().setValue(true);
             CheckMenuItem_confirmOrder.disableProperty().setValue(true);
@@ -122,6 +92,10 @@ public class OrderViewController implements Initializable {
         } else if (Authorization.getStatusUser().getStatus().equals("Модератор")) {
             Menu_Users.disableProperty().setValue(true);
         }
+        List_order.getSelectionModel().clearSelection();
+        date();
+        getProduct.getProductStatus();
+        Watch_order(new ActionEvent());
     }
 
     @FXML
@@ -164,7 +138,7 @@ public class OrderViewController implements Initializable {
 
     public ObservableList<ProductFX> getListProduct(int id) {
         getProduct = new ProductDAO();
-        WeakReference<ProductDAO> getProductWeakReference = new WeakReference<>(getProduct);
+        WeakReference<ProductDAO> weakReference = new WeakReference<>(getProduct);
         return getProduct.showListOfProducts(id);
     }
 
@@ -185,23 +159,22 @@ public class OrderViewController implements Initializable {
                 if (newOrderFX != null) {
                     id = newOrderFX.getId();
                     viewProduct();
-                    if(CheckMenuItem_createWord.isSelected()){
+                    if (CheckMenuItem_createWord.isSelected()) {
                         createWord(ordersDAO.searchOrder(newOrderFX.getId()));
-                        System.out.println(newOrderFX.getId()+" saasdsadsadsadsadasd");
+                        System.out.println(newOrderFX.getId() + " saasdsadsadsadsadasd");
                     }
-
                 }
             }
         });
+
     }
 
-    private void createWord(Order order){
-        System.out.println(order+"  asdsd sda as d");
+    private void createWord(Order order) {
         ApachePoiDemo apachePoiDemo = new ApachePoiDemo();
-        apachePoiDemo.CreateWord(getListProduct(order.getId()), order.getOrderDescription()+".docx", order.getUserId());
+        WeakReference<ApachePoiDemo> weakReference = new WeakReference<>(apachePoiDemo);
+        apachePoiDemo.CreateWord(getListProduct(order.getId()), order.getOrderDescription() + ".docx", order.getUserId());
         CheckMenuItem_createWord.selectedProperty().setValue(false);
     }
-
 
     public void viewProductInfo(int id) {
         if (CheckMenuItem_Info.isSelected()) {
@@ -230,6 +203,7 @@ public class OrderViewController implements Initializable {
                 if (CheckMenuItem_deleteProduct.isSelected() && !CheckMenuItem_Delete_Order.isSelected()) {
                     if (newProduct != null) {
                         CreateScene createScene = new CreateScene();
+                        WeakReference<CreateScene> weakReference = new WeakReference<>(createScene);
                         createScene.createScene("Window.fxml", 400, 200, false);
 
                         WindowController controller = createScene.getLoader().getController();
@@ -254,6 +228,7 @@ public class OrderViewController implements Initializable {
                                 newOrder.getNumber_order());
                         List<ProductFX> list1 = Table_Items.getItems();
                         CreateScene createScene = new CreateScene();
+                        WeakReference<CreateScene> weakReference = new WeakReference<>(createScene);
                         createScene.createScene("Window.fxml", 400, 200, false);
 
                         WindowController controller = createScene.getLoader().getController();
@@ -308,7 +283,6 @@ public class OrderViewController implements Initializable {
             }
         });
     }
-
 
     @FXML
     public void MenuItem_users() {

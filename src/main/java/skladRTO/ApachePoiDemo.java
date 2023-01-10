@@ -127,7 +127,6 @@ public class ApachePoiDemo {
                     "                              "
                     + dateFormat.format(currentDate));
             doc.write(out);
-            out.close();
         } catch (Exception e) {
             System.out.println(e);
         }

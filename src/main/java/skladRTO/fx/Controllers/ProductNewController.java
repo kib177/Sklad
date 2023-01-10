@@ -66,9 +66,10 @@ public class ProductNewController implements Initializable {
         ChoiceBox_Units.setValue(unitsDAO.getUnits().get(0));
     }
 
-    public void getOrderView(OrderViewController orderViewController){
+    public void getOrderView(OrderViewController orderViewController) {
         this.orderViewController = orderViewController;
     }
+
     public void viewAddProduct() {
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("AmountUnits"));
@@ -83,9 +84,11 @@ public class ProductNewController implements Initializable {
         Product_name.setText("");
         Product_amount.setText("");
     }
-public void getSceneOrderNewController(Stage stage){
+
+    public void getSceneOrderNewController(Stage stage) {
         this.stage = stage;
-}
+    }
+
     public void getOrder(Order order) {
         this.order = order;
     }
@@ -100,7 +103,7 @@ public void getSceneOrderNewController(Stage stage){
             button_add.getScene().getWindow().hide();
             stage.getScene().getWindow().hide();
             ApachePoiDemo apachePoiDemo = new ApachePoiDemo();
-            apachePoiDemo.CreateWord(listFX, order.getOrderDescription()+".docx", order.getUserId());
+            apachePoiDemo.CreateWord(listFX, order.getOrderDescription() + ".docx", order.getUserId());
 
             orderViewController.Watch_order(new ActionEvent());
         }

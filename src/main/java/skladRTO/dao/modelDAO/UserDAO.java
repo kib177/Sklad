@@ -30,8 +30,8 @@ public class UserDAO implements UserFunction {
     public ObservableList<UserFX> showListOfUsers() {
         UserListFX listUser = new UserListFX();
         WeakReference<UserListFX> weakReference = new WeakReference<>(listUser);
-        String str = "SELECT users.id_users, users.first_name, users.last_name, authentication.login, " +
-                "authentication.password, authentication.email, status_user.status" +
+        String str ="SELECT users.id_users, users.first_name, users.last_name, authentication.login," +
+                " authentication.password, authentication.email, status_user.status" +
                 " FROM users " +
                 " LEFT JOIN authentication ON (users.authentication_id=authentication.id) " +
                 " LEFT JOIN status_user ON (authentication.status_user_id=status_user.id);";
@@ -61,8 +61,9 @@ public class UserDAO implements UserFunction {
      */
     public User getUser(int id) {
         User user = null;
-        String str = "SELECT * FROM sklad.users WHERE users.authentication_id = ?;";
+        String str = "SELECT * FROM sklad.users WHERE users.id_users = ?;";
         logger.debug("Отправляем запрос в БД ->\n -> " + str);
+        logger.debug("Где users.authentication_id =  " + id);
         try (Connection connection = DatabaseConnection.getDatabaseConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(str)) {
             preparedStatement.setInt(1, id);
@@ -252,7 +253,7 @@ public class UserDAO implements UserFunction {
                     preparedStatement2.setInt(4, num);
                     preparedStatement2.executeUpdate();
                     int lastInsertId = 0;
-                    try (Statement statement = connection.createStatement();) {
+                    try (Statement statement = connection.createStatement()) {
                         String str1 = "SELECT LAST_INSERT_ID();";
                         logger.debug("Отправляем запрос в БД ->\n -> " + str1);
                         ResultSet resultSet1 = statement.executeQuery(str1);
