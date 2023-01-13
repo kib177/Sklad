@@ -26,10 +26,10 @@ public class ApachePoiDemo {
     XWPFDocument doc = new XWPFDocument();
     UserDAO userDAO = new UserDAO();
 
-    public void CreateWord(ObservableList<ProductFX> list, String nameFile, int idUser) {
+    public void CreateWord(ObservableList<ProductFX> list, String nameFile, int idUser, String numberOrder) {
 
 
-        try (FileOutputStream out = new FileOutputStream(new File(selectedDir() + "\\" + nameFile))) {
+        try (FileOutputStream out = new FileOutputStream(new File(selectedDir() + "\\" + nameFile + " " + numberOrder+".docx"))) {
             // создаем абзац Делком40 вверхнем углу
             XWPFParagraph DELKOM40 = doc.createParagraph();
 
@@ -57,7 +57,7 @@ public class ApachePoiDemo {
             runOrder.setFontSize(16);
             runOrder.setBold(true);
             runOrder.setFontFamily("Times New Roman");
-            runOrder.setText("Заявка на приобретение");
+            runOrder.setText("Заявка на приобретение "+numberOrder);
             runOrder.addBreak();
 
             // абзац инициатора

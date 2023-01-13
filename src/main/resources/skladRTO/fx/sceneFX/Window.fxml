@@ -14,7 +14,7 @@
             <Tooltip text="Нажмите для подтверждения действий" />
          </tooltip></Button>
       <Button fx:id="button_cancel" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="148.0" mnemonicParsing="false" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Отменить" AnchorPane.leftAnchor="50.0" />
-      <Label fx:id="label_text" alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="43.0">
+      <Label fx:id="label_text" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="55.0">
          <font>
             <Font name="Times New Roman Italic" size="16.0" />
          </font></Label>

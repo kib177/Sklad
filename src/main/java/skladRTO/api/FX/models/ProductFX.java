@@ -9,6 +9,7 @@ import java.util.Objects;
 
 public class ProductFX {
     private SimpleIntegerProperty id;
+    private SimpleIntegerProperty counter;
     private SimpleStringProperty name;
     private SimpleIntegerProperty amount;
     private SimpleStringProperty machine;
@@ -20,7 +21,7 @@ public class ProductFX {
     private SimpleStringProperty units;
 
 
-    public ProductFX(int id, String name, String machine, int amount, int status, int order, int productInfo, String units) {
+    public ProductFX(int id, String name, String machine, int amount, int status, int order, int productInfo, String units, int counter) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.machine = new SimpleStringProperty(machine);
@@ -30,6 +31,7 @@ public class ProductFX {
         this.productInfo = new SimpleIntegerProperty(productInfo);
         this.AmountUnits = new SimpleStringProperty(amount + " " + units);
         this.units = new SimpleStringProperty(units);
+        this.counter = new SimpleIntegerProperty(counter);
     }
 
     public ProductFX(String name, String number, String machine, String units) {
@@ -48,6 +50,18 @@ public class ProductFX {
             }
         }
         return null;
+    }
+
+    public int getCounter() {
+        return counter.get();
+    }
+
+    public SimpleIntegerProperty counterProperty() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter.set(counter);
     }
 
     public String getUnits() {

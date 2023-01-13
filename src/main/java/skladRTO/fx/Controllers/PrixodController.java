@@ -78,7 +78,7 @@ public class PrixodController implements Initializable {
     public void addProductInfo() {
         ProductInfo productInfo = new ProductInfo(productInfoDAO.getIdProduct_info(product.getId()), articul.getText(), data.getText(), description.getText());
         product.setStatusFX(getProduct.getIdStatus(String.valueOf(status.getValue()).trim()));
-        getProduct.updateProduct(product, productInfo);
+        getProduct.comingProduct(product, productInfo);
         orderViewController.viewProduct();
         createScene.close();
     }

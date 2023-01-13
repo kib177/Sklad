@@ -5,10 +5,11 @@ import javafx.collections.ObservableList;
 import skladRTO.api.FX.models.ProductFX;
 
 public class ProductListFX {
+    private int counter = 1;
     private ObservableList<ProductFX> productList = FXCollections.observableArrayList();
 
     public void create(int id, String name, String machine, int amount, int status, int order, int productInfo, String units) {
-        productList.add(new ProductFX(id, name, machine, amount, status, order, productInfo, units));
+        productList.add(new ProductFX(id, name, machine, amount, status, order, productInfo, units, counter++));
     }
 
     public ObservableList<ProductFX> getProductList() {

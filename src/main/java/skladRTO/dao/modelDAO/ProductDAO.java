@@ -23,8 +23,10 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
     public static final String ADD_NEW_PRODUCT = "INSERT INTO order_product (name_product,amount,status_id,order_id,product_info_id, machines_id, units_id)" +
             " VALUES(?,?,?,?,?,?,?);";
     public static final String LAST_INSERT_ID = "SELECT LAST_INSERT_ID();";
-    public static final String UPDATE_PRODUCT = "UPDATE order_product" +
+    public static final String COMING_PRODUCT = "UPDATE order_product" +
             " SET status_id = ? WHERE id_product = ?;";
+    public static final String UPDATE_PRODUCT = "UPDATE order_product" +
+            " SET name_product = ? WHERE id_product = ?;";
     public static final String UPDATE_PRODUCT_INFO = "UPDATE product_info SET articul = ?," +
             " arrival_date = ?, description = ? WHERE id = ?";
     public static final String SELECT_FROM_ORDER_PRODUCT = "SELECT * FROM order_product " +
@@ -298,7 +300,7 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
      * @param product     Заполненный объект типа ProductFX
      * @param productInfo Заполненный объект типа ProductInfo
      */
-    public void updateProduct(ProductFX product, ProductInfo productInfo) {
+    public void comingProduct(ProductFX product, ProductInfo productInfo) {
         //    Возможно стоит создать лист
         try (Connection connection = DatabaseConnection.getDatabaseConnection()) {
             logger.debug("Создание Savepoint для транзакции");
@@ -316,8 +318,8 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
                 e.printStackTrace();
                 connection.rollback(savepointOne);
             }
-            logger.debug("Отправляем запрос в БД на на изменение order_product: ->\n -> " + UPDATE_PRODUCT);
-            try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT)) {
+            logger.debug("Отправляем запрос в БД на на изменение order_product: ->\n -> " + COMING_PRODUCT);
+            try (PreparedStatement preparedStatement = connection.prepareStatement(COMING_PRODUCT)) {
                 preparedStatement.setInt(1, product.getStatusFX());
                 preparedStatement.setInt(2, product.getId());
                 preparedStatement.executeUpdate();
@@ -333,6 +335,19 @@ public class ProductDAO implements FillingInListsDAO<ProductListFX> {
             logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }
+    }
+
+    public void updateProduct(ProductFX product) {
+        try (Connection connection = DatabaseConnection.getDatabaseConnection();
+                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PRODUCT)) {
+                preparedStatement.setString(1, product.getName());
+                preparedStatement.setInt(2, product.getId());
+                preparedStatement.executeUpdate();
+            } catch (SQLException | IOException e) {
+                logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
+                e.printStackTrace();
+        }
+            logger.debug("Метод был выполнен успешно!");
     }
 
     /**

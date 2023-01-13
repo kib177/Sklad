@@ -81,7 +81,7 @@ public class OrderNewController implements Initializable {
                     order_number.getText());
             logger.info("Создан объект заказа");
             logger.debug("Переход к окну с заполнением позиций");
-            createScene.createScene("Product_add.fxml", 600, 350, false);
+            createScene.createScene("Product_add.fxml", 750, 400, false);
             createScene.getStage().setAlwaysOnTop(true);
             ProductNewController controller = createScene.getLoader().getController();
             controller.getOrder(order);

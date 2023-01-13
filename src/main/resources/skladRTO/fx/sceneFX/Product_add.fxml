@@ -11,26 +11,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductNewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.ProductNewController">
    <children>
-      <Button fx:id="Button_gone" layoutX="486.0" layoutY="103.0" mnemonicParsing="false" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Завершить" AnchorPane.topAnchor="103.0" />
-      <TextField fx:id="Product_amount" layoutX="237.0" layoutY="40.0" prefHeight="26.0" prefWidth="122.0" AnchorPane.leftAnchor="237.0" AnchorPane.topAnchor="40.0">
+      <Button fx:id="Button_gone" layoutX="602.0" layoutY="158.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="124.0" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Завершить" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="158.0" />
+      <TextField fx:id="Product_amount" layoutX="424.0" layoutY="41.0" prefHeight="26.0" prefWidth="160.0" AnchorPane.leftAnchor="424.0" AnchorPane.topAnchor="41.0">
          <tooltip>
             <Tooltip text="Введите требуемое количество " />
          </tooltip></TextField>
-      <Button fx:id="button_add" layoutX="463.0" layoutY="40.0" mnemonicParsing="false" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Добавить позицию" AnchorPane.leftAnchor="461.4" AnchorPane.topAnchor="40.0" />
-      <Label layoutX="70.0" layoutY="21.0" text="Наименование" textFill="#030303c4" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="21.0">
+      <Button fx:id="button_add" layoutX="601.0" layoutY="38.0" mnemonicParsing="false" style="-fx-border-color: silver; -fx-border-radius: 5;" text="Добавить позицию" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="38.0" />
+      <Label layoutX="163.0" layoutY="18.0" text="Наименование" textFill="#030303c4" AnchorPane.leftAnchor="163.0" AnchorPane.topAnchor="18.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="264.0" layoutY="21.0" text="Количество" textFill="#000000c4" AnchorPane.leftAnchor="264.0" AnchorPane.topAnchor="21.0">
+      <Label layoutX="473.0" layoutY="18.0" text="Количество" textFill="#000000c4" AnchorPane.leftAnchor="473.0" AnchorPane.topAnchor="18.0">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="Table_Items" layoutX="-2.0" layoutY="174.0" prefHeight="175.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
+      <TableView fx:id="Table_Items" layoutX="-2.0" layoutY="174.0" prefHeight="194.0" prefWidth="750.0" style="-fx-border-color: white; -fx-background-radius: 5; -fx-border-radius: 5;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0">
          <columns>
+            <TableColumn maxWidth="80.0" minWidth="80.0" text="№ п/п" />
             <TableColumn fx:id="ColumnProduct_name" maxWidth="500.0" minWidth="150.0" prefWidth="300.0" style="-fx-alignment: CENTER; -fx-text-alignment: justify;" text="Наименование" />
             <TableColumn fx:id="Column_Machine" maxWidth="250.0" minWidth="150.0" prefWidth="150.0" style="-fx-alignment: CENTER;" text="Оборудование" />
             <TableColumn fx:id="ColumnProduct_amount" maxWidth="200.0" minWidth="100.0" prefWidth="100.0" style=" -fx-alignment: CENTER" text="Количество" />
@@ -47,15 +48,15 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </Label>
-      <TextArea fx:id="Product_name" layoutX="14.0" layoutY="41.0" prefHeight="62.0" prefWidth="200.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="41.0" />
-      <ChoiceBox fx:id="ChoiceBox_Units" layoutX="237.0" layoutY="96.0" prefHeight="26.0" prefWidth="122.0" AnchorPane.leftAnchor="237.0" AnchorPane.topAnchor="96.0" />
-      <ChoiceBox fx:id="ChoiceBox_Machine" layoutX="14.0" layoutY="130.0" prefHeight="26.0" prefWidth="200.0" />
-      <Label layoutX="71.0" layoutY="109.0" text="Оборудование" textFill="#030303c4">
+      <TextArea fx:id="Product_name" layoutX="14.0" layoutY="41.0" prefHeight="145.0" prefWidth="363.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="41.0" />
+      <ChoiceBox fx:id="ChoiceBox_Units" layoutX="423.0" layoutY="101.0" prefHeight="26.0" prefWidth="160.0" AnchorPane.leftAnchor="423.0" AnchorPane.topAnchor="101.0" />
+      <ChoiceBox fx:id="ChoiceBox_Machine" layoutX="422.0" layoutY="159.0" prefHeight="26.0" prefWidth="160.0" />
+      <Label layoutX="462.0" layoutY="135.0" text="Оборудование" textFill="#030303c4">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="241.0" layoutY="72.0" text="Еденицы измерения" textFill="#000000c4">
+      <Label layoutX="450.0" layoutY="76.0" text="Еденицы измерения" textFill="#000000c4">
          <font>
             <Font name="Times New Roman Italic" size="14.0" />
          </font>

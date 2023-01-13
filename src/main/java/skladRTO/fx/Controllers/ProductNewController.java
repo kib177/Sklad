@@ -103,7 +103,7 @@ public class ProductNewController implements Initializable {
             button_add.getScene().getWindow().hide();
             stage.getScene().getWindow().hide();
             ApachePoiDemo apachePoiDemo = new ApachePoiDemo();
-            apachePoiDemo.CreateWord(listFX, order.getOrderDescription() + ".docx", order.getUserId());
+            apachePoiDemo.CreateWord(listFX, order.getOrderDescription(), order.getUserId(), order.getNumberOrder());
 
             orderViewController.Watch_order(new ActionEvent());
         }

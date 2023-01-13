@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import skladRTO.ApachePoiDemo;
 import skladRTO.api.FX.models.OrderFX;
 import skladRTO.api.FX.models.ProductFX;
@@ -51,7 +53,7 @@ public class OrderViewController implements Initializable {
     @FXML
     private TableColumn<?, ?> ColumnProduct_id;
     @FXML
-    private TableColumn<?, ?> ColumnProduct_name;
+    private TableColumn<ProductFX, String> ColumnProduct_name;
     @FXML
     private TableColumn<ProductFX, String> ColumnProduct_status;
     @FXML
@@ -59,11 +61,11 @@ public class OrderViewController implements Initializable {
     @FXML
     private TableColumn<?, ?> Column_date;
     @FXML
-    private TableColumn<?, ?> Column_number_order;
+    private TableColumn<OrderFX, String> Column_number_order;
     @FXML
     private TableColumn<?, ?> Column_user;
     @FXML
-    private TableColumn<OrderFX, String> Column_machine;
+    private TableColumn<ProductFX, String> Column_machine;
     @FXML
     private TableView<OrderFX> List_order;
     @FXML
@@ -80,27 +82,53 @@ public class OrderViewController implements Initializable {
     private TableColumn<OrderFX, String> Сolumn_description;
     @FXML
     private Label date;
-    private Integer id;
+    private Integer idOrder;
+    private ProductFX productFX;
+    @FXML
+    private MenuItem MenuItem_UpdateNameProduct;
+    @FXML
+    private ContextMenu ContextMenu_ProductName;
+    @FXML
+    private ContextMenu ContextMenu_DesOrder;
+    @FXML
+    private ContextMenu ContextMenu_NumberOrder;
+    @FXML
+    private MenuItem MenuItemContext_UpdateDesOrder;
+    @FXML
+    private MenuItem MenuItem_UpdateNumberOrder;
 
+    /**
+     *
+     * @param location
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resources
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     *
+     *  Метод вызывается при загрузке окна
+     *  все действия в методе будут выполнены раньше отображения интерфейса окна
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (Authorization.getStatusUser().getStatus().equals("Пользователь")) {
-            Menu_Users.disableProperty().setValue(true);
-            CheckMenuItem_confirmOrder.disableProperty().setValue(true);
-            CheckMenuItem_Delete_Order.disableProperty().setValue(true);
-            CheckMenuItem_deleteProduct.disableProperty().setValue(true);
-        } else if (Authorization.getStatusUser().getStatus().equals("Модератор")) {
+        if (Authorization.getStatusUser().getStatus().equals("Пользователь")) {// Если пользователь, отключаем доступ
+            Menu_Users.disableProperty().setValue(true);// меню управления пользователями
+            CheckMenuItem_confirmOrder.disableProperty().setValue(true);// подтверждение заказа
+            CheckMenuItem_Delete_Order.disableProperty().setValue(true);// удаление заказа
+            CheckMenuItem_deleteProduct.disableProperty().setValue(true);// удаление продукта
+        } else if (Authorization.getStatusUser().getStatus().equals("Модератор")) { // если модератор отключаем только доступ к управлению пользователями
             Menu_Users.disableProperty().setValue(true);
         }
-        List_order.getSelectionModel().clearSelection();
-        date();
-        getProduct.getProductStatus();
-        Watch_order(new ActionEvent());
+        List_order.getSelectionModel().clearSelection();// убираем выдление в таблице
+        date();// метод даты
+        getProduct.getProductStatus(); // подгружаем метод для создания списка статусов
+        Watch_order(new ActionEvent()); // метод выводящий заказы в таблицу
+
     }
 
     @FXML
     public void MenuItem_print() {
-
     }
 
     @FXML
@@ -117,6 +145,16 @@ public class OrderViewController implements Initializable {
     public void MenuItem_exit() {
         createScene.createScene("Authorization.fxml", 350, 250, false);
         createSceneOrderView.getStage().close();
+    }
+
+
+    public void UpdateNameProduct(){
+        System.out.println("asdsads" + productFX);
+        CreateScene createScene = new CreateScene();
+        createScene.createScene("UpdateProduct.fxml", 500, 250, false);
+        UpdateProductController controller = createScene.getLoader().getController();
+        controller.getProduct(productFX);
+        controller.getOrderViewController(this);
     }
 
     public void date() {
@@ -142,12 +180,24 @@ public class OrderViewController implements Initializable {
         return getProduct.showListOfProducts(id);
     }
 
+    /**
+     *
+     * @param actionEvent передаю действие на кнопку, без участия пользователя (при надобности)
+     *  Метод отображения заказов в таблице
+     *  List_Order - сама таблица
+     *  selectionModel - вызывает метод получения выделения в таблице, после создается список и добавляется в него
+     *  addListener<>( new ChangeListener<>()) является списком выделенных обьектов(упорядоченым)
+     *  метод changed - переопределен из ChangeListener, позволяет работать с обьектами в списке
+     *
+     */
     @FXML
     public void Watch_order(ActionEvent actionEvent) {
         WeakReference<OrdersDAO> weakReference = new WeakReference<>(ordersDAO);
         Column_Id.setCellValueFactory(new PropertyValueFactory<>("id"));
         Column_number_order.setCellValueFactory(new PropertyValueFactory<>("number_order"));
+        Column_number_order.setCellFactory(tc -> textWrap(Column_number_order));
         Сolumn_description.setCellValueFactory(new PropertyValueFactory<>("order_description"));
+        Сolumn_description.setCellFactory(tc -> textWrap(Сolumn_description));
         Column_user.setCellValueFactory(new PropertyValueFactory<>("user"));
         Column_date.setCellValueFactory(new PropertyValueFactory<>("order_date"));
         List_order.setItems(ordersDAO.showListOfOrders());
@@ -157,22 +207,37 @@ public class OrderViewController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends OrderFX> observableValue, OrderFX orderFX, OrderFX newOrderFX) {
                 if (newOrderFX != null) {
-                    id = newOrderFX.getId();
-                    viewProduct();
-                    if (CheckMenuItem_createWord.isSelected()) {
+                    idOrder = newOrderFX.getId(); // локальная переменная для заполнения листа продуктов по id заказа
+                    viewProduct(); // вызов метода отображения продуктов по заказу
+                    if (CheckMenuItem_createWord.isSelected()) { // если в меню выбрано создать файл то передаст id выделенного обьекта
                         createWord(ordersDAO.searchOrder(newOrderFX.getId()));
-                        System.out.println(newOrderFX.getId() + " saasdsadsadsadsadasd");
                     }
                 }
             }
         });
+    }
 
+    public TableCell<OrderFX, String> textWrap(TableColumn<OrderFX, String> tableColumn) {
+        TableCell<OrderFX, String> cell = new TableCell<>();
+        Text text = new Text();
+        cell.setGraphic(text);
+        cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+
+        if(tableColumn == Column_number_order){
+            cell.setContextMenu(ContextMenu_NumberOrder);
+        } else if (tableColumn == Сolumn_description){
+            cell.setContextMenu(ContextMenu_DesOrder);
+        }
+
+        text.wrappingWidthProperty().bind(tableColumn.widthProperty());
+        text.textProperty().bind(cell.itemProperty());
+        return cell;
     }
 
     private void createWord(Order order) {
         ApachePoiDemo apachePoiDemo = new ApachePoiDemo();
         WeakReference<ApachePoiDemo> weakReference = new WeakReference<>(apachePoiDemo);
-        apachePoiDemo.CreateWord(getListProduct(order.getId()), order.getOrderDescription() + ".docx", order.getUserId());
+        apachePoiDemo.CreateWord(getListProduct(order.getId()), order.getOrderDescription(), order.getUserId(), order.getNumberOrder());
         CheckMenuItem_createWord.selectedProperty().setValue(false);
     }
 
@@ -184,18 +249,25 @@ public class OrderViewController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param actionEvent - так же действие для вызова метода без нажатия кнопки
+     * createScene - локальная сслыка на обьект CreateScene которая формирует вызов окна
+     * controller - явдяется обьектом только что вызванного класса, содержащим контроллер загрузчика класса
+     *
+     */
+
     @FXML
     public void MenuItem_addOrder(ActionEvent actionEvent) {
         createScene.createScene("New_order.fxml", 505, 400, false);
         OrderNewController controller = createScene.getLoader().getController();
-        controller.setOrderViewController(this);
-        controller.getSceneProductNewController(this.createScene.getStage());
-        createScene.getStage().setAlwaysOnTop(true);
+        controller.setOrderViewController(this); // передаем обьект OrderViewController в метод вызванному классу
+        controller.getSceneProductNewController(this.createScene.getStage());// передаем Stage (Сцену) вызванному классу
+        createScene.getStage().setAlwaysOnTop(true);// привязка сцены поверх старого окна
     }
 
     @FXML
     public void CheckMenuItem_deleteProduct() {
-
         TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
             @Override
@@ -263,25 +335,43 @@ public class OrderViewController implements Initializable {
     }
 
     public void viewProduct() {
-        ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        ColumnProduct_id.setCellValueFactory(new PropertyValueFactory<>("counter"));
         ColumnProduct_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ColumnProduct_name.setCellFactory(tc-> textWrapProduct(ColumnProduct_name));
         Column_machine.setCellValueFactory(new PropertyValueFactory<>("machine"));
+        Column_machine.setCellFactory(tc -> textWrapProduct(Column_machine));
         ColumnProduct_amount.setCellValueFactory(new PropertyValueFactory<>("AmountUnits"));
         ColumnProduct_status.setCellValueFactory(new PropertyValueFactory<>("status"));
-        Table_Items.setItems(getListProduct(id));
+        Table_Items.setItems(getListProduct(idOrder));
 
         TableView.TableViewSelectionModel<ProductFX> selectionModel = Table_Items.getSelectionModel();
         selectionModel.selectedItemProperty().addListener(new ChangeListener<skladRTO.api.FX.models.ProductFX>() {
             @Override
             public void changed(ObservableValue<? extends ProductFX> observableValue, ProductFX product, ProductFX newProduct) {
                 if (newProduct != null) {
+                    productFX = newProduct;
                     if (CheckMenuItem_Info.isSelected()) {
                         viewProductInfo(newProduct.getId());
-
                     }
                 }
             }
         });
+    }
+
+    public TableCell<ProductFX, String> textWrapProduct(TableColumn<ProductFX, String> tableColumn) {
+        TableCell<ProductFX, String> cell = new TableCell<>();
+        Text text = new Text();
+        cell.setGraphic(text);
+        if(tableColumn == ColumnProduct_name) {
+        cell.setContextMenu( ContextMenu_ProductName);
+        }
+        cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
+        text.wrappingWidthProperty().bind(tableColumn.widthProperty());
+        if(tableColumn == Column_machine) {
+            text.setTextAlignment(TextAlignment.CENTER);
+        }
+        text.textProperty().bind(cell.itemProperty());
+        return cell;
     }
 
     @FXML
