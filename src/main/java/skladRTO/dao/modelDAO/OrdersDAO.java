@@ -8,6 +8,7 @@ import skladRTO.api.FX.models.OrderFX;
 import skladRTO.api.FX.models.ProductFX;
 import skladRTO.api.models.Order;
 import skladRTO.api.models.Product;
+import skladRTO.dao.connectDB.ConnectionBuilderFactory;
 import skladRTO.dao.connectDB.DatabaseConnection;
 import skladRTO.dao.interfaces.OrderFunction;
 
@@ -32,15 +33,23 @@ public class OrdersDAO implements OrderFunction<OrderFX, OrderListFX> {
     public ObservableList<OrderFX> showListOfOrders() {
         OrderListFX listOrder = new OrderListFX();
         WeakReference<OrderListFX> weakReference = new WeakReference<>(listOrder);
+        Connection con = null;
+        try {
+            con = ConnectionBuilderFactory.getConnectionBuilder().getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         String str = "SELECT * FROM orders " +
                 " LEFT JOIN users ON (orders.user_id=users.id_users)";
         logger.debug("Отправляем запрос в БД ->\n -> " + str);
-        try (ResultSet resultSet = DatabaseConnection.getStatement().executeQuery(str)) {
+        try (Statement statement = con.createStatement();
+                ResultSet resultSet = statement.executeQuery(str)) {
             logger.debug("Перебираем полученные данные из БД");
             while (resultSet.next()) {
                 FillingInList(listOrder, resultSet);
             }
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
         }

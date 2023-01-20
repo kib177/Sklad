@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="skladRTO.fx.Controllers.MachinesController">
+   <children>
+      <TableView fx:id="Table" prefHeight="400.0" prefWidth="345.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="174.39999999999998" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="Column_id" maxWidth="100.0" minWidth="72.0" prefWidth="72.0" style="-fx-alignment: CENTER;" text="ID" />
+          <TableColumn fx:id="Column_name" minWidth="200.0" prefWidth="200.0" style="-fx-alignment: CENTER;" text="Наименование" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Button layoutX="392.0" layoutY="122.0" mnemonicParsing="false" onAction="#DeleteMachine" prefHeight="25.0" prefWidth="80.0" text="Удалить" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="120.0" />
+      <Button layoutX="393.0" layoutY="29.0" mnemonicParsing="false" onAction="#AddMachine" prefHeight="25.0" prefWidth="80.0" text="Добавить" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="30.0" />
+      <Button layoutX="392.0" layoutY="77.0" mnemonicParsing="false" onAction="#UpdateMachine" prefHeight="25.0" prefWidth="80.0" text="Изменить" AnchorPane.rightAnchor="48.0" AnchorPane.topAnchor="75.0" />
+      <Label fx:id="LabelVibor" layoutX="362.0" layoutY="167.0" text="Выберите оборудование!" visible="false" AnchorPane.rightAnchor="17.19999999999999" AnchorPane.topAnchor="167.0" />
+   </children>
+</AnchorPane>

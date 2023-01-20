@@ -1,0 +1,5 @@
+package skladRTO.api.newModels;
+
+public enum ModelsFX {
+    AUTHENTICATION, MACHINE, ORDER, PRODUCT, PRODUCT_INFO, STATUS, STATUS_USER, UNIT, USER
+}

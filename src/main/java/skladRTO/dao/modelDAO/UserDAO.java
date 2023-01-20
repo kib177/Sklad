@@ -10,6 +10,8 @@ import skladRTO.api.lists.UserStatusLIst;
 import skladRTO.api.models.Authentication;
 import skladRTO.api.models.StatusUser;
 import skladRTO.api.models.User;
+import skladRTO.dao.connectDB.ConnectionBuilder;
+import skladRTO.dao.connectDB.ConnectionBuilderFactory;
 import skladRTO.dao.connectDB.DatabaseConnection;
 import skladRTO.dao.interfaces.UserFunction;
 
@@ -19,6 +21,12 @@ import java.sql.*;
 
 
 public class UserDAO implements UserFunction {
+
+    private ConnectionBuilder builder = ConnectionBuilderFactory.getConnectionBuilder();
+
+    private Connection getConnection() throws SQLException {
+        return builder.getConnection();
+    }
     private static final Logger logger = LogManager.getLogger(UserDAO.class.getName());
 
     /**
@@ -74,9 +82,11 @@ public class UserDAO implements UserFunction {
                         resultSet.getString("last_name"), resultSet.getInt("authentication_id"));
                 logger.debug("Запись данных из БД в объект User ->\n-> " + user);
             }
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             logger.warn("Произошла ошибка подключения к БД или ошибка записи/чтение данных из БД\n\t" + e);
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
         logger.debug("Возвращаем полученный объект типа User -> " + user);
         return user;

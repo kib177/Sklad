@@ -1,5 +1,6 @@
-Исправил ошибки указанные и найденные в процессе.
-- можно заняться кэш, лог, либо памятью(GC).
+Пароль skproject login admin
+
+Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.
 
 30.12.2022:
 -Добавил метод для выбора пути сохранения файла. Все в том же классе так же комментил.

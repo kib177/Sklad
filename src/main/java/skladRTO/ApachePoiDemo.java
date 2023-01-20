@@ -57,7 +57,7 @@ public class ApachePoiDemo {
             runOrder.setFontSize(16);
             runOrder.setBold(true);
             runOrder.setFontFamily("Times New Roman");
-            runOrder.setText("Заявка на приобретение "+numberOrder);
+            runOrder.setText("Заявка на приобретение №"+numberOrder);
             runOrder.addBreak();
 
             // абзац инициатора

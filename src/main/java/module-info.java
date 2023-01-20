@@ -13,7 +13,8 @@ module skladrto {
     requires junit;
     requires java.desktop;
     requires org.apache.poi.ooxml;
-
+    requires mysql.connector.java;
+    requires c3p0;
 
     opens skladRTO to javafx.fxml;
     exports skladRTO;
